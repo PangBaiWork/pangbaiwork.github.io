@@ -52,7 +52,7 @@ font:
 
   # Global font settings used for all elements inside <body>.
   global:
-    external: false
+    external: true
     family: Mulish
     size:
 
@@ -81,7 +81,7 @@ font:
 
   # Font settings for <code> and code blocks.
   codes:
-    external: false
+    external: true
     family: Inconsolata
 
 # project of https://www.iconfont.cn/
@@ -232,7 +232,7 @@ audio:
     list:
       - https://y.qq.com/n/yqq/playsquare/3565081723.html
 # random image api
-image_server: https://www.dmoe.cc/random.php
+image_server: https://api.suyanw.cn/api/comic
 #https://acg.xydwz.cn/api/api.php
 
 # Algolia Search
@@ -321,11 +321,11 @@ minify:
       - '**/rss.ejs'
 
   css:
-    enable: false
+    enable: true
     exclude:
       - '**/*.min.css'
   js:
-    enable: false
+    enable: true
     mangle:
       toplevel: true
 
