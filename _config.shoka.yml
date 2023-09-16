@@ -232,7 +232,7 @@ audio:
     list:
       - https://y.qq.com/n/yqq/playsquare/3565081723.html
 # random image api
-image_server: https://api.suyanw.cn/api/comic
+image_server: https://app.zichen.zone/api/acg.php
 #https://acg.xydwz.cn/api/api.php
 
 # Algolia Search
