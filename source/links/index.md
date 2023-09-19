@@ -70,3 +70,12 @@ date: 2021-05-02 07:59:46
   image: https://q1.qlogo.cn/g?b=qq&nk=1538874738&s=640
   color: "#FFC0CB"
 {% endlinks %}
+
+{% links %}
+- site: 渢鸞的小窝
+  owner: 渢鸞
+  url: https://blog.crack.moe/
+  desc: 萌系黑客会遇到物理panic吗
+  image: https://blog.crack.moe/img/face.jpg
+  color: "#FFC0CB"
+{% endlinks %}
