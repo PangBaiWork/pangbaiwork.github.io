@@ -9,7 +9,6 @@ tags:
 categories:
 - 在安卓上安装你的kail
 cover: http://shp.qpic.cn/collector/1642981619/5d10a393-4056-405f-8cf6-1b0520c3f0b8/0
-sticky: true
 ---
 ### `在你的任意安卓手机上刷入kali`
 在手机上稳定便捷运行linux
