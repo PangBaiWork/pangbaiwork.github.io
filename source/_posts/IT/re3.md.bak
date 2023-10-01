@@ -58,6 +58,21 @@ end
 masm 1.asm
 link 1.obj
 ```
+## 设置程序入口
+用一个标号标识,用```end 标号```结束程序入口
 
 
+```nasm
+   assume cs:codesg
+
+   codesg segment
+   start:    mov ax, 2
+            add ax, ax
+            add ax, ax
+            mov ax, 4c00H
+            int 21H
+   codesg ends
+   
+   end start
+```
 
