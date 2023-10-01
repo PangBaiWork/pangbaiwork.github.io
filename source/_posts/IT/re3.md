@@ -1,0 +1,77 @@
+title: 汇编学习-CPU寄存器
+author: PangBai
+date: 2023-09-29 17:19:19
+tags:
+- 汇编语言
+categories:
+- 逆向
+---
+汇编语法
+<!--more-->
+# 基础语法
+## 标号
+为一个段命名,标号指代了一个地址,如codesg
+```nasm 
+codesg segment
+```
+这个段由以下命令定义结束
+```nasm
+codesg ends
+```
+## 声明段的类型
+段的类型可能是代码也可能是数据,需要加以声明```assume```
+```nasm
+assume cs:codesg
+```
+## 几种结束
+ - 段结束
+```nasm
+段名 ends
+```
+ - 程序结束
+```nasm
+end
+```
+ - 程序返回
+```nasm
+ mov ax, 4c00H
+ int 21H
+```
+
+## 示例程序
+编写1.asm
+```nasm
+   assume cs:codesg
+
+   codesg segment
+     mov ax, 2
+     add ax, ax
+     add ax, ax
+     mov ax, 4c00H
+     int 21H
+   codesg ends
+   
+   end
+```
+执行编译和链接
+```shell
+masm 1.asm
+link 1.obj
+```
+## 设置程序入口
+用一个标号标识,用```end 标号```结束程序入口
+
+
+```nasm
+   assume cs:codesg
+
+   codesg segment
+   start:    mov ax, 2
+            add ax, ax
+            add ax, ax
+            mov ax, 4c00H
+            int 21H
+   codesg ends
+   
+   end start
+```
