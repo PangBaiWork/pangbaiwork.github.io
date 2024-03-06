@@ -8,8 +8,8 @@ date: 2021-05-02 07:59:46
 - site: JIXIEJIDIGUAN
   owner: 麗姫を描
   url: https://jixiejidiguan.top/
-  desc: 默默无闻
-  image: https://jixiejidiguan.top/stalye/img/DHL.png
+  desc: 画的个人记录
+  image: https://jixiejidiguan.top/favicon.ico
   color: #
 {% endlinks %}
 
@@ -26,10 +26,10 @@ date: 2021-05-02 07:59:46
 
 
 {% links %}
-- site: 繁花博客
+- site: 繁花的小破站
   owner: 繁花落雪
   url: https://fanhuacg.top/
-  desc: 资源与信息的共享平台
+  desc: 咕咕咕~
   image: 
   color: #
 {% endlinks %}
