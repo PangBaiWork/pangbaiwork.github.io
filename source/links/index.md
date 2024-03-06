@@ -3,14 +3,6 @@ title: 我的朋友们呀!
 date: 2021-05-02 07:59:46
 ---
 # `友情链接`
-{% links %}
-- site: Horon's Blog
-  owner: 浩然
-  url: https://horon.top/
-  desc: MC爱好者小论坛 成立于2020/12/20，属于MC圈的个人博客兼MC资源发布和共享站。
-  image: https://horon.top/wp-content/uploads/2020/12/cropped-PVP9.png
-  color: #
-{% endlinks %}
 
 {% links %}
 - site: JIXIEJIDIGUAN
@@ -21,14 +13,6 @@ date: 2021-05-02 07:59:46
   color: #
 {% endlinks %}
 
-{% links %}
-- site: 魚が大好きな猫のxiao窝 
-  owner: 小茉莉
-  url: https://blog.linkgmod.cn/
-  desc: 相信美好的事情即将发生
-  image: https://tc.linkgmod.cn/uploads/big/6ce7422290cbd482b21071ce70fbcf30.jpg
-  color: #
-{% endlinks %}
 
 {% links %}
 - site: QAIU blog
