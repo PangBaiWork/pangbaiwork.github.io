@@ -79,3 +79,12 @@ date: 2021-05-02 07:59:46
   image: https://blog.crack.moe/img/face.jpg
   color: "#FFC0CB"
 {% endlinks %}
+
+{% links %}
+- site: WoodWhale's Blog
+  owner: WoodWhale
+  url: https://www.woodwhale.cn
+  desc: Focus On Cyber Security
+  image: https://www.woodwhale.cn/woodwhale.png
+  color: "#77E2A0"
+{% endlinks %}
