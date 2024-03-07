@@ -1,4 +1,4 @@
-title: 汇编学习-CPU寄存器
+title: 汇编学习-汇编语法
 author: PangBai
 tags:
 - 汇编语言
