@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;minecraft服务器搭建&#34; category</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 11 Jan 2021 23:20:00 +0800</pubDate>
+        <lastBuildDate>Mon, 11 Jan 2021 23:20:00 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>MC</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/share/CatServer/</guid>
+            <title>1.12.2 | CatServer 可自行添加mod|自配权限小型整合服务端</title>
+            <link>https://pangbai.work/share/CatServer/</link>
+            <category>Minecraft</category>
+            <category>服务器</category>
+            <pubDate>Mon, 11 Jan 2021 23:20:00 +0800</pubDate>
+            <description><![CDATA[ &lt;h4 id=&#34;为什么用catserver服务端做整合&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#为什么用catserver服务端做整合&#34;&gt;#&lt;/a&gt; 为什么用 CatServer 服务端做整合？&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;CatServer 在服务端优化 / 插件支持 /mod 优化方面领先于许多服务端，选择 CatServer 做整合可以给大家带来更好的体验。 同时 CatServer 支持添加 Bukkit，Sponge，Spigot，BungeeCord 等多种服务端的插件，方便日后添加插件&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#介绍&#34;&gt;#&lt;/a&gt; 介绍&lt;/h4&gt;
+&lt;p&gt;这个服务端可以用于制作一些生存服 / 建筑服 /mod 服等，服务端较为小型，未添加 mod，有需要添加的请自行添加&lt;br /&gt;
+服务端不提供主城地图，需要请自行添加&lt;br /&gt;
+服务端插件截图&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%22%E5%9B%BE%E7%89%87title%22&#34; alt=&#34;插件截图&#34; /&gt;&lt;br /&gt;
+↑↑↑插件截图↑↑↑&lt;br /&gt;
+开服证明截图&lt;br /&gt;
+&lt;img data-src=&#34;%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80%22%E5%9B%BE%E7%89%87title%22&#34; alt=&#34;开服证明&#34; /&gt;&lt;br /&gt;
+↑↑↑开服证明↑↑↑&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;插件下载&lt;/strong&gt;&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC02MzEyNDAtMS0xLmh0bWw=&#34;&gt; MiaoChat&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC04MTAzOTQtMS0xLmh0bWw=&#34;&gt;TitleManager&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc3BpZ290bWMub3JnL3Jlc291cmNlcy92YXVsdC4zNDMxNS8=&#34;&gt;Vault&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc3BpZ290bWMub3JnL3Jlc291cmNlcy9yYW5kb21tb3RkLjY3NDcyLw==&#34;&gt;RandomMOTD&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc3BpZ290bWMub3JnL3Jlc291cmNlcy9wbGFjZWhvbGRlcmFwaS42MjQ1Lw==&#34;&gt;PlaceholderAPI&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC04NDc4NTktMS0xLmh0bWw=&#34;&gt;CatSeedLogin&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC02MTk4ODMtMS0xLmh0bWw=&#34;&gt;EssentialsX&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuc3BpZ290bWMub3JnL3Jlc291cmNlcy9wcm90b2NvbGxpYi4xOTk3Lw==&#34;&gt;ProtocolLib&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC0xMDQ4OTg4LTEtMS5odG1s&#34;&gt;Hat&lt;/span&gt;&lt;/p&gt;
+&lt;h4 id=&#34;下载地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#下载地址&#34;&gt;#&lt;/a&gt; 下载地址&lt;/h4&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMTJXekdNSDdIRnUtN0FlV25mS05QWEE=&#34;&gt;百度网盘&lt;/span&gt;  提取码:n3rv  &lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9zaGFyZS53ZWl5dW4uY29tL3ZONzN1b3N0&#34;&gt;腾讯微云&lt;/span&gt;  提取码:kmptyy&lt;/p&gt;
+&lt;h4 id=&#34;注&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#注&#34;&gt;#&lt;/a&gt; 注：&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;本文转自 MCBBS&lt;/strong&gt;&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNiYnMubmV0L3RocmVhZC0xMTUxMTQ0LTEtMS5odG1s&#34;&gt; 原文地址&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
