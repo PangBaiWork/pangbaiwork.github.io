@@ -39,7 +39,7 @@ MOV [EBX], 110          ; MY_TABLE[0] = 110
 ADD EBX, 2              ; EBX = EBX +2
 MOV [EBX], 123
 ```
-这个例子来自w3school[寻址模式](https://www.w3schools.cn/assembly/assembly_addressing_modes.html)
+这个例子来自[w3school寻址模式](https://www.w3schools.cn/assembly/assembly_addressing_modes.html)
 按照注释理解，[MY_TABLE]是一个数组地址，
 [EBX]却是解引用。
 查找了一下资料，这里进行一下梳理吧(不知道对不对，欢迎指正)。 
