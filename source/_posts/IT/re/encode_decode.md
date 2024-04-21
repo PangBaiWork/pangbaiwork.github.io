@@ -6,6 +6,53 @@ tags:
 - Re
 published: false
 ---
+
+# HEX
+```cpp hex加密解密
+#include "stdio.h" // sprintf()函数声明所在的头文件
+char data[] = "Hello World!!\r\n";
+char res[32];
+
+int str_2_hex_str(char *dest, char *src)
+{
+    int len = strlen(src); // 获取接收数据长度
+    int i,j;
+    for (i = 0, j = 0; i < len; i++) {
+        sprintf(&dest[j], "%02X", src[i]);
+        j+=2; // 每个16进制占2个长度
+    }
+    dest[j] = '\0'; // 添加字符串结束符
+    return j; // 返回字符串长度
+}
+
+int len = str_2_hex_str(res, data);
+///////////////////////////////
+#include <stdlib.h> // 要使用strtol()库函数，需要包含头文件
+
+char data[] = "48656C6C6F20576F726C6421210D0A"; // 假如，我们接收到这样的数据
+char res[32]; // 储存转换后的结果
+
+int hex_str_2_str(char *dest, char *src)
+{
+    int len = strlen(src); // 获取接收数据长度
+    int i,j;
+    for (i = 0, j = 0; i < len; i+=2) { // 每次取两个字符
+        char tmp_buf[3]; // 每两个字符组成一个16进制字符串，同时结尾需要空字符来告诉编译器我们的是字符串
+        char *endptr; // 保存已转换数值后的下一个字符
+        // 以下为取待转换的16进制字符串
+        tmp_buf[0] = src[i];
+        tmp_buf[1] = src[i + 1];
+        tmp_buf[2] = '\0'; // 记得添加空字符
+        // 转换成16进制，base传16即可
+        dest[j++] = strtol(tmp_buf, &endptr, 16);
+    }
+    dest[j] = '\0'; // 添加字符串结束符
+    return j;
+}
+
+int len = hex_str_2_str(res, data);
+
+```
 # BASE64
 ```cpp base64加密解密算法
 //base64加密

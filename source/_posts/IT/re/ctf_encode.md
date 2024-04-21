@@ -106,3 +106,8 @@ print(new_contrary_sbox)
 - [x] 解密可能有&0x30，&3C操作
 
 [加密解密实现](encode_decode.md#BASE64)
+
+# hex编码
+- [x]  进行& 0xFFFFFFB5 | 8
+- [x]  +0x30或+'0'或+48
+[加密解密实现](encode_decode.md#HEX)
