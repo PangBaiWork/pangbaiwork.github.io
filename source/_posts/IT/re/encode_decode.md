@@ -6,7 +6,8 @@ tags:
 - Re
 published: true
 ---
-
+常见的加密解密算法实现汇总
+<!--more-->
 # HEX
 ```cpp hex加密解密
 #include "stdio.h" // sprintf()函数声明所在的头文件
