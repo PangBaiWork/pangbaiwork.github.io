@@ -29,32 +29,7 @@ Tea系列加密都会有个叫Delta的东西，其常见值为`0x9E3779B9或0x61
  - [x] 嵌套循环
  - [x] 可能会在同一行里出现左移2或4，右移3或5(你就记2345吧)
  - [x] rounds = 6 + 52/n,会出现被除数52和+6
-```cpp
-unsigned int v[8] = {0x10BD3B47, 0x6155E0F9, 0x6AF7EBC5, 0x8D23435F, 0x1A091605, 0xD43D40EF, 0xB4B16A67, 0x6B3578A9};
-    unsigned int key[4] = {0x00001234, 0x00002345, 0x00004567, 0x00006789};
-    unsigned int sum = 0;
-    unsigned int y,z,p,rounds,e;
-    int n = 8;
-    int i = 0;
-    rounds = 6 + 52/n;
-    y = v[0];
-    sum = rounds*delta;
-     do
-     {
-        e = sum >> 2 & 3;
-        for(p=n-1;p>0;p--)
-        {
-            z = v[p-1];
-            v[p] -= ((((z>>5)^(y<<2))+((y>>3)^(z<<4))) ^ ((key[(p&3)^e]^z)+(y ^ sum)));
-            y = v[p];
-        }
-        z = v[n-1];
-        v[0] -= (((key[(p^e)&3]^z)+(y ^ sum)) ^ (((y<<2)^(z>>5))+((z<<4)^(y>>3))));
-        y = v[0];
-        sum = sum-delta;
-     }while(--rounds);
-```
-
+[加密解密实现](encode_decode.md#XXTEA)
 # AES加密
 AES为对称加密，同时也是分组加密，每组处理128位数据(16个字节)，按密钥长度分为AES128(16字节密钥10轮加密),AES192(24字节密钥12轮加密),AES256(32字节密钥14轮加密)。
  - [x] 对明文长度进行除16，或者右移4位
@@ -62,7 +37,19 @@ AES为对称加密，同时也是分组加密，每组处理128位数据(16个�
  - [x] 256个元素的数组(16x16的Sbox)，如加密盒子{0x63,0x7c,0x77,0x7b...}解密盒子{0x52,0x09,0x6a,0xd5...},可能出现换盒
  - [x] 一行代码里对数组4个元素操作(看起来很整齐，元素下标有顺序)
 _加密可以魔改，subbytes和shiftrows顺序调换是没关系的，但是MixColums顺序加密放最前面解密就要放最后面_
- 
+ ```python 逆盒算法
+new_s_box = [,,,,,]
+
+new_contrary_sbox = [0]*256
+
+for i in range(256):
+    line = (new_s_box[i]&0xf0)>>4
+    rol = new_s_box[i]&0xf
+    new_contrary_sbox[(line*16)+rol] = i
+
+print(new_contrary_sbox)
+```
+[加密解密实现](encode_decode.md#AES)
 # sha1
 不安全的加密算法，不可逆
 - [x] 一般有5个IV  0x67452301;0xEFCDAB89;0x98BADCFE;0x10325476;0xC3D2E1F0(前四个和md的iv相同)
@@ -96,5 +83,11 @@ _加密可以魔改，subbytes和shiftrows顺序调换是没关系的，但是Mi
 - [x] 64个元素的置换表
 - [x] 8x4x16(512)个元素的sbox
 # base58
-和普通base加密有很大不同，通过取模就行加密
+和普通base加密有很大不同，通过取模进行加密
 - [x] 进行%58和/58的操作
+# base64
+普遍的加密
+- [x] 有'＝'或61存在
+- [x] 64个元素的可打印字符表
+- [x] 加密可能有&FC,&F0,&C0操作
+- [x] 解密可能有&0x30，&3C操作
