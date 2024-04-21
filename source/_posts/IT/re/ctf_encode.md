@@ -34,7 +34,7 @@ Tea系列加密都会有个叫Delta的东西，其常见值为`0x9E3779B9或0x61
  - [x] rounds = 6 + 52/n,会出现被除数52和+6
  
  
- [加密解密实现](encode_decode.md#XXTEA)
+ [加密解密实现](/IT/re3/encode_decode/#XXTEA)
 # AES加密
 AES为对称加密，同时也是分组加密，每组处理128位数据(16个字节)，按密钥长度分为AES128(16字节密钥10轮加密),AES192(24字节密钥12轮加密),AES256(32字节密钥14轮加密)。
  - [x] 对明文长度进行除16，或者右移4位
@@ -54,18 +54,18 @@ for i in range(256):
 
 print(new_contrary_sbox)
 ```
-[加密解密实现](encode_decode.md#AES)
+[加密解密实现](/IT/re3/encode_decode/#AES)
 # sha1
 不安全的加密算法，不可逆
 - [x] 一般有5个IV  0x67452301;0xEFCDAB89;0x98BADCFE;0x10325476;0xC3D2E1F0(前四个和md的iv相同)
-[加密实现](encode_decode.md#SHA1)
+[加密实现](/IT/re3/encode_decode/#SHA1)
 # BlowFish
 两个盒用来加密
 - [x] PBOX(18个32位子密钥)
 - [x] SBOX(4组8*32位数组Sbox[4][256])
 - [x] 18轮循环里套4轮循环,4轮循环里套256(步长为2)轮循环
 
-[加密解密实现](encode_decode.md#BlowFish)
+[加密解密实现](/IT/re3/encode_decode/#BlowFish)
 # sm4(国密)
 分组加密，和AES特征很像。
 - [x] 256个元素的SBOX
@@ -73,7 +73,7 @@ print(new_contrary_sbox)
 - [x] 移位8，16，24再&ff
 - [x] 一行代码里对数组4个元素操作(看起来很整齐，元素下标有顺序)
 
-[加密解密实现](encode_decode.md#SM4)
+[加密解密实现](/IT/re3/encode_decode/#SM4)
 # rc4加密
 加密解密是同一套算法
 - [x] 一个256位的sbox
@@ -81,7 +81,7 @@ print(new_contrary_sbox)
 - [x] 多次取余256
 - [x] 一个单独的异或操作
 
-[加密解密实现](encode_decode.md#RC4)
+[加密解密实现](/IT/re3/encode_decode/#RC4)
 # DES加密
 主要加密特征是一堆表
 - [x] 64位(8字符)或192位(24字符)的key
@@ -92,12 +92,12 @@ print(new_contrary_sbox)
 - [x] 64个元素的置换表
 - [x] 8x4x16(512)个元素的sbox
 
-[加密解密实现](encode_decode.md#DES)
+[加密解密实现](/IT/re3/encode_decode/#DES)
 # base58
 和普通base加密有很大不同，通过取模进行加密
 - [x] 进行%58和/58的操作
 
-[加密解密实现](encode_decode.md#BASE58)
+[加密解密实现](/IT/re3/encode_decode/#BASE58)
 # base64
 普遍的加密
 - [x] 有'＝'或61存在
@@ -105,9 +105,9 @@ print(new_contrary_sbox)
 - [x] 加密可能有&FC,&F0,&C0操作
 - [x] 解密可能有&0x30，&3C操作
 
-[加密解密实现](encode_decode.md#BASE64)
+[加密解密实现](/IT/re3/encode_decode/#BASE64)
 
 # hex编码
 - [x]  进行& 0xFFFFFFB5 | 8
 - [x]  +0x30或+'0'或+48
-[加密解密实现](encode_decode.md#HEX)
+[加密解密实现](/IT/re3/encode_decode/#HEX)

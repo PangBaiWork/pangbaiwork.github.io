@@ -1,5 +1,5 @@
 ---
-title: ctf_vm
+title: CTF虚拟机
 categories: CTF
 tags:
 - 汇编

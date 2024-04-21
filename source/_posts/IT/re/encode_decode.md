@@ -1,10 +1,10 @@
 ---
-title: 加密解密
+title: 加密解密算法
 categories: CTF
 tags:
 - 汇编
 - Re
-published: false
+published: true
 ---
 
 # HEX
