@@ -40,6 +40,23 @@ Canary保护是在栈中插入应该随机数据的操作。一旦程序跳转�
 这段数据有下面的特点
  - [x] 低位字节为0x00,这个是为了防止canary被字符串输出函数泄露(c语言字符串到0x00就不会输出了)
  - [x] 数据是随机产生的，只会保存两份，一份在gs:0x14中,另一份就是在栈中
+ - [x] 同一进程的canary值都是一样的，子进程同父进程一致，程序结束canary值会更新
  
+
+ 绕过Canary方法
  
- 绕过Canary的话，就要获取到栈中Canary的数据，在栈溢出时使用canary原本的数据填充canary的地址，再溢出到ebp。具体操作请百度Canary泄露
+ - [x] 泄露canary:  利用输出函数获取到栈中Canary的数据，在payload使用canary原本的数据填充canary的地址，再溢出到ebp。具体操作请百度Canary泄露
+ - [x] 修改canary检测函数:  修改canary检测错误的函数`__stack_chk_fail`，首先获取got表地址，然后通过其他漏洞比如`格式化输入输出函数`,修改got表的值,让错误处理函数变更为其他值，前提是`RELRO`保护没有开启。
+ - [x] 爆破canary:  canary爆破只能在子进程进行，子进程的pid比父进程大，此方法可能比较复杂，具体请百度。
+SSP泄露: 利用Canary泄露内存数据
+Canary检测到内存泄露会输出一段错误信息再结束程序，这段错误信息中会包含一个特殊字符串--程序执行路径
+```shell canary错误信息
+*** stack smashing detected ***:[./pwn] terminated
+```
+`./pwn`字符串的是在main函数的argv[0]处，我们可以溢出到此处修改指针，获取内存数据，但是这段错误信息在环境变量`LIBC_FATAL_STDERR_`不等于1的时候是不会输出在控制台的，我们这时还需要修改环境变量指针指向scanf输入字符串`LIBC_FATAL_STDERR_=1`(环境变量指针envp一遍在argv往下两个地址)
+
+ 
+ # FORTIFY
+ 当编译时加上参数-D_FORTIFY_SOURCE=2,一些敏感函数如read, fgets, memcpy, printf等等可能导致漏洞出现的函数都会被替换成read_chk, fgets_chk, memcpy_chk,printf_chk等。这些带了chk的函数会检查读取/复制的字节长度是否超过缓冲区长度，通过检查诸如%n之类的字符串位置是否位于可能被用户修改的可写地址，避免了格式化字符串跳过某些参数（如直接%7$x）等方式来避免漏洞出现。开启了FORTIFY保护的程序会被checksec检出，此外，在反汇编时直接查看got表也会发现chk函数的存在。
+ 有些时候函数可能不被替换，这就会产生漏洞
+ 
