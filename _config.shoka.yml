@@ -232,7 +232,7 @@ audio:
     list:
       - https://y.qq.com/n/yqq/playsquare/3565081723.html
 # random image api
-image_server: https://moe.jitsu.top/img/?sort=pc&size=mw1024
+image_server: https://pic.rmb.bdstatic.com/bjh/200b063dbfaf222db5df97b97c2218df.jpeg
 #https://acg.xydwz.cn/api/api.php
 
 # Algolia Search
