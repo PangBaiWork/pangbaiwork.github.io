@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;与你远方的朋友一起玩游戏&#34; category</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 24 Jul 2021 13:39:19 +0800</pubDate>
+        <lastBuildDate>Sat, 24 Jul 2021 13:39:19 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>MC</category>
+        <category>汇编</category>
+        <category>Re</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/share/mclink/</guid>
+            <title>MCinaBox远程联机教学</title>
+            <link>https://pangbai.work/share/mclink/</link>
+            <category>MC</category>
+            <pubDate>Sat, 24 Jul 2021 13:39:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;本教程 MCinBox,Boat,Pojav 联机&lt;br /&gt;
+类似游戏也可参照此教程&lt;br /&gt;
+请预先安装 forge&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;成功前踩坑记录&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#成功前踩坑记录&#34;&gt;#&lt;/a&gt; 成功前踩坑记录&lt;/h2&gt;
+&lt;p&gt;想到 &lt;code&gt;远程&lt;/code&gt;   &lt;code&gt;联机&lt;/code&gt; 有点开服经验的人会自然地想到 &lt;code&gt;端口映射内网穿透&lt;/code&gt; 玩个游戏也是技术活。&lt;br /&gt;
+我刚开始的时候也是这么想的，找个映射工具，映射好了 IP 发过去就完事。于是就去搞了个花生壳，1G 的免费流量也能快乐很久了，但最终发现，效果非常差，线路隔几分钟断一下 (心态崩了)&lt;br /&gt;
+ 花生壳不行，我想起以前开服用的樱花端口映射，手机映射客户端没有，于是用 termux 运行它的映射工具，但这样的效果和花生壳一样，几分钟断一次线，延迟还挺大。&lt;br /&gt;
+于是思考折衷方案，只有用组网工具来实现联机了，想起了以前的多玩联机盒子 (已经下架了)，找到了 zero tier (国外的一款免费组网软件)，但延迟感人。&lt;br /&gt;
+闲来无事去酷安逛，搜索 &lt;code&gt;联机&lt;/code&gt; 关键词，发现仅有一个叫 &lt;code&gt;蒲公英联机平台&lt;/code&gt; 的可以用。于是想去试试也行，结果非常成功，延迟就 50ms，很丝滑。&lt;/p&gt;
+&lt;h2 id=&#34;教程开始&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#教程开始&#34;&gt;#&lt;/a&gt; 教程开始&lt;/h2&gt;
+&lt;p&gt;作者: PangBai&lt;br /&gt;
+ &lt;code&gt;转载请注明原文地址&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;材料准备&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个带 forge 的 Minecraft&lt;/li&gt;
+&lt;li&gt;局域网联机 mod&lt;/li&gt;
+&lt;li&gt;蒲公英联机平台&lt;/li&gt;
+&lt;li&gt;一个可以注册的手机号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;简单联机 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNtb2QuY24vY2xhc3MvMTE1OC5odG1s&#34;&gt;下载地址&lt;/span&gt;&lt;br /&gt;
+自定义局域网联机 &lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cubWNtb2QuY24vY2xhc3MvMTE1OC5odG1s&#34;&gt;下载地址&lt;/span&gt;&lt;br /&gt;
+如果你使用 1.12.2 以下版本 MC 请下载第一个 mod，如果你使用 1.12.2 以上版本联机，请下载第二个 mod。&lt;/p&gt;
+&lt;h2 id=&#34;联机平台&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#联机平台&#34;&gt;#&lt;/a&gt; 联机平台&lt;/h2&gt;
+&lt;p&gt;用手机号注册后，在游戏大厅随便选择一款游戏的页面 (选我的世界的也行)，点击右上角加号，创建房间，免费用户可以创建一个五人的房间，进入房间点击联机，允许 vpn 权限，然后把房间分享给好友&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/ccd18690-73af-446c-8746-23918ac9ebb7/0&#34; alt=&#34;image&#34; title=&#34;联机图&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;配置联机&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置联机&#34;&gt;#&lt;/a&gt; 配置联机&lt;/h3&gt;
+&lt;p&gt;一般同学联机都不会有正版账号，会被验证卡住。这时候需要关掉正版验证。&lt;br /&gt;
+简单联机 mod，运行 mod 运行游戏进入世界，会在 saves 文件里的存档中产生 &lt;code&gt;server.properties&lt;/code&gt; ，如果你是腐竹应该知道这个服务器配置文件， 打开 &lt;code&gt;server.properties&lt;/code&gt;  修改第 10 行 port 将等号后改为一个五位数端口如 27855，修改第 12 行的 online-mode 等号后为 false 用来禁用正版验证&lt;br /&gt;
+自定义局域网 mod 的使用更为方便，使用请参考其介绍&lt;/p&gt;
+&lt;p&gt;进入游戏，点击多人游戏，添加服务器&lt;br /&gt;
+这里需要两个东西&lt;br /&gt;
+存档玩家的 IP (服主) —— 到联机平台的房间页面，查看 &lt;code&gt;本机IP&lt;/code&gt; &lt;br /&gt;
+ 联机端口 —— 之前输入在 port 后的五位数端口&lt;/p&gt;
+&lt;p&gt;非服主的玩家只用输入 ip+∶+ 端口号 (如 172.16.2.121:37585)&lt;br /&gt;
+ 点击完成就可以了&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/65484843-9cc5-4d61-a98e-3c9222faef62/0&#34; alt=&#34;image&#34; title=&#34;服务器页面&#34; /&gt;&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/f9fc7644-51b1-420e-aff0-b6a9f064a76f/0&#34; alt=&#34;image&#34; title=&#34;成功&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;教程结束，收工，各位游戏愉快。&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
