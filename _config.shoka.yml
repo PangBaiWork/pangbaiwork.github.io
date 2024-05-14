@@ -232,7 +232,8 @@ audio:
     list:
       - https://y.qq.com/n/yqq/playsquare/3565081723.html
 # random image api
-image_server: https://moe.anosu.top/img/?size=m_lfit,w_1024,h_900&sort=pc
+image_server: https://api.miaomc.cn/image/get
+#https://moe.anosu.top/img/?size=m_lfit,w_1024,h_900&sort=pc
 #https://api.7trees.cn/img/
 #https://acg.xydwz.cn/api/api.php
 
