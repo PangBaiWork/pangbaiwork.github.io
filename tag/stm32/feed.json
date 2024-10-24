@@ -1,0 +1,20 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • All posts by \"stm32\" tag",
+    "description": "记录生活 | 为众人抱薪者,不可使其扼于风雪",
+    "home_page_url": "https://pangbai.work",
+    "items": [
+        {
+            "id": "https://pangbai.work/CTF/Reverse/stm32/",
+            "url": "https://pangbai.work/CTF/Reverse/stm32/",
+            "title": "STM32固件逆向概述",
+            "date_published": "2024-10-24T17:15:03.313Z",
+            "content_html": "<h1 id=\"系统架构\"><a class=\"anchor\" href=\"#系统架构\">#</a> 系统架构</h1>\n<p>stm32 基于 ARM 公司设计的 Cortex-M 系列芯片</p>\n<h1 id=\"stm32的存储器映射\"><a class=\"anchor\" href=\"#stm32的存储器映射\">#</a> stm32 的存储器映射</h1>\n<p>作为一块 32 位芯片，stm32 把其拥有的 4GB 地址空间里分配为几大，<br />\n详细分配大概是这样</p>\n<ul>\n<li>0x00000000 ~ 0x1FFFFFFF (代码块) 512MB</li>\n<li>0x20000000 ~ 0x3FFFFFFF (SRAM 内存) 512MB</li>\n<li>0x40000000 ~ 0x5FFFFFFF (片上外设) 512MB</li>\n<li>0x60000000 ~ 0xFFFFFFFF (拓展 RAM 和一些其他的东西)<br />\n 对于 M3 系列芯片代码块里作为可编程部分 (给 flash 的) 一般只有 0x08000000~0x0807FFFF (512KB)<br />\n 对于 M4 系列的则为 0x08000000~0x081FFFFF（2MB）<br />\n其他 M 系列也大同小异</li>\n</ul>\n",
+            "tags": [
+                "汇编",
+                "Re",
+                "STM32"
+            ]
+        }
+    ]
+}

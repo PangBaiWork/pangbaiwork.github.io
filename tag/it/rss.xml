@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;it&#34; tag</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 25 Oct 2024 01:15:03 +0800</pubDate>
+        <lastBuildDate>Fri, 25 Oct 2024 01:15:03 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>MC</category>
+        <category>汇编</category>
+        <category>Re</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/PythonStudy/</guid>
+            <title>Python学习</title>
+            <link>https://pangbai.work/IT/PythonStudy/</link>
+            <category>IT</category>
+            <category>编程</category>
+            <pubDate>Fri, 25 Oct 2024 01:15:03 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;Python 脚本，用来写点有用东西&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;大学物理不确定度计算&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#大学物理不确定度计算&#34;&gt;#&lt;/a&gt; 大学物理，不确定度计算&lt;/h2&gt;
+&lt;figure class=&#34;highlight python&#34;&gt;&lt;figcaption data-lang=&#34;python&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; math&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;from&lt;/span&gt; statistics &lt;span class=&#34;token keyword&#34;&gt;import&lt;/span&gt; mean&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#数据，有几组写几组&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;v1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;35.95&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;36.00&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;35.91&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;35.90&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;#仪器的最小分度值&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;avg&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;mean&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;数据平均值&#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;,&lt;/span&gt;avg&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0.0&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;token keyword&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token builtin&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+=&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt;i&lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;avg&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;A类不确定度: &#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;u1&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;math&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sqrt&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt; &lt;span class=&#34;token builtin&#34;&gt;sum&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;len&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;v1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt; &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;u1&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;B类不确定度: &#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;u2&lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;token builtin&#34;&gt;min&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;/&lt;/span&gt;math&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sqrt&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;u2&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;token string&#34;&gt;&#34;总不确定度:  &#34;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;math&lt;span class=&#34;token punctuation&#34;&gt;.&lt;/span&gt;sqrt&lt;span class=&#34;token punctuation&#34;&gt;(&lt;/span&gt;u2&lt;span class=&#34;token operator&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;u1&lt;span class=&#34;token operator&#34;&gt;**&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/Re4/</guid>
+            <title>汇编学习-汇编指令</title>
+            <link>https://pangbai.work/IT/Re4/</link>
+            <category>IT</category>
+            <category>汇编语言</category>
+            <pubDate>Fri, 25 Oct 2024 01:15:03 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;常用 x86 汇编指令，以及其含义&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;move&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#move&#34;&gt;#&lt;/a&gt; Move&lt;/h2&gt;
+&lt;p&gt;move 操作对象可以是&lt;br /&gt;
+寄存器 &amp;lt;- 寄存器&lt;br /&gt;
+寄存器 &amp;lt;- 内存&lt;br /&gt;
+寄存器 &amp;lt;- 立即数&lt;br /&gt;
+内存 &amp;lt;- 寄存器&lt;br /&gt;
+内存 &amp;lt;- 立即数&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;立即数可以看成 C 语言里的常数 (大概吧)&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;是进行数据操作的指令&lt;/p&gt;
+&lt;h2 id=&#34;lea&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lea&#34;&gt;#&lt;/a&gt; Lea&lt;/h2&gt;
+&lt;p&gt;加载有效地址到寄存器。&lt;br /&gt;
+加载地址也可以用 mov 指令，但是在有些情况下 lea 会很简便&lt;/p&gt;
+&lt;h2 id=&#34;关于符号&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#关于符号&#34;&gt;#&lt;/a&gt; 关于符号 []&lt;/h2&gt;
+&lt;p&gt;对于操作数，经常可以看到 []。&lt;br /&gt;
+我总是很困惑这个符号，因为它有时候表示解引用，操作的是内存的值，有时候又是表示地址。现在来梳理一下吧。&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;span&gt;例子1&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov     &lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;18h&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; lea     &lt;span class=&#34;token register variable&#34;&gt;edx&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;28h&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;关于上面的汇编，未执行前 eax 里装的是数组的首地址。mov 第二操作数是数组里的元素，而 lea 的第二操作数是一个地址。同样的一个 []，在 mov 为解引用，在 lea 却只是一个简单的加法运算。&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;span&gt;例子2&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;MY_TABLE&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;     &lt;span class=&#34;token comment&#34;&gt;; Effective Address of MY_TABLE in EBX&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;110&lt;/span&gt;          &lt;span class=&#34;token comment&#34;&gt;; MY_TABLE[0] = 110&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ADD &lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;              &lt;span class=&#34;token comment&#34;&gt;; EBX = EBX +2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;123&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;这个例子来自&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNuL2Fzc2VtYmx5L2Fzc2VtYmx5X2FkZHJlc3NpbmdfbW9kZXMuaHRtbA==&#34;&gt; w3school 寻址模式&lt;/span&gt;&lt;br /&gt;
+按照注释理解，[MY_TABLE] 是一个数组地址，&lt;br /&gt;
+[EBX] 却是解引用。&lt;br /&gt;
+查找了一下资料，这里进行一下梳理吧 (不知道对不对，欢迎指正)。&lt;/p&gt;
+&lt;h3 id=&#34;对于lea-装入有效地址的指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于lea-装入有效地址的指令&#34;&gt;#&lt;/a&gt; &lt;strong&gt;对于 lea&lt;/strong&gt;&lt;em&gt;: 装入有效地址的指令&lt;/em&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个操作数一定是寄存器&lt;/li&gt;
+&lt;li&gt;第二个操作数可以是寄存器，变量，地址表达式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;重点在第二个操作数&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第二个操作数为变量时&lt;/strong&gt;&lt;br /&gt;
+因为是进行地址加载的指令，[] 加不加都没关系，解释为 DS: 变量偏移，这时的变量都是解释为地址 (也就是变量偏移), 不会取变量的值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第二个操作数为寄存器或者地址表达式时&lt;/strong&gt;&lt;br /&gt;
+必须要加 [] , 因为 lea 是加载地址的第二个操作数一定是地址，也就是 DS: 寄存器的值，这里的 [] 就是取寄存器的值，并没有解引用 (地址表达式也是表达式的值，并没有引用地址数据)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;对于mov-进行数据操作的指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于mov-进行数据操作的指令&#34;&gt;#&lt;/a&gt; &lt;strong&gt;对于 mov&lt;/strong&gt;&lt;em&gt;: 进行数据操作的指令&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;两个操作数的类型是不固定的，我们假设操作数第一个是个寄存器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第二个操作数为变量时&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为是进行数据操作的指令，不管变量加不加 [] 都是相同的效果，都是解引用，获取变量的数据到寄存器。栗子 2 的第一条代码就明白了，[] 是不用管的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第二个操作数为寄存器或者地址表达式&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第二个操作数是寄存器的时候，就是我们常见的情况了，加 [] 是把寄存器里的地址数据取出来解引用得到地址里的数据，把地址里的数据装入寄存器。不加 [] 是直接装寄存器的数据，不管数据是一个地址还是其他什么东西。&lt;/p&gt;
+&lt;p&gt;第二个操作数是地址表达式一定要加 [] ，这个可以理解 (你找不到不加 [] 的地址表达式), 这时是解引用，把数据装入寄存器。你可能要问了，如果我想把地址表达的值装入寄存器呢？我们有两种方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方法一：使用 lea 指令 (也就是 lea 的第二种情况)。&lt;/li&gt;
+&lt;li&gt;方法二：先用 add 之类的指令把地址表达式的值算出来，然后值给到第二次操作数的寄存器 ebx, 再执行 mov eax, ebx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结&lt;/h3&gt;
+&lt;p&gt;对于汇编指令来说 [] 只是一个标记，并没有特定的含义，具体含义应该看其所在的对应指令。除了上面的两个指令使用 [] 外，在编写汇编代码时，甚至可以用 &lt;code&gt;变量[]&lt;/code&gt;  来使用数组元素 (有点像 c 语言了), 当然在 ida 几乎看不到这样的东西，这只是一个语法糖。把 mov 和 lea 理解透了才能清楚汇编执行时倒是操作的是地址还是数据。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/bit/</guid>
+            <title>通用二进制位运算及其注意事项</title>
+            <link>https://pangbai.work/IT/bit/</link>
+            <category>IT</category>
+            <category>re</category>
+            <pubDate>Wed, 20 Sep 2023 17:00:21 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;巩固通用计算机二进制位运算相关内容，增强数据加解密的能力&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;一位运算的结果与参与运算的变量的符号有关&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#一位运算的结果与参与运算的变量的符号有关&#34;&gt;#&lt;/a&gt; 一。位运算的结果与参与运算的变量的符号有关&lt;/h2&gt;
+&lt;p&gt;二进制正负表示方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原码&lt;/li&gt;
+&lt;li&gt;反码&lt;/li&gt;
+&lt;li&gt;补码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里我们只会用到原码与补码&lt;br /&gt;
+通用位运算 &lt;code&gt;&amp;amp; | ^ &amp;lt;&amp;lt; &amp;gt;&amp;gt; ~&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&#34;当有负数参与时&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#当有负数参与时&#34;&gt;#&lt;/a&gt; 当有负数参与时&lt;/h3&gt;
+&lt;p&gt;首先进行与正数相同的位运算 (负数都是补码表示的)&lt;/p&gt;
+&lt;h4 id=&#34;&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#&#34;&gt;#&lt;/a&gt; &amp;amp; | ^&lt;/h4&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;// 进行按位与 &amp; amp;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;补&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;————————&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;// 进行按位与 &amp; amp;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;补&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;补&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;————————&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;8&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;————————————————&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h4 id=&#34;-2&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#-2&#34;&gt;#&lt;/a&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt;&lt;/h4&gt;
+&lt;p&gt;对于 &lt;code&gt;&amp;lt;&amp;lt; &amp;gt;&amp;gt;&lt;/code&gt;  移位操作&lt;br /&gt;
+ &lt;code&gt;&amp;lt;&amp;lt;&lt;/code&gt; 二进制整体左移 (符号位和前面的去掉)，会在低位补 0, 不论正负都一样&lt;br /&gt;
+ &lt;code&gt;&amp;gt;&amp;gt;&lt;/code&gt;  二进制整体右移&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于正数，会在高位补 0&lt;/li&gt;
+&lt;li&gt;对于负数，会在高位补 1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight c&#34;&gt;&lt;figcaption data-lang=&#34;c&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;正数右移&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;负数右移&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;&gt;&gt;&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;token operator&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt; ]]></description>
+        </item>
+    </channel>
+</rss>
