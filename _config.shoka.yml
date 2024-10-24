@@ -97,7 +97,7 @@ menu:
   #   categories: /categories/ || th
   #   tags: /tags/ || tags
   友情链接: /links/ || magic
-  朋友: /friends/ || user
+  朋友: /friend/ || user
   听听旁白喜欢的歌: /music/ || music
   启思录: /thinks/ || th
 

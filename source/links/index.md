@@ -72,3 +72,117 @@ date: 2021-05-02 07:59:46
   image: https://www.woodwhale.cn/woodwhale.png
   color: "#77E2A0"
 {% endlinks %}
+
+{% links %}
+- site: Xunflash的小站
+  owner: Xunflash(粑粑)
+  url: https://www.xunflash.top/
+  desc: 去上带学了 !
+  image: https://www.xunflash.top/icon.png
+  color: "#EF5990"
+{% endlinks %}
+
+
+{% links %}
+- site: Lunatic的博客
+  owner: Lunatic
+  url: https://goodlunatic.github.io
+  desc: Mind and Hand :)
+  image: https://goodlunatic.github.io/favicon.ico
+  color: "#FFC0CB"
+{% endlinks %}
+
+
+{% links %}
+- site: Fup1p1's blog
+  owner: Fup1p1
+  url: https://www.fup1p1.com/
+  desc: 逆向寻真理
+  image: https://www.fup1p1.com/upload/2023/08/header.jpg
+  color: "#FFC0CB"
+ 
+{% endlinks %}
+
+{% links %}
+- site: enllus1on
+  owner: enllus1on
+  url: https://enllus1on.github.io/
+  desc: pwn for more
+  image: https://enllus1on.github.io/images/kano.jpg
+  color: "#EF5990"
+  
+{% endlinks %}
+
+{% links %}
+- site: AsaL1n
+  owner: AsaL1n
+  url: https://asal1n.github.io/
+  desc: why we need that?
+  image: https://asal1n.github.io/img/head.jpg
+  color: "#EF5990"
+{% endlinks %}
+
+{% links %}
+- site: Straw's blog
+  owner: Straw
+  url: https://straw-233.github.io/
+  desc: 管人痴
+  image: https://straw-233.github.io/avatar/meinasi.png
+  color: "#EF5990"
+{% endlinks %}
+
+{% links %}
+- site: CHHHCHHOH's blog
+  owner: CHHHCHHOH
+  url: http://www.chhhchhoh.cn/
+  desc: 哇，二次元
+  image: https://s2.loli.net/2024/10/20/9EXmLyYuU6b5tVh.png
+  color: "#EF5990"
+{% endlinks %}
+
+{% links %}
+- site: void2eye
+  owner: void2eye
+  url: https://void2eye.fun/
+  desc: 临渊羡鱼，不如退而结网
+  image: https://void2eye.fun/img/808.png
+  color: "#EF5990"
+{% endlinks %}
+
+
+
+
+{% links %}
+- site: carbofish
+  owner: carbofish
+  url: https://carbo.ink
+  desc: 114, 514! 
+  image: https://s2.loli.net/2024/10/20/AJDMV9xzFufZWp1.jpg
+  color: "#EF5990"
+{% endlinks %}
+
+{% links %}
+- site: C3ngH
+  owner: C3ngH
+  url: https://c3ngh.top
+  desc: 广告位招租
+  image: https://c3ngh-blog.oss-cn-hangzhou.aliyuncs.com/img/C3ngH.jpg
+  color: "#EF5990"
+{% endlinks %}
+
+
+{% links %}
+- site: A1ic3
+  owner: A1ic3
+  url: https://a1ic3.cn/
+  desc: 希望成为一个有趣的人
+  image: https://a1ic3.cn/images/avatar1.jpg
+  color: "#EF5990"
+{% endlinks %}
+
+
+
+
+
+
+
