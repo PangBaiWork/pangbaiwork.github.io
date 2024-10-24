@@ -1,6 +1,7 @@
 ---
 title: STM32固件逆向概述
-categories: CTF
+categories: 
+- [ CTF ,Reverse]
 tags:
 - 汇编
 - Re

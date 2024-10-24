@@ -1,6 +1,7 @@
 ---
 title: 加密解密算法
-categories: CTF
+categories: 
+- [ CTF ,Reverse]
 tags:
 - 汇编
 - Re

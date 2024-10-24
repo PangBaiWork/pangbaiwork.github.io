@@ -3,7 +3,7 @@ title: 利用JavaScript实现循环打字效果
 date: 2021-03-13 19:27:55
 tags: html前端
 categories:
-- [html,HTML特效]
+- [html,js]
 ---
 ++一个自己制作的JS打字效果++&#123;.primary&#125;
 # 效果

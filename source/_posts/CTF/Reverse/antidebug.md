@@ -1,6 +1,7 @@
 ---
 title: 反调试简述
-categories: CTF
+categories:
+- [ CTF ,Reverse]
 tags:
 - 汇编
 - Re

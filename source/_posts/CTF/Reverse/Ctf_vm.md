@@ -1,6 +1,7 @@
 ---
 title: CTF虚拟机
-categories: CTF
+categories: 
+- [ CTF ,Reverse]
 tags:
 - 汇编
 - Re

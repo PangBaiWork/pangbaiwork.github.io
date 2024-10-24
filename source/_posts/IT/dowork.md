@@ -3,7 +3,7 @@ title: Dowork食用教程
 date: 2023-09-18 17:00:21
 tags:
  - Dowork
-sticky: true
+sticky: false
 ---
 Dowork是一个在安卓运行Linux容器并且集成了终端,图形化显示,音频输出,容器管理等功能的多合一管理器
 

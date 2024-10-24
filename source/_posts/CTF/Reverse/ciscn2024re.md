@@ -1,6 +1,7 @@
 ---
-title: ciscn2024复现及总结
-categories: CTF
+title: CISCN2024复现及总结
+categories: 
+- [ CTF ,Reverse]
 tags:
 - 汇编
 - Re
