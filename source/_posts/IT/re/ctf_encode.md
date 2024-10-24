@@ -111,3 +111,8 @@ print(new_contrary_sbox)
 - [x]  进行& 0xFFFFFFB5 | 8
 - [x]  +0x30或+'0'或+48
 [加密解密实现](/IT/re/encode_decode/#HEX)
+
+# CRC
+- [x]  &1
+- [x]  +0x30或+'0'或+48
+[加密解密实现](/IT/re/encode_decode/#HEX)
