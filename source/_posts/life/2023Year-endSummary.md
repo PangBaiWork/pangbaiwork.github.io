@@ -1,7 +1,7 @@
 ---
 title: 2023年终总结( ﾟдﾟ)つBye
 categories: 
-- [Life]
+- [life]
 tags:
 - 博客日常
 - 记录生活
