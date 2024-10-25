@@ -1,7 +1,7 @@
 ---
 title: CISCN2024复现及总结
 categories: 
-- [ CTF ,Reverse]
+- [ CTF ,逆向工程]
 tags:
 - 汇编
 - Re

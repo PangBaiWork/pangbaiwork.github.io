@@ -1,7 +1,7 @@
 ---
 title: 反调试简述
 categories:
-- [ CTF ,Reverse]
+- [ CTF ,逆向工程]
 tags:
 - 汇编
 - Re

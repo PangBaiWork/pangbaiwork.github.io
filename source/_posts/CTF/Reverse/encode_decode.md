@@ -1,7 +1,7 @@
 ---
 title: 加密解密算法
 categories: 
-- [ CTF ,Reverse]
+- [ CTF ,逆向工程]
 tags:
 - 汇编
 - Re

@@ -1,7 +1,7 @@
 ---
 title: 常见加密算法特征识别
 categories: 
-- [ CTF ,Reverse]
+- [ CTF ,逆向工程]
 tags:
 - Re
 - 汇编

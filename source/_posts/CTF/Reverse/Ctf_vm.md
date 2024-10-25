@@ -1,7 +1,7 @@
 ---
 title: CTF虚拟机
 categories: 
-- [ CTF ,Reverse]
+- [ CTF ,逆向工程]
 tags:
 - 汇编
 - Re
