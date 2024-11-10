@@ -1,5 +1,6 @@
 ---
 title: 常见加密算法特征识别
+date: 2024-07-23 12:19:19
 categories: 
 - [ CTF ,逆向工程]
 tags:
