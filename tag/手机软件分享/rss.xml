@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;手机软件分享&#34; tag</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 16 Jan 2021 13:39:19 +0800</pubDate>
+        <lastBuildDate>Sat, 16 Jan 2021 13:39:19 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>re</category>
+        <category>ADB</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>MC</category>
+        <category>汇编</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/share/idm/</guid>
+            <title>LDM+线程下载器</title>
+            <link>https://pangbai.work/share/idm/</link>
+            <category>手机软件分享</category>
+            <category>线程下载器</category>
+            <pubDate>Sat, 16 Jan 2021 13:39:19 +0800</pubDate>
+            <description><![CDATA[ &lt;h4 id=&#34;idm下载器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#idm下载器&#34;&gt;#&lt;/a&gt; IDM 下载器&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;线程下载器在电脑上是比较出名的，但你有用过手机版的线程下载器吗？&lt;br /&gt;
+面对国外网站的文件下载，用龟速来形容也不为过，当你看到 16kb/s 时估计已经对 100 多兆的文件绝望了，此时的 IDM 线程下载器就能拯救你了。  &lt;br /&gt;
+此类下载器与迅雷等不同，线程下载器使用多线程下载文件，换句话说，32 个线程在一秒内能为你下载&lt;br /&gt;
+ 16kb*32 的文件数据，理想情况下速度几乎增大了 32 倍。堪称神器。  &lt;br /&gt;
+此外国内&lt;s&gt;某度网盘&lt;/s&gt;的下载速度让人绝望，但大于 1G 的文件几乎都存在网盘里，此线程下载器可已搭配 ES 文件管理器 使用，实现网盘高速下载。&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;特点&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特点&#34;&gt;#&lt;/a&gt; 特点&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;同时下载 5 个&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;多部分下载 - 每次下载多达 32 线&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;支持代 {过}……{滤} 理&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;速度限制器限制速度下载&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;刷新过期链接&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ts 视频缓存转换&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL21pcC51Y2J1Zy5jb20vc2hvdWppLzEyNjUyOC5odG1s&#34;&gt;跳转下载&lt;/span&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
