@@ -1,5 +1,5 @@
 ---
-title: 2024浙江省大学生网络与信息安全竞赛Reverse-WP
+title: 2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP
 categories: 
 - [ CTF ,逆向工程]
 tags:
