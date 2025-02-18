@@ -1,6 +1,5 @@
 ---
 title: 加密解密算法
-date: 2024-5-23 12:19:19
 categories: 
 - [ CTF ,逆向工程]
 tags:
@@ -37,6 +36,7 @@ char res[32]; // 储存转换后的结果
 
 int hex_str_2_str(char *dest, char *src)
 {
+
     int len = strlen(src); // 获取接收数据长度
     int i,j;
     for (i = 0, j = 0; i < len; i+=2) { // 每次取两个字符
