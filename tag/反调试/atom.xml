@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pangbai.work</id>
+    <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;反调试&#34; tag</title>
+    <link href="https://pangbai.work" />
+    <updated>2025-07-03T08:13:19.000Z</updated>
+    <category term="Linux" />
+    <category term="shell" />
+    <category term="IT" />
+    <category term="编程" />
+    <category term="ADB" />
+    <category term="re" />
+    <category term="汇编语言" />
+    <category term="Dowork" />
+    <category term="Github" />
+    <category term="linux" />
+    <category term="kail" />
+    <category term="渗透" />
+    <category term="Android" />
+    <category term="安卓" />
+    <category term="博客日常" />
+    <category term="记录生活" />
+    <category term="氵帖" />
+    <category term="Minecraft" />
+    <category term="服务器" />
+    <category term="xposed" />
+    <category term="xp模块" />
+    <category term="太极" />
+    <category term="icebox" />
+    <category term="手机软件分享" />
+    <category term="线程下载器" />
+    <category term="MC" />
+    <category term="汇编" />
+    <category term="Re" />
+    <category term="frida" />
+    <category term="反调试" />
+    <category term="STM32" />
+    <category term="html前端" />
+    <entry>
+        <id>https://pangbai.work/CTF/Reverse/frida-check/</id>
+        <title>Frida特征分析(基于去特征的FridaServer)</title>
+        <link rel="alternate" href="https://pangbai.work/CTF/Reverse/frida-check/"/>
+        <content type="html">&lt;p&gt;攻防世界总是在不断对抗，没有永恒的安全可言。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;Frida 是安卓逆向分析的利器，注入检测一直是对抗的难题，学会解决这些问题才能成为一个真正的逆向工程师。&lt;br /&gt;
+就原本的构建的 frida 而言，注入检测是十分简单的，从 &lt;code&gt;/proc/self/maps&lt;/code&gt; ，从 &lt;code&gt;/proc/self/stat&lt;/code&gt; ，都可以找到很多 Frida 注入特征。&lt;br /&gt;
+社区开始想方设法屏蔽掉这些特征，比如 patch 源码，修改端口，但似乎都不能完全隐藏起来。&lt;br /&gt;
+我个人日常使用的魔改 Frida 是&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1lsYXJvZC9GbG9yaWRhL3JlbGVhc2Vz&#34;&gt; Florida&lt;/span&gt;，这里感谢一下作者，使用 GitHub Action 持续构建最新的 release。&lt;br /&gt;
+对于 Frida 的检查我决定分为两种比较好一种是利用 &lt;code&gt;/proc&lt;/code&gt;  接口的检测，一种是运行时检测。&lt;/p&gt;
+&lt;h3 id=&#34;运行时检测&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#运行时检测&#34;&gt;#&lt;/a&gt; 运行时检测&lt;/h3&gt;
+&lt;p&gt;对于 inline hook 在工作时一定会修改汇编代码，crc 快速校验 text 端是很有效的手段，但是会带来一定性能损失。&lt;br /&gt;
+有没有更好的方法检测 frida 呢？有的。&lt;br /&gt;
+Frida 可以同时 hook java 和 native 代码，其中的 java 代码 hook 是通过 hook libart 实现的，其中 &lt;code&gt;art::ArtMethod::PrettyMethod&lt;/code&gt;  一定会被 frida hook 来使 java hook 正常工作。比起 crc 校验 so 的整个 text 段，不如直接 crc 校验 &lt;code&gt;PrettyMethod&lt;/code&gt;  的函数前几个字节，可能有人会说，我怎么知道函数头原来的汇编是什么样的呢，我们其实可以把前几个字节保存到本地，然后每次启动一个线程去对比，如果数据不一致就说明被 frida 注入了（特别是用 attach 方式注入的），还有一种就是解析 &lt;code&gt;PrettyMethod&lt;/code&gt;  汇编代码前几行，如果有   &lt;code&gt;b 0x*****&lt;/code&gt;  类型的长跳转也说明被 frida 注入了。&lt;br /&gt;
+还有一种运行时检测是堆栈检查，检查函数调用的堆栈信息，如果有异常情况也可以说明被 hook 了。&lt;/p&gt;
+&lt;h3 id=&#34;proc-接口的检测&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#proc-接口的检测&#34;&gt;#&lt;/a&gt; /proc 接口的检测&lt;/h3&gt;
+&lt;p&gt;基于 /proc 的检查被大厂 app 使用得更广泛，即使是魔改 Frida 也可以被检测出 Frida 特征，这里拿 BiliBili app 的 libmsaoaidsec.so 来说吧（不只是 b 站，这个 so 被非常多的 app 使用）。&lt;br /&gt;
+这个 so 在加载时会调用 &lt;code&gt;.init_proc&lt;/code&gt;  的初始化函数，其中一段代码&lt;img data-src=&#34;image.png&#34; alt=&#34;dlsym&#34; /&gt; 动态解析 libc 获得 pthread_create 的地址，调用这个函数创建了三个线程，循环检测 Frida 特征，其中一个线程在遍历 &lt;code&gt;/proc/self/task&lt;/code&gt; ，这个目录包含当前进程所有线程的运行信息，读取 &lt;code&gt;/proc/self/task/tid/status&lt;/code&gt;  文件内容 &lt;img data-src=&#34;image-1.png&#34; alt=&#34;alt text&#34; /&gt; 内容包含线程名称，通过 strstr 判断线程名称是不是包含 &lt;code&gt;gum-js-loop&lt;/code&gt;  和 &lt;code&gt;gmain&lt;/code&gt;  来检测 frida，检测成功就会闪退。&lt;br /&gt;
+&lt;img data-src=&#34;image-2.png&#34; alt=&#34;alt text&#34; /&gt;&lt;br /&gt;
+ 魔改特征的 &lt;code&gt;Florida&lt;/code&gt;  并没有通过这一检测，同时不只是 status，app 还可以检 &lt;code&gt;/proc/self/task/tid/stat&lt;/code&gt;   &lt;code&gt;/proc/self/task/tid/sched&lt;/code&gt;   &lt;code&gt;/proc/self/task/tid/comm&lt;/code&gt;  等多个目录下的文件内容，都可以检测出 frida 的信息。&lt;br /&gt;
+最后还有个十分容易检测的特征是 &lt;code&gt;/proc/self/net/unix&lt;/code&gt; , 被 frida 注入时会包含如下内容&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;0000000000000000: 00000003 00000000 00000000 0001 03 &lt;span class=&#34;token number&#34;&gt;1741108&lt;/span&gt; @/frida-e254654d-8ae6-4a50-9764-e54a961a9439&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;应该是 frida 用来远程通信的 unix 域套接字。&lt;br /&gt;
+当然检测方法并不是这几种，也可以使用 &lt;code&gt;/proc/self/maps&lt;/code&gt;  等其他方式进行检测，但是其他检测方案已经被魔改特征的 &lt;code&gt;Florida&lt;/code&gt;  所隐藏了。&lt;/p&gt;
+&lt;p&gt;检测方法很多，反检测方法其实也可以很多。&lt;br /&gt;
+有补充或者勘误的小伙伴可以在评论区留言。&lt;/p&gt;
+</content>
+        <category term="汇编" />
+        <category term="Re" />
+        <category term="反调试" />
+        <updated>2025-07-03T08:13:19.000Z</updated>
+    </entry>
+</feed>
