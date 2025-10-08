@@ -83,23 +83,22 @@ public class MainActivity1 extends MainActivity {
 ```
 再复制几个 Activity 之后不管点击哪个图标调转都会是第一个MainActivity，这样就实现了多图标的效果，十分有趣。
 ### 题目架构
-题目使用`flutter + native + Java`实现，多少有点花哨但是流程还是很清晰的： `Flutter输入->加载libnative.so->修改字节码->判断libart.so指定位置有没有被修改->魔改aes加密->魔改Java加密->Flutter判断密文`，,整个程序只涉及到AES和XXTEA加密，其实最核心的部分是对 `Java` 层代码的魔改。
+题目使用`flutter + native + Java`实现，多少有点花哨但是流程还是很清晰的： `Flutter输入->加载libnative.so->修改字节码->判断libart.so指定位置有没有被修改->魔改aes加密->魔改Java加密->Flutter判断密文`，整个程序只涉及到AES和XXTEA加密，其实最核心的部分是对 `Java` 层代码的魔改。
 ### Flutter部分
-第一部分在比赛进行的过程中就难倒了许多师傅，`Flutter` 框架写的题目在国内CTF比赛中不算常见，但是确实也出现过不少次了，比如NepCTF2025，NKCTF2024，NewStarCTF2024等等。
-这里逆向用到了项目 [Blutter](https://github.com/worawit/blutter) 。
-我推荐静态分析从`Blutter`生成的`asm`开始入手，因为这里存在大部分代码结构和逻辑（几乎全部逻辑），而且同IDA分析的出的伪C代码不同，这里的类和函数是最清晰的，各种闭包的调用和字符串常量更是清晰可见(在IDA中闭包可能是各种各样都基址+偏移调用)，IDA只适合在Hook和调试时使用。
-`asm/magical_girl` 下存在以下文件
+第一部分在比赛进行的过程中就难倒了许多师傅，`Flutter` 框架写的题目在国内CTF比赛中不算常见，但是确实也出现过不少次了，比如NepCTF2025，NKCTF2024，NewStarCTF2024等等。这里逆向用到了项目 [blutter](https://github.com/worawit/blutter) 。
+我推荐静态分析从`blutter`生成的`asm`开始入手，因为这里存在大部分代码结构和逻辑（几乎全部逻辑），而且同IDA分析的出的伪C代码不同，这里的类和函数是最清晰的，各种闭包的调用和字符串常量更是清晰可见(在IDA中闭包可能是各种各样都基址+偏移调用)，IDA只适合在Hook和调试时使用。
+`blutter`会生成`asm/magical_girl` 文件夹下存在以下文件
 ```bash
     目录: D:\share\出题\WMCTF\lib\output\asm\magical_girl
 
 Mode                 LastWriteTime         Length Name
 ----                 -------------         ------ ----
 -a----         2025/10/3     17:52         441492 aes_crypt_null_safe.dart
--a----         2025/10/3     17:52          70967 `EditView.dart`的check
+-a----         2025/10/3     17:52          70967 EditView.dart
 -a----         2025/10/3     17:52          30221 main.dart
 -a----         2025/10/3     17:52           3717 null_sub0.dart
 ```
-仅从做题者的角度出发，代码`EditView.dart`的`check`函数就是`flutter`层的`check`逻辑.
+仅从做题者的角度出发，代码`EditView.dart`的`check`函数就是`flutter`层的`check`逻辑。
 `blutter`是很优秀的工具，但是代码中夹杂大量不存在高亮的`ARM`汇编，阅读还是十分头疼的，在`ai`兴起的这个时代靠肉眼分析还是太过落后了，这里我借助`ai agent`来快速分析代码（注意`ai`并不完全可信细节部分任然需要自己审查）。
 ```dart EditView.dart
 // lib: package:magical_girl/EditView.dart
@@ -354,10 +353,13 @@ void main() {
   runApp(const MagicalGirlEditApp());
 }
 ```
-看到结果的时候连自己都吓到了，和源代码居然十分接近（如果更高级的ai应该就能FullCombo了），如果只分析大概逻辑，这个输出已经完全够用了。
-基于此结果开始我们的分析：
-`check`函数调用了一个AES加密，`aesSetKeys`调用有两个参数，我使用的`ai`貌似这两个参数都猜成key了(`finalKeyBytes, aesKeyBytes`，有钱的老板用GPT5肯定不会出现这种情况吧)，AES有的两个加密参数可能是`KEY`和`IV`常见为16字节，这边加密模式也没分析出来我们回原文看看也没能看到参数，可以先放一下。
-`aesKeyBytes`来自静态数组`[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]`刚好16位，但是都是2的倍数， `keyBytes`来自两个`list`拼接(`addAll`)，其中一部分在选自静态数组`[2, 2, 8, 10]`,`[126, 70, 6, 426]`另一部分来自`getKey`， 可以察觉到不对了，AES传入的密钥都是byte类型，但是这里有数据超过255，并且不存在奇数，除2之后`[1,1,4,5]`，瞬间可以要素察觉了，这里的所有byte都是左移1位的。同时`finalKeyBytes`的最终值取决于`getSym`返回的第八位是否等于`0xD6`。再来分析加密，查看`aes_crypt_null_safe.dart`的`_sBox`函数(为什么要看这个？因为这属于常见魔改项吧，都位于`magical_girl`目录下了，肯定不会是标准加密了)。
+看到结果的时候连自己都吓到了，和源代码居然十分接近（如果更高级的`ai`应该就能`FullCombo`了），如果只分析大概逻辑，这个输出已经完全够用了。 
+
+基于此结果开始我们的分析，`check`函数调用了一个AES加密，`aesSetKeys`调用有两个参数，我使用的`ai`貌似这两个参数都猜成key了(`finalKeyBytes, aesKeyBytes`，有钱的老板用`GPT5`肯定不会出现这种情况吧)，`AES`有的两个加密参数，可能是`KEY`和`IV`常见为16字节，这边加密模式没分析出来，我们回原文看看也没能看到参数，可以先放一下。 
+
+`aesKeyBytes`来自静态数组`[2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]`刚好16位，但是都是2的倍数， `keyBytes`来自两个`list`拼接(`addAll`)，其中一部分在选自静态数组`[2, 2, 8, 10]`,`[126, 70, 6, 426]`另一部分来自`getKey`， 可以察觉到不对了，AES传入的密钥都是byte类型，但是这里有数据超过255，并且不存在奇数，除2之后`[1,1,4,5]`，瞬间可以要素察觉了，这里的所有byte都是左移1位的。同时`finalKeyBytes`的最终值取决于`getSym`返回的第八位是否等于`0xD6`。
+
+再来分析加密代码，查看`aes_crypt_null_safe.dart`的`_sBox`函数(为什么要看这个？因为这属于常见魔改项吧，都位于`magical_girl`目录下了，肯定不会是标准加密了)。
 
 ```c
          0x2903a0: mov             x17, #0xf6
@@ -407,17 +409,19 @@ void main() {
 ```
 轮密钥加密和列混淆交换位置，很常见的魔改。接下来通过调试消去不确定因素。
 
-不知道大家是否有发现IDA分析的汇编结果和blutter解析结果有出入
+不知道大家是否有发现`IDA`分析的汇编结果和`blutter`解析结果有出入
 ```c
+blutter:
     0x28c25c: ldur            x16, [fp, #-0x10]
     0x28c260: str             x16, [SP]
     0x28c264: r0 = aesSetMode()
 --------------------------------
+IDA:
     0x28C25C                  LDUR            X16, [X29,#-0x10]
     0x28C260                  STR             X16, [X15]
     0x28C264                  BL              magical_girl$aes_crypt_null_safe_AesCrypt__aesSetMode_291548
 ```
-对于x29寄存器，熟悉arm的朋友都知道，指的就是fp寄存器。但是对于x15寄存器来说，这个寄存器和sp并没有什么关系（arm的sp是x31寄存器）。说明flutter函数的调用并非标准调用，事实上从Blutter生成的`blutter_frida.js`便可以看出端倪，
+对于`x29`寄存器，熟悉`arm`的朋友都知道，指的就是`fp`寄存器。但是对于`x15`寄存器来说，这个寄存器和`sp`并没有什么关系（`arm`的`sp`是`x31`寄存器）。说明`flutter`函数的调用并非标准调用，事实上从`blutter`生成的`blutter_frida.js`便可以看出端倪，
 ```js
 const PointerCompressedEnabled = true;
 const CompressedWordSize = 4;
@@ -435,7 +439,7 @@ function getArg(context, idx) {
     return stack.add(8 * idx).readPointer();
 }
 ```
-`IDA`把函数分析为`fastcall`调用约定，并不适用于`Flutter`函数，所以反编译结果十分丑陋。我们这里可以来借用``blutter_frida.js`分析一下传参规则。
+`IDA`把函数分析为`fastcall`调用约定，并不适用于`Flutter`函数，所以反编译结果十分丑陋。我们这里可以来借用`blutter_frida.js`分析一下传参规则。
 ```c
     0x28c244: ldur            x16, [fp, #-0x10]
     0x28c248: ldur            lr, [fp, #-0x18]
@@ -456,7 +460,7 @@ function getArg(context, idx) {
     0x28c28c: stp             x0, x16, [SP]
     0x28c290: r0 = aesEncrypt()
 ```
-首先，aesSetKeys()传入了两个参数，一个是key,一个是iv,我们通过以下修改来hook调用参数
+首先，`aesSetKeys()`传入了两个参数，一个是`key`,一个是`iv`,我们通过以下修改来`hook`调用参数
 ```js
 //使弹窗可关闭
 Java.perform(function () {
@@ -628,9 +632,9 @@ AesCrypt@7b006f6bb9 = {
 Process terminated
 ```
 
-对`aesSetMode`和`aesEncrypt_28c6a8`故技重施，也可找到输入的flag数据（aesEncrypt_28c6a8都第一个参数），便发现`Flutter`函数调用约定:
-`参数从右往左入栈，最后入栈对象的this指针`。到此处`Flutter`逆向便已经变得十分简单了，IDA的那些错误的入参分析变得毫无价值。
-将打印参数改为对象this指针(Hook必须是aesSetMode的后面,不然拿到的输出是cbc)，我们可以看到AES加密模式：
+对`aesSetMode`和`aesEncrypt_28c6a8`故技重施，也可找到输入的`flag`数据（`aesEncrypt_28c6a8`都第一个参数），便发现`Flutter`函数调用约定:
+`参数从右往左入栈，最后入栈对象的this指针`。到此处`Flutter`逆向便已经变得十分简单了，`IDA`的那些错误的入参分析变得毫无价值。
+将打印参数改为对象`this`指针(`Hook`点必须在`aesSetMode`的后面,不然拿到的输出是`cbc`)，我们可以看到`AES`加密模式：
 ```json
  "off_18!AesMode@7b0045a1d1": {
       "parent!_Enum": {
@@ -639,23 +643,20 @@ Process terminated
       }
     },
 ```
-key在`aesSetKeys`也直接打印出来了，接下来只要Hook调试各个步骤看看加密的魔改情况就行了。
-加密是AES ecb加密，IV失去了作用。
-到此Flutter层就分析完毕了，是不是很简单呢，哈哈哈。
+`key`在`aesSetKeys`也直接打印出来了，接下来只要`Hook`调试各个步骤看看加密的魔改情况就行了。加密是`AES ecb`加密，`IV`失去了作用。
+到此`Flutter`层就分析完毕了，是不是很简单呢，哈哈哈。
 ### Native构思
 我认为简单的Flutter逆向拿出来给师傅们看，还是太草率了，多少有点难登大雅之堂，真正好的题目，出题人花费的时间远会比做题人花费的时间长。 
 
 `Native`首先要介绍一下 [安卓原生库的命名空间](https://source.android.google.cn/docs/core/permissions/namespaces_libraries?hl=zh-cn) 
-Android 7.0 为原生库引入了命名空间，以限制内部 API 的可见性，听起来很高大上，具体解释就是安卓上的动态链接库使用被约束了，普通开发者不管是编译时链接还是使用`dlsym`都不能获取到被限制的lib的符号地址，`native`开发能调用的`api`被严重限制，同理Java也有类似的约束`hiddenapi`用来限制反射的功能。 
+`Android 7.0` 为原生库引入了命名空间，以限制内部 API 的可见性，听起来很高大上，具体解释就是安卓上的动态链接库使用被约束了，普通开发者不管是编译时链接还是使用`dlsym`都不能获取到被限制的lib的符号地址，`native`开发能调用的`api`被严重限制，同理`Java`也有类似的约束`hiddenapi`用来限制反射的功能。 
 
-本题目使用 [fake-dlfcn](https://github.com/ssrlive/fake-dlfcn) 来查找调用 `libart.so` 的符号，同时修改了一些代码来适配高版本安卓。这个项目原理比较简单，扫描`
-proc/self/maps`
-得到原生库的基址，并通过解析原生库的`elf`符号表得到偏移，再进行计算得到符号地址。
+本题目使用 [fake-dlfcn](https://github.com/ssrlive/fake-dlfcn) 来查找调用 `libart.so` 的符号，同时修改了一些代码来适配高版本安卓。这个项目原理比较简单，扫描`proc/self/maps`得到原生库的基址，并通过解析原生库的`elf`符号表得到偏移，再进行计算得到符号地址。
 
-题目使用的`inlineHook`的shellcode来自[inlineHook
+题目使用的`inlineHook`的`shellcode`来自[inlineHook
 ](https://gitee.com/zzy_cs/inline-hook)
 
-接下来可以看`native`了，`libnative_add.so`在`Flutter`输入框回车的时候被加载。`genKey`函数是一个`rc4`用来生成静态的`Key`，通过blutter生成的代码可以知道这个函数被`flutter`的`getKey()`调用没有什么需要细说的。`getSym`函数被`flutter`的`getSym`函数调用。其伪代码如下
+接下来可以看`native`了，`libnative_add.so`在`Flutter`输入框回车的时候被加载。`genKey`函数是一个`rc4`用来生成静态的`Key`，通过`blutter`生成的代码可以知道这个函数被`flutter`的`getKey()`调用没有什么需要细说的。`getSym`函数被`flutter`的`getSym`函数调用。其伪代码如下
 ```c
 __int64 __fastcall getSym(char *a1)
 {
@@ -696,7 +697,7 @@ __int64 __fastcall getSym(char *a1)
     
 ```
 检测`PrettyMethod`的函数头是否有`br`指令特征（0xD6），
-检测点来自代码 [frida-java-bridge](https://github.com/frida/frida-java-bridge/blob/9bf86b718ab3e9d50d9333dba1f26e8f7aad852b/lib/android.js#L4809)，之前在看雪偶然看到的一篇文章提到过，找不到在哪了哈哈。
+检测点来自代码 [frida-java-bridge](https://github.com/frida/frida-java-bridge/blob/9bf86b718ab3e9d50d9333dba1f26e8f7aad852b/lib/android.js#L4809)，`libmsaoaidsec.so`也存在这种检测方案。
 ```c
 LOAD:00000000001A8BF4             ; _QWORD art::ArtMethod::PrettyMethod(art::ArtMethod *__hidden this, bool)
 LOAD:00000000001A8BF4                             EXPORT _ZN3art9ArtMethod12PrettyMethodEb
@@ -705,7 +706,7 @@ LOAD:00000000001A8BF4                                                     ; sub_
 LOAD:00000000001A8BF4 50 00 00 58                 LDR             X16, loc_1A8BFC
 LOAD:00000000001A8BF8 00 02 1F D6                 BR              X16
 ```
-这个检测点从代码上来看，但凡使用过`frida-java-bridge`的都会存在，但在我测试`Frida 16`最后一个版本时（16.7.19），这个检测点完全失效了。失效原因十分奇特，这个函数字节码在程序里的检测代码来看是完全正常的，但在我使用Frida把`libart.so`给dump出来时却发现该位置已经是被修改了。当我再切换到`Frida 16.5.6`检测代码成功检测到字节码被修改。只能猜到新版`Frida`应用了某些特殊修改，此检测机制对于新版Frida可能失效，有师傅能解答我的疑问的话，可以在评论留言。
+这个检测点从代码上来看，但凡使用过`frida-java-bridge`的都会存在，但在我测试`Frida 16`最后一个版本时（16.7.19），这个检测点完全失效了。失效原因十分奇特，这个函数字节码在程序里的检测代码来看是完全正常的，但在我使用Frida把`libart.so`给`dump`出来时却发现该位置已经是被修改了。当我再切换到`Frida 16.5.6`检测代码成功检测到字节码被修改。只能猜到新版`Frida`应用了某些特殊修改，此检测机制对于新版`Frida`可能失效，有师傅能解答我的疑问的话，可以在评论留言。
 题目中绕过这个检测的就能获得真正的`aeskey`，如果没绕过就会退出程序。
 
 接下来就是程序最重要的部分了，在`.init_proc`有如下代码
@@ -788,7 +789,7 @@ int init_proc()
   return result;
 }
 ```
-代码基于`neon指令集`对字符串进行解密，`veorq_s8`和`vqtbl1q_s8`一个是异或指令，一个是取表换位指令，了解一下就可以写出字符串解密脚本，用`Frida` `hook init` 需要`Hook连接器`也可以恢复出来。
+有字符串混淆，代码使用`neon指令集`对字符串进行解密，`veorq_s8`和`vqtbl1q_s8`，一个是异或指令，一个是取表换位指令，了解一下就可以写出字符串解密脚本，用`Frida` `hook init` 需要`Hook连接器`也可以恢复出来。
 
 接下来分析函数，首先是`shellcode`全局变量，转化为汇编后可以看到保护现场的`shellcode`
 ```
@@ -880,11 +881,11 @@ hook(IsDebuggable_sym,enter_fun2,leave_fun2)
   *(_QWORD *)&v12[&the_func_addr_ - &shellcode_start_] = sub_1A710;
   *(_QWORD *)&v12[&end_func_addr_ - &shellcode_start_] = sub_1A76C;
 ```
-看`shellcode`可以知道第一个是`onEnter`，第二个是`onLeave`，这两个函数并没有太多更改操作，仅`sub_1A710`更改函数返回指为1。为什么要Hook这个函数？这里是为了杜绝代码走 [JIT](https://source.android.google.cn/docs/core/runtime/jit-compiler?hl=zh-cn) ，大家都知道，安卓字节码最终执行有三种路径：解释模式，JIT，和AOT
+看`shellcode`可以知道第一个是`onEnter`，第二个是`onLeave`，这两个函数并没有太多更改操作，仅`sub_1A710`更改函数返回指为1。为什么要Hook这个函数？这里是为了杜绝代码走 [JIT](https://source.android.google.cn/docs/core/runtime/jit-compiler?hl=zh-cn) ，大家都知道，安卓字节码最终执行有三种路径：解释模式，`JIT`，和`AOT`
 ![JIT](https://source.android.google.cn/docs/core/runtime/images/jit-arch.png?hl=zh-cn)
-解释模式顾名思义就是VM解析字节码然后运行（本题目需要走这种模式），JIT就是运行时编译成机械码，AOT就是运行前编译成机械码。后两种编译模式共用一个编译器。本次的Apk是Release构建的默认会使Java代码的执行走AOT（AOT文件会在Apk安装时生成，同时在Apk运行时通过收集信息优化），如果不进行处理，后面的DoCall是不会被触发的（因为DoCall是解释模式才会用到的，这一点从`art::interpreter::DoCall`这个前缀就可以看出来），值得注意的是如果你将Apk编译为`Debug`将不会触发AOT，但或许会触发JIT，权衡下还是以`Release`为目标了，也是为了学习吧哈哈。 
+解释模式顾名思义就是`VM`解析字节码然后运行（本题目需要走这种模式），`JIT`就是运行时编译成机械码，`AOT`就是运行前编译成机械码。后两种编译模式共用一个编译器。本次的`Apk`是`Release`构建的默认会使`Java`代码的执行走`AOT`（`AOT`文件会在`Apk`安装时生成，同时在`Apk`运行时通过收集信息优化`oat`文件），如果不进行处理，后面的`DoCall`是不会被触发的（因为`DoCall`是解释模式才会用到的，这一点从`art::interpreter::DoCall`这个前缀就可以看出来），值得注意的是如果你将`Apk`编译为`Debug`将不会触发`AOT`，但或许会触发`JIT`，权衡下还是以`Release`为目标了，也是为了学习吧哈哈。 
 
-当初立马想到，DEX如果是在apk安装才会指出`dex2oat`那为什么不直接通过动态加载`Dex`绕过`AOT`呢，我马上加载马上使用的Dex你总不可能优化了吧。但这个思路是不可行的，动态加载Dex不走oat只有一种情况：使用`InMemoryDexClassLoader`，但从`Android10`开始，`InMemoryDexClassLoader` 加载的`Dex`文件也会走`AOT`流程。那么剩下的方法就是 `Hook` AOT加载流程，需要找一个必定导出`libart.so`函数来实施计划，打开AOSP看看，但随即发现大部分符号都是`HIDDEN`的，能使用的符号少之又少，又由于题目的`hook`程序是在点击后启动的，几乎很难找到符合要求的`Hook`点。随后在拷打ai的时候发现`_ZNK3art9OatHeader12IsDebuggableE`，尝试后发现能在`Release`打包使`DoCall`被Hook到，在a11～a15的设备测试也没有问题，由于ddl临近没深追究就用上了。
+当初立马想到，`DEX`如果是在`apk`安装才会指出`dex2oat`那为什么不直接通过动态加载`Dex`绕过`AOT`呢，我马上加载马上使用的`Dex`你总不可能优化了吧。但这个思路是不可行的，动态加载`Dex`不走`oat`只有一种情况：使用`InMemoryDexClassLoader`，但从`Android10`开始，`InMemoryDexClassLoader` 加载的`Dex`文件也会走`AOT`流程。那么剩下的方法就是 `Hook` AOT加载流程，需要找一个必定导出`libart.so`函数来实施计划，打开AOSP看看，但随即发现大部分符号都是`HIDDEN`的，能使用的符号少之又少，又由于题目的`hook`程序是在点击后启动的，几乎很难找到符合要求的`Hook`点。随后在拷打ai的时候发现`_ZNK3art9OatHeader12IsDebuggableE`，尝试后发现能在`Release`打包使`DoCall`被`Hook`到，在`a11～a15`的设备测试也没有问题，由于ddl临近没深追究就用上了。
 
 对于`DoCall`
 ```c
@@ -1057,20 +1058,20 @@ std::string ArtMethod::PrettyMethod(ArtMethod* m, bool with_signature) {
   }
 
 ```
-看到这些代码就可以秒懂了，只要把内存中函数的字节码转为`Instruction*`，就可以利用其中函数读取操作码和操作数。那么通过`inst`拿到的指针就是Dex的指针，只要把指针向前回溯到Dex头就可以操作正在运行的整个Dex文件。  
-ddl近在眼前，没时间写什么华丽的修改代码的，使用了最简单的修改方式，题目是设置一个比对器，通过比对正在执行的Java函数名来修改字节码。当执行到`call magic.fixKey`就将该字节码下方的逻辑修改掉，直到被修改的逻辑执行完毕运行到`call magic.toByteArray`再把改掉的字节码改回来。
+看到这些代码就可以秒懂了，只要把内存中函数的字节码转为`Instruction*`，就可以利用其中函数读取操作码和操作数。那么通过`inst`拿到的指针就是`Dex`的指针，只要把指针向前回溯到`Dex`头就可以操作正在运行的整个`Dex`文件。  
+`ddl`近在眼前，没时间写什么华丽的修改代码的，使用了最简单的修改方式，题目是设置一个比对器，通过比对正在执行的`Java`函数名来修改字节码。当执行到`call magic.fixKey`就将该字节码下方的逻辑修改掉，直到被修改的逻辑执行完毕运行到`call magic.toByteArray`再把改掉的字节码改回来。
 
-这里解释一下为什么我选`DoCall`但是没有选`ArtMethod::Invoke`，Invoke函数头如下
+这里解释一下为什么我选`DoCall`但是没有选`ArtMethod::Invoke`，`Invoke`函数头如下
 ```c
 void ArtMethod::Invoke(Thread* self, uint32_t* args, uint32_t args_size, JValue* result, const char* shorty) 
 ```
-这个函数是在函数DoCall的下层执行，可以通过`this`拿到`ArtMethod`再进一步解析`ArtMethod`拿到`GetCodeItem()`在解析`codeitem`结构拿到`Instruction`，这个字节码获取流程太过复杂，对于Hook来说如果某些偏移是硬编码，那是很难适配多个版本安卓的。
+这个函数是在函数`DoCall`的下层执行，可以通过`this`拿到`ArtMethod`再进一步解析`ArtMethod`拿到`GetCodeItem()`在解析`codeitem`结构拿到`Instruction`，这个字节码获取流程太过复杂，对于`Hook`来说如果某些偏移是硬编码，那是很难适配多个版本安卓的。
 
 用什么改的已经知道了，那到底是怎么改的呢？
 参照这个表格 [dex_instruction_list Aosp](https://cs.android.com/android/platform/superproject/main/+/main:art/libdexfile/dex/dex_instruction_list.h;l=18;drc=61197364367c9e404c7da6900658f1b16c42d0da?q=dex_instruction_list.h&sq=&hl=zh-cn)
 
-hex(179)->0xd3  
-hex(224)->0xe0
+`hex(179)->0xd3`  
+`hex(224)->0xe0`
 ```c
   V(0xB2, MUL_INT_2ADDR, "mul-int/2addr", k12x, kIndexNone, kContinue, kMultiply, kVerifyRegA | kVerifyRegB) \
   V(0xB3, DIV_INT_2ADDR, "div-int/2addr", k12x, kIndexNone, kContinue | kThrow, kDivide, kVerifyRegA | kVerifyRegB) \
@@ -1080,8 +1081,8 @@ hex(224)->0xe0
   V(0xE2, USHR_INT_LIT8, "ushr-int/lit8", k22b, kIndexNone, kContinue, kUshr | kRegCFieldOrConstant, kVerifyRegA | kVerifyRegB) \
 ```
 改变乘除，改变移位方向。
-也就是Java层的XXTEA已经完全被魔改了。
-对于此处的节法，我预计的正解是Hook程序在`magic.toByteArray`触发前，在`Java`层使用`Frida-dexdump`获得魔改后的字符串，或者说把第二次`strstr`后的还原逻辑`NOP`掉，在出题后我也尝试过，此法可行，`dump`出的`Dex`带有已修改的字节码，并且可以用`Jeb`反编译为`Java`代码。当然还可以使用`Smali Trace`来打印`Smali`执行流程，对比即可知道修改流程。比赛中的唯一解使用的是CE断点然后`DUMP`内存获得修改后的Dex，赛后也有师傅通过手修字节码来获得魔改后的逻辑的，都太强了QAQ。
+也就是`Java`层的`XXTEA`已经完全被魔改了。
+对于此处的节法，我预计的正解是`Hook`程序在`magic.toByteArray`触发前，在`Java`层使用`Frida-dexdump`获得魔改后的字符串，或者说把第二次`strstr`后的还原逻辑`NOP`掉，在出题后我也尝试过，此法可行，`dump`出的`Dex`带有已修改的字节码，并且可以用`Jeb`反编译为`Java`代码。当然还可以使用`Smali Trace`来打印`Smali`执行流程，对比即可知道修改流程。比赛中的唯一解使用的是CE断点然后`DUMP`内存获得修改后的`Dex`，赛后也有师傅通过手修字节码来获得魔改后的逻辑的，都太强了`QAQ`。
 魔改后的`Java`代码直接贴师傅们的图了。
 ![alt text](image-4.png)
 `Flutter`加密完的`AES`密文会被`send`到`Java`进行魔改XXTEA，最后得到加密结果比对验证，至此全部程序都结束了。
