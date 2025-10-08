@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;随时随地进行软件构建&#34; category</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 24 Sep 2021 13:39:19 +0800</pubDate>
+        <lastBuildDate>Fri, 24 Sep 2021 13:39:19 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>MC</category>
+        <category>汇编</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>反调试</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/githubci/</guid>
+            <title>Github CI自动构建使用教程</title>
+            <link>https://pangbai.work/IT/githubci/</link>
+            <category>Github</category>
+            <pubDate>Fri, 24 Sep 2021 13:39:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;可爱的 Github 为开发者们提供了一项名为 Github CI 的功能，帮助开发者在线构建各种项目，为构建耗时项目和没有构建设备的开发者提供帮助&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;当一提到开源，每个人应该都会想到&lt;s&gt;白嫖&lt;/s&gt;和全球最大的开源社区 - Github。自动构建作为免费开放的功能可谓非常好用。&lt;/p&gt;
+&lt;hr /&gt;
+&lt;h3 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h3&gt;
+&lt;p&gt;我找到一个开源的安卓 NDK 项目，但因为没有电脑，作为小白的我起初使用 AIDE 进行构建，安装了 ndk 支持后发现，构建出的东西没有 so 文件？重试很多次后我才知道，这东西不支持 Cmake?Cmake 是个啥？去问度娘后才得到答案。然后我开始考虑用 termux 容器运行 arch Linux 进行构建，安装 sdkman，安装 gradle，ndk 没有 arm 架构的？然后到处查找，在 github 上找到一个，搞过来用，好的，用不了。纯小白便开始迷茫。逛了逛 Github 想起来，不是还有 github ci 吗？以前也没怎么接触过这个，就开始试试吧。&lt;/p&gt;
+&lt;h3 id=&#34;教程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#教程&#34;&gt;#&lt;/a&gt; 教程&lt;/h3&gt;
+&lt;p&gt;条件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个 github 仓库&lt;/li&gt;
+&lt;li&gt;对 git 操作流程有一定了解&lt;/li&gt;
+&lt;li&gt;安装 git (手机请用 termux)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;配置github&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#配置github&#34;&gt;#&lt;/a&gt; 配置 Github&lt;/h4&gt;
+&lt;p&gt;仓库的建立和远程控制，网络上已经有了许多教程，在这里就不一一赘述了。&lt;br /&gt;
+打开 Github 项目仓库页面，点击 Actions&lt;br /&gt;
+ 在这个页面寻找你需要构建的项目，展开更多后，可以找到 &lt;code&gt;Android Ci&lt;/code&gt;  的选项，选择它。&lt;br /&gt;
+可以看到如下页面，直接点击下面的  &lt;code&gt;Start commit&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;打开终端，在你的项目文件夹初始化 git 仓库&lt;br /&gt;
+使用 ssh 将当前仓库和 github 的仓库建立远程连接&lt;/p&gt;
+&lt;p&gt;执行&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;git&lt;/span&gt; pull&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;把远程仓库文件同步过来&lt;br /&gt;
+然后执行&lt;/p&gt;
+&lt;figure class=&#34;highlight sh&#34;&gt;&lt;figcaption data-lang=&#34;sh&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;cd&lt;/span&gt; .github/workflows&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;进入自动构建的配置文件夹&lt;br /&gt;
+然后对配置文件 &lt;code&gt;android.yml&lt;/code&gt;  进行编辑&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;把 java 版本更改为 8，以提高兼容&lt;/li&gt;
+&lt;li&gt;确定你需要设置构建的项目文件地址，并且存在 gradlew (用于 gradle 构建)&lt;/li&gt;
+&lt;li&gt;可以在 run 后面执行命令行，但不要用 cd 之类的指令，实测不能使用&lt;br /&gt;
+_mulu&lt;br /&gt;
+ 构建完成后所有生成的文件都会被删除&lt;/li&gt;
+&lt;li&gt;构建好后的文件可以通过 artifact 打包成 zip，在构建控制页面下载&lt;br /&gt;
+以下为实例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight yaml&#34;&gt;&lt;figcaption data-lang=&#34;YAML&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Android CI&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;push&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token key atrule&#34;&gt;branches&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; master &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;pull_request&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token key atrule&#34;&gt;branches&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; master &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token key atrule&#34;&gt;jobs&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;  &lt;span class=&#34;token key atrule&#34;&gt;build&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 在 linux 上运行构建 (必要的话可以改为 windows)&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;12&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token key atrule&#34;&gt;runs-on&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ubuntu&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;latest&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;13&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;14&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 初始化构建工具&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;15&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token key atrule&#34;&gt;steps&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;16&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/checkout@v2&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;17&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; set up JDK 8&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;18&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/setup&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;java@v2&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;19&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;with&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;20&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token key atrule&#34;&gt;java-version&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;8&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;21&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token key atrule&#34;&gt;distribution&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#39;adopt&#39;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;22&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;        &lt;span class=&#34;token key atrule&#34;&gt;cache&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; gradle&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;23&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 修改权限并进行构建&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;24&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Grant execute permission for gradlew&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;25&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; chmod +x gradlew&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;26&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Build with Gradle&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;27&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; ./gradlew build&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;28&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 查找构建好的文件      &lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;29&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 这里为寻找.apk 和.aar 后缀文件的路径&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;30&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; find apk&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;31&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;run&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;  find ./ &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;regex &#34;.&lt;span class=&#34;token important&#34;&gt;*\.apk\|.*\.aar&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;32&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;           &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;33&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token comment&#34;&gt;# 将构建好的含.apk 的文件上传&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;34&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; Upload APK&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;35&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;uses&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; actions/upload&lt;span class=&#34;token punctuation&#34;&gt;-&lt;/span&gt;artifact@v2&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;36&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;      &lt;span class=&#34;token key atrule&#34;&gt;with&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;37&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;          &lt;span class=&#34;token key atrule&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt;  ok&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;38&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;          &lt;span class=&#34;token key atrule&#34;&gt;path&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;:&lt;/span&gt; app/build/outputs/apk/debug/&lt;span class=&#34;token important&#34;&gt;*.apk&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;39&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;	  &lt;span class=&#34;token comment&#34;&gt;#这里的 path 路径是来自于 find apk 那一步的结果&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;修改完成后&lt;br /&gt;
+将本地仓库推送 github，项目的自动构建就会按照配置文件运行&lt;br /&gt;
+第一次构建成功可能因为路径问题不会上传 apk 文件&lt;/p&gt;
+&lt;p&gt;这时我们需要去 github ci 的 log 页面，寻找 find apk 那一行查看 apk 所在路径&lt;br /&gt;
+如果其输出路径为 app/build/outputs/apk/，就打开终端，把配置文件 upload APK 那一步的 path 改为&lt;br /&gt;
+ app/build/outputs/apk/*.apk。&lt;br /&gt;
+保存文件重新将本地仓库推送到 github&lt;br /&gt;
+ 这次就可以得到构建好的 apk 了&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/8c8a9739-dbf2-412f-9d5e-7b0f6556ac42/0&#34; alt=&#34;githubci&#34; /&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

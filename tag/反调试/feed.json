@@ -1,0 +1,20 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • All posts by \"反调试\" tag",
+    "description": "记录生活 | 为众人抱薪者,不可使其扼于风雪",
+    "home_page_url": "https://pangbai.work",
+    "items": [
+        {
+            "id": "https://pangbai.work/CTF/Reverse/frida-check/",
+            "url": "https://pangbai.work/CTF/Reverse/frida-check/",
+            "title": "Frida特征分析(基于去特征的FridaServer)",
+            "date_published": "2025-07-03T08:13:19.000Z",
+            "content_html": "<p>Frida 是安卓逆向分析的利器，注入检测一直是对抗的难题，学会解决这些问题才能成为一个真正的逆向工程师。</p>\n<span id=\"more\"></span>\n<p>就原本的构建的 frida 而言，注入检测是十分简单的，从 <code>/proc/self/maps</code> ，从 <code>/proc/self/stat</code> ，都可以找到很多 Frida 注入特征。</p>\n<p>我个人日常使用的魔改 Frida 是<span class=\"exturl\" data-url=\"aHR0cHM6Ly9naXRodWIuY29tL1lsYXJvZC9GbG9yaWRhL3JlbGVhc2Vz\"> Florida</span>，这里感谢一下作者，使用 <code>GitHub Action</code>  持续构建最新的 <code>release</code> 。</p>\n<h3 id=\"运行时检测\"><a class=\"anchor\" href=\"#运行时检测\">#</a> 运行时检测</h3>\n<p>对于 inline hook 在工作时一定会修改汇编代码，crc 快速校验 text 端是很有效的手段，但是会带来一定性能损失。有没有更好的方法检测 frida 呢？有的。</p>\n<h4 id=\"prettymethod\"><a class=\"anchor\" href=\"#prettymethod\">#</a> PrettyMethod</h4>\n<p>Frida 可以同时 hook java 和 native 代码，其中的 java 代码 hook 是通过 hook libart 实现的，其中 <code>art::ArtMethod::PrettyMethod</code>  一定会被 frida 修改。比起 crc 校验 so 的整个 text 段，不如直接校验 <code>PrettyMethod</code>  的函数前几个字节，解析 <code>PrettyMethod</code>  汇编代码前几行，如果有   <code>br 0x*****</code>  类型的长跳转也说明被 frida 注入了。Frida 启动时不止这一个 <code>native lib</code>  被 <code>Hook</code> ，像 <code>libc.so</code>  这种库的导出函数也会存在相似的特征。<br />\n还有一种运行时检测是堆栈检查，检查函数调用的堆栈信息，如果有异常情况也可以说明被 hook 了。</p>\n<h3 id=\"基于-proc-接口的检测\"><a class=\"anchor\" href=\"#基于-proc-接口的检测\">#</a> 基于 /proc 接口的检测</h3>\n<h4 id=\"明显字符串检测\"><a class=\"anchor\" href=\"#明显字符串检测\">#</a> 明显字符串检测</h4>\n<p>基于 <code>/proc</code>  的检查被大厂使用得更广泛，即使是魔改 <code>Frida</code>  也可以被检测出 <code>Frida</code>  特征，这里拿 <code>BiliBili</code>  的 <code>libmsaoaidsec.so</code>  来说吧（不只是 b 站，这个 so 被非常多的 <code>app</code>  使用）。<br />\n这个 so 在加载时会调用 <code>.init_proc</code>  的初始化函数，其中一段代码<img data-src=\"image.png\" alt=\"dlsym\" /> 动态解析 libc 获得 pthread_create 的地址，调用这个函数创建了三个线程，循环检测 Frida 特征，其中一个线程在遍历 <code>/proc/self/task</code> ，这个目录包含当前进程所有线程的运行信息，读取 <code>/proc/self/task/tid/status</code>  文件内容 <img data-src=\"image-1.png\" alt=\"alt text\" /> 内容包含线程名称，通过 <code>strstr</code>  判断线程名称是不是包含 <code>gum-js-loop</code>  和 <code>gmain</code>  来检测 frida，检测成功就会闪退。<br />\n<img data-src=\"image-2.png\" alt=\"alt text\" /><br />\n 魔改特征的 <code>Florida</code>  并没有通过这一检测。<br />\n不只是 <code>status</code> ，app 还可以检查 <code>/proc/self/task/tid/stat</code>   <code>/proc/self/task/tid/sched</code>   <code>/proc/self/task/tid/comm</code>  等多个目录下的文件内容，都可以检测出明显的 frida 的特征。<br />\n最后还有个十分容易检测的特征是 <code>/proc/self/net/unix</code> , 被 frida 注入时会包含如下内容</p>\n<figure class=\"highlight shell\"><figcaption data-lang=\"Bash\"></figcaption><table><tr><td data-num=\"1\"></td><td><pre>0000000000000000: 00000003 00000000 00000000 0001 03 <span class=\"token number\">1741108</span> @/frida-e254654d-8ae6-4a50-9764-e54a961a9439</pre></td></tr></table></figure><p>用于通信的 frida 的 <code>unix</code>  域套接字。</p>\n<h4 id=\"分析特征的检测\"><a class=\"anchor\" href=\"#分析特征的检测\">#</a> 分析特征的检测</h4>\n<p>重灾区还是 <code>/proc/self/maps</code> ，最传统的检测就是 <code>frida-agent-64.so</code> ，但是这个特征很容易去除。前面有谈到 <code>libc.so</code>  会被 <code>Hook</code> ，这点从 <code>/proc/self/maps</code>  也可以看到，权限的修改是要符合内存页的，修改字节码会导致 <code>maps</code>  中出现两个 <code>xp</code>  权限的段中间出现若干个 <code>rwxp</code>  权限的内存段，正常情况下 <code>xp</code>  的段应该是完整的并且只有一个。</p>\n<p>检测方法很多，反检测方法其实也可以很多。<br />\n有补充或者勘误的小伙伴可以在评论区留言。</p>\n",
+            "tags": [
+                "汇编",
+                "Re",
+                "反调试"
+            ]
+        }
+    ]
+}

