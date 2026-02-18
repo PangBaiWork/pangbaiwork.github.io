@@ -5,14 +5,14 @@ date: 2021-05-01 11:24:24
 {% media audio %}
 - title: 旁白的歌单
   list:                                      
-   - https://y.qq.com/n/yqq/playsquare/3565081723.html
+   - https://music.163.com/m/playlist?id=6794826172&creatorId=5038491351
 {% endmedia %}
 {% links %}
  - site: 歌单链接
    owner: PangBaI
-   url: https://i.y.qq.com/n2/m/share/details/taoge.html?platform=11&appshare=android_qq&appversion=10110008&hosteuin=oKCPowEFoKC5Nv**&id=3565081723&ADTAG=qfshare
+   url: https://music.163.com/m/playlist?id=6794826172&creatorId=5038491351
    desc: 旁白的歌单 
-   image: https://y.qq.com/music/common/upload/t_shared_ad/2455021.png?max_age=2592000
+   image: https://p1.music.126.net/DBnqzQc44_OGZxO0b8VllQ==/109951172691911594.jpg?imageView=1&type=webp&thumbnail=378x0
    color: #
 {% endlinks %}
 &nbsp;
