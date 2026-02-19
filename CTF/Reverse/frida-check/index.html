@@ -1,0 +1,582 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="汇编,Re,反调试" />
+
+
+<link rel="canonical" href="https://pangbai.work/CTF/Reverse/frida-check/">
+
+
+
+  <title>
+Frida特征分析(基于去特征的FridaServer) - Frida - 逆向工程 - CTF |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Frida特征分析(基于去特征的FridaServer)
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2025-07-03 16:13:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2025-07-03T16:13:19+08:00">2025-07-03</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>1.5k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>1 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?92474"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?789571"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?792841"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?728689"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?903524"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?767605"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/" itemprop="item" rel="index" title="分类于 CTF"><span itemprop="name">CTF</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/Reverse/" itemprop="item" rel="index" title="分类于 逆向工程"><span itemprop="name">逆向工程</span></a>
+<meta itemprop="position" content="2" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/Reverse/Frida/" itemprop="item" rel="index" title="分类于 Frida"><span itemprop="name">Frida</span></a>
+<meta itemprop="position" content="3" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/CTF/Reverse/frida-check/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>Frida 是安卓逆向分析的利器，注入检测一直是对抗的难题，学会解决这些问题才能成为一个真正的逆向工程师。</p>
+<span id="more"></span>
+<p>就原本的构建的 frida 而言，注入检测是十分简单的，从 <code>/proc/self/maps</code> ，从 <code>/proc/self/stat</code> ，都可以找到很多 Frida 注入特征。</p>
+<p>我个人日常使用的魔改 Frida 是<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL1lsYXJvZC9GbG9yaWRhL3JlbGVhc2Vz"> Florida</span>，这里感谢一下作者，使用 <code>GitHub Action</code>  持续构建最新的 <code>release</code> 。</p>
+<h3 id="运行时检测"><a class="anchor" href="#运行时检测">#</a> 运行时检测</h3>
+<p>对于 inline hook 在工作时一定会修改汇编代码，crc 快速校验 text 端是很有效的手段，但是会带来一定性能损失。有没有更好的方法检测 frida 呢？有的。</p>
+<h4 id="prettymethod"><a class="anchor" href="#prettymethod">#</a> PrettyMethod</h4>
+<p>Frida 可以同时 hook java 和 native 代码，其中的 java 代码 hook 是通过 hook libart 实现的，其中 <code>art::ArtMethod::PrettyMethod</code>  一定会被 frida 修改。比起 crc 校验 so 的整个 text 段，不如直接校验 <code>PrettyMethod</code>  的函数前几个字节，解析 <code>PrettyMethod</code>  汇编代码前几行，如果有   <code>br 0x*****</code>  类型的长跳转也说明被 frida 注入了。Frida 启动时不止这一个 <code>native lib</code>  被 <code>Hook</code> ，像 <code>libc.so</code>  这种库的导出函数也会存在相似的特征。<br />
+还有一种运行时检测是堆栈检查，检查函数调用的堆栈信息，如果有异常情况也可以说明被 hook 了。</p>
+<h3 id="基于-proc-接口的检测"><a class="anchor" href="#基于-proc-接口的检测">#</a> 基于 /proc 接口的检测</h3>
+<h4 id="明显字符串检测"><a class="anchor" href="#明显字符串检测">#</a> 明显字符串检测</h4>
+<p>基于 <code>/proc</code>  的检查被大厂使用得更广泛，即使是魔改 <code>Frida</code>  也可以被检测出 <code>Frida</code>  特征，这里拿 <code>BiliBili</code>  的 <code>libmsaoaidsec.so</code>  来说吧（不只是 b 站，这个 so 被非常多的 <code>app</code>  使用）。<br />
+这个 so 在加载时会调用 <code>.init_proc</code>  的初始化函数，其中一段代码<img data-src="image.png" alt="dlsym" /> 动态解析 libc 获得 pthread_create 的地址，调用这个函数创建了三个线程，循环检测 Frida 特征，其中一个线程在遍历 <code>/proc/self/task</code> ，这个目录包含当前进程所有线程的运行信息，读取 <code>/proc/self/task/tid/status</code>  文件内容 <img data-src="image-1.png" alt="alt text" /> 内容包含线程名称，通过 <code>strstr</code>  判断线程名称是不是包含 <code>gum-js-loop</code>  和 <code>gmain</code>  来检测 frida，检测成功就会闪退。<br />
+<img data-src="image-2.png" alt="alt text" /><br />
+ 魔改特征的 <code>Florida</code>  并没有通过这一检测。<br />
+不只是 <code>status</code> ，app 还可以检查 <code>/proc/self/task/tid/stat</code>   <code>/proc/self/task/tid/sched</code>   <code>/proc/self/task/tid/comm</code>  等多个目录下的文件内容，都可以检测出明显的 frida 的特征。<br />
+最后还有个十分容易检测的特征是 <code>/proc/self/net/unix</code> , 被 frida 注入时会包含如下内容</p>
+<figure class="highlight shell"><figcaption data-lang="Bash"></figcaption><table><tr><td data-num="1"></td><td><pre>0000000000000000: 00000003 00000000 00000000 0001 03 <span class="token number">1741108</span> @/frida-e254654d-8ae6-4a50-9764-e54a961a9439</pre></td></tr></table></figure><p>用于通信的 frida 的 <code>unix</code>  域套接字。</p>
+<h4 id="分析特征的检测"><a class="anchor" href="#分析特征的检测">#</a> 分析特征的检测</h4>
+<p>重灾区还是 <code>/proc/self/maps</code> ，最传统的检测就是 <code>frida-agent-64.so</code> ，但是这个特征很容易去除。前面有谈到 <code>libc.so</code>  会被 <code>Hook</code> ，这点从 <code>/proc/self/maps</code>  也可以看到，权限的修改是要符合内存页的，修改字节码会导致 <code>maps</code>  中出现两个 <code>xp</code>  权限的段中间出现若干个 <code>rwxp</code>  权限的内存段，正常情况下 <code>xp</code>  的段应该是完整的并且只有一个。</p>
+<p>检测方法很多，反检测方法其实也可以很多。<br />
+有补充或者勘误的小伙伴可以在评论区留言。</p>
+
+      <div class="tags">
+          <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"><i class="ic i-tag"></i> 汇编</a>
+          <a href="/tags/Re/" rel="tag"><i class="ic i-tag"></i> Re</a>
+          <a href="/tags/%E5%8F%8D%E8%B0%83%E8%AF%95/" rel="tag"><i class="ic i-tag"></i> 反调试</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="CTF/Reverse/frida-check/" class="item leancloud_visitors" data-flag-title="Frida特征分析(基于去特征的FridaServer)" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/CTF/Reverse/frida-check/" title="Frida特征分析(基于去特征的FridaServer)">https://pangbai.work/CTF/Reverse/frida-check/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/life/2024Year-endSummary/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?547146" title="2024年终总结੭ ᐕ)੭">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 记录生活</span>
+  <h3>2024年终总结੭ ᐕ)੭</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/CTF/Reverse/Want2BecomeMagicalGirl/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?782429" title="Want2BecomeMagicalGirl出题笔记-WMCTF2025">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 逆向工程</span>
+  <h3>Want2BecomeMagicalGirl出题笔记-WMCTF2025</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E6%A3%80%E6%B5%8B"><span class="toc-number">1.</span> <span class="toc-text"> 运行时检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#prettymethod"><span class="toc-number">1.1.</span> <span class="toc-text"> PrettyMethod</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E-proc-%E6%8E%A5%E5%8F%A3%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">2.</span> <span class="toc-text"> 基于 &#x2F;proc 接口的检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%98%8E%E6%98%BE%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%A3%80%E6%B5%8B"><span class="toc-number">2.1.</span> <span class="toc-text"> 明显字符串检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%86%E6%9E%90%E7%89%B9%E5%BE%81%E7%9A%84%E6%A3%80%E6%B5%8B"><span class="toc-number">2.2.</span> <span class="toc-text"> 分析特征的检测</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/CTF/Reverse/frida-check/" rel="bookmark" title="Frida特征分析(基于去特征的FridaServer)">Frida特征分析(基于去特征的FridaServer)</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/life/2024Year-endSummary/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/CTF/Reverse/Want2BecomeMagicalGirl/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E4%B8%80%E4%B8%AA%E5%BE%88%E7%89%9B%E7%9A%84%E6%89%8B%E6%9C%BA%E7%AB%AF%E7%BA%BF%E7%A8%8B%E4%B8%8B%E8%BD%BD%E5%99%A8/" title="分类于 一个很牛的手机端线程下载器">一个很牛的手机端线程下载器</a>
+</div>
+
+    <span><a href="/share/idm/" title="LDM+线程下载器">LDM+线程下载器</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/IT/dowork/" title="Dowork食用教程">Dowork食用教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%AC%E7%AB%99%E5%94%AF%E4%B8%80%E4%B8%80%E7%AF%87%E6%9C%89%E7%94%A8%E7%9A%84%E6%96%87%E7%AB%A0/" title="分类于 可能是本站唯一一篇有用的文章">可能是本站唯一一篇有用的文章</a>
+</div>
+
+    <span><a href="/html/hhh/" title="如何在一分钟内黑掉任何网站">如何在一分钟内黑掉任何网站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="分类于 Minecraft服务器搭建">Minecraft服务器搭建</a>
+</div>
+
+    <span><a href="/share/CatServer/" title="1.12.2 | CatServer 可自行添加mod|自配权限小型整合服务端">1.12.2 | CatServer 可自行添加mod|自配权限小型整合服务端</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/re3/" title="汇编学习-汇编语法">汇编学习-汇编语法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%9D%9E%E4%BA%BA%E7%B1%BB%E7%94%9F%E7%89%A9%E5%AD%A6%E7%A0%94%E7%A9%B6/" title="分类于 非人类生物学研究">非人类生物学研究</a>
+</div>
+
+    <span><span class="exturl" data-url="aHR0cHM6Ly9zaGFyZWNoYWluLnFxLmNvbS9iYjRhODI2YzYyYTViNjQ5ZDg0YTk2ZWYyNjNiNGVjZA==" title="黄色单细胞生物纪录">黄色单细胞生物纪录<i class="ic i-link-alt"></i></span></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E4%B8%8E%E4%BD%A0%E8%BF%9C%E6%96%B9%E7%9A%84%E6%9C%8B%E5%8F%8B%E4%B8%80%E8%B5%B7%E7%8E%A9%E6%B8%B8%E6%88%8F/" title="分类于 与你远方的朋友一起玩游戏">与你远方的朋友一起玩游戏</a>
+</div>
+
+    <span><a href="/share/mclink/" title="MCinaBox远程联机教学">MCinaBox远程联机教学</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ZJCTF2024/" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/encode_decode/" title="加密解密算法">加密解密算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/antidebug/" title="反调试简述">反调试简述</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'CTF/Reverse/frida-check/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

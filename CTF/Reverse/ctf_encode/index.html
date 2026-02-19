@@ -1,0 +1,672 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="汇编,Re" />
+
+
+<link rel="canonical" href="https://pangbai.work/CTF/Reverse/ctf_encode/">
+
+
+
+  <title>
+常见加密算法特征识别 - 逆向工程 - CTF |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">常见加密算法特征识别
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-07-23 12:19:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-07-23T12:19:19+08:00">2024-07-23</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>1.8k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>2 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?761126"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?968520"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?531168"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?309004"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?649236"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?571255"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/" itemprop="item" rel="index" title="分类于 CTF"><span itemprop="name">CTF</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/Reverse/" itemprop="item" rel="index" title="分类于 逆向工程"><span itemprop="name">逆向工程</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/CTF/Reverse/ctf_encode/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>当代码混淆到一定程度，就算是常见的加密也可能难以识别出来，总结一下常见的加密算法特征，希望不被一些其他原因混淆视听</p>
+<span id="more"></span>
+<h1 id="tea系列"><a class="anchor" href="#tea系列">#</a> Tea 系列</h1>
+<p>tea 系列加密可谓常见，甚至腾讯都在魔改 tea 使用到数据加密中。<br />
+Tea 系列加密都会有个叫 Delta 的东西，其常见值为 <code>0x9E3779B9或0x61C88647</code> ，这个东西是可以被随意改变的，但是如果见得这串熟悉的数据，那就基本可以确定是 tea 系列加密了</p>
+<h2 id="tea"><a class="anchor" href="#tea">#</a> Tea</h2>
+<p>普通 tea 可以被攻击 (别问怎么攻击，我也不知道)<br />
+ 每次加密处理 64 位数据，并且被分别两组</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_0" disabled="true" /><label for="cbx_0"> 明显的两行进行一堆位运算和异或后与明文相加减</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1">  Dword [2] 或者两个 Dword 进行操作，</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_2" disabled="true" /><label for="cbx_2"> 循环 32 次，但是这个次数是魔改的</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_3" disabled="true" /><label for="cbx_3"> 移位通常是左移 4，右移 5，这个也是可以魔改的</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_4" disabled="true" /><label for="cbx_4"> Key 是 4 个 32 位的值，与移位后数据相加</label></li>
+</ul>
+<p>加密解密简单，手逆就行了</p>
+<h2 id="xteatean"><a class="anchor" href="#xteatean">#</a> XTEA/TEAN</h2>
+<p>可以被攻击，特征与 TEA 相似，但还比 tea 多一个特征</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_5" disabled="true" /><label for="cbx_5"> 对 Delta 的和进行 &amp; 3 来选取密钥</label></li>
+</ul>
+<p>加密解密简单，手逆就行了</p>
+<h2 id="xxtea"><a class="anchor" href="#xxtea">#</a> XXTEA</h2>
+<p>最厉害的 tea 类型加密，加密逻辑比较复杂，不像上面两个看两眼就能写解密代码，同时原字符串长度可以不是 4 的倍数了，特征和上面两个也很不一样</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_6" checked="true" disabled="true" /><label for="cbx_6"> 128 位的 key (和上面两个一样)</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_7" checked="true" disabled="true" /><label for="cbx_7"> 很多的 &amp; 3 操作，会和 key 和 sum 进行运算</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_8" checked="true" disabled="true" /><label for="cbx_8"> 嵌套循环</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_9" checked="true" disabled="true" /><label for="cbx_9"> 可能会在同一行里出现左移 2 或 4，右移 3 或 5 (你就记 2345 吧)</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_10" checked="true" disabled="true" /><label for="cbx_10"> rounds = 6 + 52/n, 会出现被除数 52 和 + 6</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#XXTEA">加密解密实现</a></p>
+<h1 id="aes加密"><a class="anchor" href="#aes加密">#</a> AES 加密</h1>
+<p>AES 为对称加密，同时也是分组加密，每组处理 128 位数据 (16 个字节)，按密钥长度分为 AES128 (16 字节密钥 10 轮加密),AES192 (24 字节密钥 12 轮加密),AES256 (32 字节密钥 14 轮加密)。</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_11" checked="true" disabled="true" /><label for="cbx_11"> 对明文长度进行除 16，或者右移 4 位</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_12" checked="true" disabled="true" /><label for="cbx_12"> 左移右移 24/16/8 或者 &amp; ff000000，&amp;00ff0000，&amp;0000ff00，&amp;000000ff</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_13" checked="true" disabled="true" /><label for="cbx_13"> 256 个元素的数组 (16x16 的 Sbox)，如加密盒子 {0x63,0x7c,0x77,0x7b...} 解密盒子 {0x52,0x09,0x6a,0xd5...}, 可能出现换盒</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_14" checked="true" disabled="true" /><label for="cbx_14"> 一行代码里对数组 4 个元素操作 (看起来很整齐，元素下标有顺序)<br />
+<em> 加密可以魔改，subbytes 和 shiftrows 顺序调换是没关系的，但是 MixColums 顺序加密放最前面解密就要放最后面</em></label></li>
+</ul>
+<figure class="highlight python"><figcaption data-lang="python"><span>逆盒算法</span></figcaption><table><tr><td data-num="1"></td><td><pre>new_s_box <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">,</span><span class="token punctuation">]</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>new_contrary_sbox <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token operator">*</span><span class="token number">256</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">256</span><span class="token punctuation">)</span><span class="token punctuation">:</span></pre></td></tr><tr><td data-num="6"></td><td><pre>   line <span class="token operator">=</span> <span class="token punctuation">(</span>new_s_box<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&amp;</span><span class="token number">0xf0</span><span class="token punctuation">)</span><span class="token operator">>></span><span class="token number">4</span></pre></td></tr><tr><td data-num="7"></td><td><pre>   rol <span class="token operator">=</span> new_s_box<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token operator">&amp;</span><span class="token number">0xf</span></pre></td></tr><tr><td data-num="8"></td><td><pre>   new_contrary_sbox<span class="token punctuation">[</span><span class="token punctuation">(</span>line<span class="token operator">*</span><span class="token number">16</span><span class="token punctuation">)</span><span class="token operator">+</span>rol<span class="token punctuation">]</span> <span class="token operator">=</span> i</pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token keyword">print</span><span class="token punctuation">(</span>new_contrary_sbox<span class="token punctuation">)</span></pre></td></tr></table></figure><p><a href="/IT/re/encode_decode/#AES">加密解密实现</a></p>
+<h1 id="sha1"><a class="anchor" href="#sha1">#</a> sha1</h1>
+<p>不安全的加密算法，不可逆</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_15" checked="true" disabled="true" /><label for="cbx_15"> 一般有 5 个 IV  0x67452301;0xEFCDAB89;0x98BADCFE;0x10325476;0xC3D2E1F0 (前四个和 md 的 iv 相同)<br />
+<a href="/IT/re/encode_decode/#SHA1"> 加密实现</a></label></li>
+</ul>
+<h1 id="blowfish"><a class="anchor" href="#blowfish">#</a> BlowFish</h1>
+<p>两个盒用来加密</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_16" checked="true" disabled="true" /><label for="cbx_16"> PBOX (18 个 32 位子密钥)</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_17" checked="true" disabled="true" /><label for="cbx_17"> SBOX (4 组 8*32 位数组 Sbox [4][256])</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_18" checked="true" disabled="true" /><label for="cbx_18"> 18 轮循环里套 4 轮循环，4 轮循环里套 256 (步长为 2) 轮循环</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#BlowFish">加密解密实现</a></p>
+<h1 id="sm4国密"><a class="anchor" href="#sm4国密">#</a> sm4 (国密)</h1>
+<p>分组加密，和 AES 特征很像。</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_19" checked="true" disabled="true" /><label for="cbx_19"> 256 个元素的 SBOX</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_20" checked="true" disabled="true" /><label for="cbx_20"> 128 位分组，密钥也是 128 位 (16 字节)</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_21" checked="true" disabled="true" /><label for="cbx_21"> 移位 8，16，24 再 &amp; ff</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_22" checked="true" disabled="true" /><label for="cbx_22"> 一行代码里对数组 4 个元素操作 (看起来很整齐，元素下标有顺序)</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#SM4">加密解密实现</a></p>
+<h1 id="rc4加密"><a class="anchor" href="#rc4加密">#</a> rc4 加密</h1>
+<p>加密解密是同一套算法</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_23" checked="true" disabled="true" /><label for="cbx_23"> 一个 256 位的 sbox</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_24" checked="true" disabled="true" /><label for="cbx_24"> 进行变量数值交换操作 (swap)</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_25" checked="true" disabled="true" /><label for="cbx_25"> 多次取余 256</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_26" checked="true" disabled="true" /><label for="cbx_26"> 一个单独的异或操作</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#RC4">加密解密实现</a></p>
+<h1 id="des加密"><a class="anchor" href="#des加密">#</a> DES 加密</h1>
+<p>主要加密特征是一堆表</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_27" checked="true" disabled="true" /><label for="cbx_27"> 64 位 (8 字符) 或 192 位 (24 字符) 的 key</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_28" checked="true" disabled="true" /><label for="cbx_28"> 16 个元素的移位数组</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_29" checked="true" disabled="true" /><label for="cbx_29"> 32 个元素的换位表</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_30" checked="true" disabled="true" /><label for="cbx_30"> 48 个元素选位表</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_31" checked="true" disabled="true" /><label for="cbx_31"> 56 个元素的选位数组</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_32" checked="true" disabled="true" /><label for="cbx_32"> 64 个元素的置换表</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_33" checked="true" disabled="true" /><label for="cbx_33"> 8x4x16 (512) 个元素的 sbox</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#DES">加密解密实现</a></p>
+<h1 id="base58"><a class="anchor" href="#base58">#</a> base58</h1>
+<p>和普通 base 加密有很大不同，通过取模进行加密</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_34" checked="true" disabled="true" /><label for="cbx_34"> 进行 %58 和 / 58 的操作</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#BASE58">加密解密实现</a></p>
+<h1 id="base64"><a class="anchor" href="#base64">#</a> base64</h1>
+<p>普遍的加密</p>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_35" checked="true" disabled="true" /><label for="cbx_35"> 有 '＝' 或 61 存在</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_36" checked="true" disabled="true" /><label for="cbx_36"> 64 个元素的可打印字符表</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_37" checked="true" disabled="true" /><label for="cbx_37"> 加密可能有 &amp; FC,&amp;F0,&amp;C0 操作</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_38" checked="true" disabled="true" /><label for="cbx_38"> 解密可能有 &amp; 0x30，&amp;3C 操作</label></li>
+</ul>
+<p><a href="/IT/re/encode_decode/#BASE64">加密解密实现</a></p>
+<h1 id="hex编码"><a class="anchor" href="#hex编码">#</a> hex 编码</h1>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_39" checked="true" disabled="true" /><label for="cbx_39">  进行 &amp; 0xFFFFFFB5 | 8</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_40" checked="true" disabled="true" /><label for="cbx_40">  +0x30 或 +'0' 或 + 48<br />
+<a href="/IT/re/encode_decode/#HEX"> 加密解密实现</a></label></li>
+</ul>
+<h1 id="crc"><a class="anchor" href="#crc">#</a> CRC</h1>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_41" checked="true" disabled="true" /><label for="cbx_41">  &amp;1</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_42" checked="true" disabled="true" /><label for="cbx_42">  +0x30 或 +'0' 或 + 48<br />
+<a href="/IT/re/encode_decode/#HEX"> 加密解密实现</a></label></li>
+</ul>
+
+      <div class="tags">
+          <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"><i class="ic i-tag"></i> 汇编</a>
+          <a href="/tags/Re/" rel="tag"><i class="ic i-tag"></i> Re</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="CTF/Reverse/ctf_encode/" class="item leancloud_visitors" data-flag-title="常见加密算法特征识别" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/CTF/Reverse/ctf_encode/" title="常见加密算法特征识别">https://pangbai.work/CTF/Reverse/ctf_encode/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/CTF/Reverse/encode_decode/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?138304" title="加密解密算法">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 逆向工程</span>
+  <h3>加密解密算法</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/CTF/Reverse/antidebug/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?161475" title="反调试简述">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 逆向工程</span>
+  <h3>反调试简述</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#tea%E7%B3%BB%E5%88%97"><span class="toc-number">1.</span> <span class="toc-text"> Tea 系列</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#tea"><span class="toc-number">1.1.</span> <span class="toc-text"> Tea</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xteatean"><span class="toc-number">1.2.</span> <span class="toc-text"> XTEA&#x2F;TEAN</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#xxtea"><span class="toc-number">1.3.</span> <span class="toc-text"> XXTEA</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#aes%E5%8A%A0%E5%AF%86"><span class="toc-number">2.</span> <span class="toc-text"> AES 加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sha1"><span class="toc-number">3.</span> <span class="toc-text"> sha1</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#blowfish"><span class="toc-number">4.</span> <span class="toc-text"> BlowFish</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sm4%E5%9B%BD%E5%AF%86"><span class="toc-number">5.</span> <span class="toc-text"> sm4 (国密)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#rc4%E5%8A%A0%E5%AF%86"><span class="toc-number">6.</span> <span class="toc-text"> rc4 加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#des%E5%8A%A0%E5%AF%86"><span class="toc-number">7.</span> <span class="toc-text"> DES 加密</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#base58"><span class="toc-number">8.</span> <span class="toc-text"> base58</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#base64"><span class="toc-number">9.</span> <span class="toc-text"> base64</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#hex%E7%BC%96%E7%A0%81"><span class="toc-number">10.</span> <span class="toc-text"> hex 编码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#crc"><span class="toc-number">11.</span> <span class="toc-text"> CRC</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/CTF/Reverse/Ctf_vm/" rel="bookmark" title="CTF虚拟机">CTF虚拟机</a></li><li><a href="/CTF/Reverse/antidebug/" rel="bookmark" title="反调试简述">反调试简述</a></li><li class="active"><a href="/CTF/Reverse/ctf_encode/" rel="bookmark" title="常见加密算法特征识别">常见加密算法特征识别</a></li><li><a href="/CTF/Reverse/encode_decode/" rel="bookmark" title="加密解密算法">加密解密算法</a></li><li><a href="/CTF/Reverse/ciscn2024re/" rel="bookmark" title="CISCN2024复现及总结">CISCN2024复现及总结</a></li><li><a href="/CTF/Reverse/stm32/" rel="bookmark" title="STM32固件逆向概述">STM32固件逆向概述</a></li><li><a href="/CTF/Reverse/ZJCTF2024/" rel="bookmark" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</a></li><li><a href="/CTF/Reverse/Live2dviewerexKill/" rel="bookmark" title="Frida逆向实战-Live2dViewerEx破解">Frida逆向实战-Live2dViewerEx破解</a></li><li><a href="/CTF/Reverse/frida-check/" rel="bookmark" title="Frida特征分析(基于去特征的FridaServer)">Frida特征分析(基于去特征的FridaServer)</a></li><li><a href="/CTF/Reverse/Want2BecomeMagicalGirl/" rel="bookmark" title="Want2BecomeMagicalGirl出题笔记-WMCTF2025">Want2BecomeMagicalGirl出题笔记-WMCTF2025</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/CTF/Reverse/encode_decode/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/CTF/Reverse/antidebug/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ctf_encode/" title="常见加密算法特征识别">常见加密算法特征识别</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/html/" title="分类于 html">html</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/html/js/" title="分类于 js">js</a>
+</div>
+
+    <span><a href="/html/js/jstxt/" title="利用JavaScript实现循环打字效果">利用JavaScript实现循环打字效果</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/IT/dowork/" title="Dowork食用教程">Dowork食用教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/randomacg/" title="Linux桌面使用随机二刺螈壁纸">Linux桌面使用随机二刺螈壁纸</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%B0%88/" title="分类于 杂谈">杂谈</a>
+</div>
+
+    <span><a href="/IT/fzzx/" title="你用了8年的软件居然是盗版">你用了8年的软件居然是盗版</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/Live2dviewerexKill/" title="Frida逆向实战-Live2dViewerEx破解">Frida逆向实战-Live2dViewerEx破解</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/antidebug/" title="反调试简述">反调试简述</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/Re4/" title="汇编学习-汇编指令">汇编学习-汇编指令</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/IT/" title="分类于 IT">IT</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/IT/Nowork/" title="分类于 Nowork开发笔记">Nowork开发笔记</a>
+</div>
+
+    <span><a href="/IT/Nowork/dialog/" title="Android底部简约风格对话框">Android底部简约风格对话框</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%9C%A8%E5%AE%89%E5%8D%93%E4%B8%8A%E5%AE%89%E8%A3%85%E4%BD%A0%E7%9A%84kail/" title="分类于 在安卓上安装你的kail">在安卓上安装你的kail</a>
+</div>
+
+    <span><a href="/IT/kali/" title="干货！安卓手机上kali">干货！安卓手机上kali</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'CTF/Reverse/ctf_encode/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;汇编语言&#34; tag</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Mon, 25 Sep 2023 12:19:19 +0800</pubDate>
+        <lastBuildDate>Mon, 25 Sep 2023 12:19:19 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>汇编</category>
+        <category>MC</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>反调试</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/Re4/</guid>
+            <title>汇编学习-汇编指令</title>
+            <link>https://pangbai.work/IT/Re4/</link>
+            <category>IT</category>
+            <category>汇编语言</category>
+            <pubDate>Mon, 25 Sep 2023 12:19:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;常用 x86 汇编指令，以及其含义&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;move&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#move&#34;&gt;#&lt;/a&gt; Move&lt;/h2&gt;
+&lt;p&gt;move 操作对象可以是&lt;br /&gt;
+寄存器 &amp;lt;- 寄存器&lt;br /&gt;
+寄存器 &amp;lt;- 内存&lt;br /&gt;
+寄存器 &amp;lt;- 立即数&lt;br /&gt;
+内存 &amp;lt;- 寄存器&lt;br /&gt;
+内存 &amp;lt;- 立即数&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;立即数可以看成 C 语言里的常数 (大概吧)&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;是进行数据操作的指令&lt;/p&gt;
+&lt;h2 id=&#34;lea&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#lea&#34;&gt;#&lt;/a&gt; Lea&lt;/h2&gt;
+&lt;p&gt;加载有效地址到寄存器。&lt;br /&gt;
+加载地址也可以用 mov 指令，但是在有些情况下 lea 会很简便&lt;/p&gt;
+&lt;h2 id=&#34;关于符号&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#关于符号&#34;&gt;#&lt;/a&gt; 关于符号 []&lt;/h2&gt;
+&lt;p&gt;对于操作数，经常可以看到 []。&lt;br /&gt;
+我总是很困惑这个符号，因为它有时候表示解引用，操作的是内存的值，有时候又是表示地址。现在来梳理一下吧。&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;span&gt;例子1&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov     &lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;18h&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; lea     &lt;span class=&#34;token register variable&#34;&gt;edx&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;eax&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;28h&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;关于上面的汇编，未执行前 eax 里装的是数组的首地址。mov 第二操作数是数组里的元素，而 lea 的第二操作数是一个地址。同样的一个 []，在 mov 为解引用，在 lea 却只是一个简单的加法运算。&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;span&gt;例子2&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;, &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;MY_TABLE&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;     &lt;span class=&#34;token comment&#34;&gt;; Effective Address of MY_TABLE in EBX&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;110&lt;/span&gt;          &lt;span class=&#34;token comment&#34;&gt;; MY_TABLE[0] = 110&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ADD &lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;              &lt;span class=&#34;token comment&#34;&gt;; EBX = EBX +2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;MOV &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token register variable&#34;&gt;EBX&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;123&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;这个例子来自&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cudzNzY2hvb2xzLmNuL2Fzc2VtYmx5L2Fzc2VtYmx5X2FkZHJlc3NpbmdfbW9kZXMuaHRtbA==&#34;&gt; w3school 寻址模式&lt;/span&gt;&lt;br /&gt;
+按照注释理解，[MY_TABLE] 是一个数组地址，&lt;br /&gt;
+[EBX] 却是解引用。&lt;br /&gt;
+查找了一下资料，这里进行一下梳理吧 (不知道对不对，欢迎指正)。&lt;/p&gt;
+&lt;h3 id=&#34;对于lea-装入有效地址的指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于lea-装入有效地址的指令&#34;&gt;#&lt;/a&gt; &lt;strong&gt;对于 lea&lt;/strong&gt;&lt;em&gt;: 装入有效地址的指令&lt;/em&gt;&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个操作数一定是寄存器&lt;/li&gt;
+&lt;li&gt;第二个操作数可以是寄存器，变量，地址表达式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;重点在第二个操作数&lt;/em&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第二个操作数为变量时&lt;/strong&gt;&lt;br /&gt;
+因为是进行地址加载的指令，[] 加不加都没关系，解释为 DS: 变量偏移，这时的变量都是解释为地址 (也就是变量偏移), 不会取变量的值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;第二个操作数为寄存器或者地址表达式时&lt;/strong&gt;&lt;br /&gt;
+必须要加 [] , 因为 lea 是加载地址的第二个操作数一定是地址，也就是 DS: 寄存器的值，这里的 [] 就是取寄存器的值，并没有解引用 (地址表达式也是表达式的值，并没有引用地址数据)。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;对于mov-进行数据操作的指令&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#对于mov-进行数据操作的指令&#34;&gt;#&lt;/a&gt; &lt;strong&gt;对于 mov&lt;/strong&gt;&lt;em&gt;: 进行数据操作的指令&lt;/em&gt;&lt;/h3&gt;
+&lt;p&gt;两个操作数的类型是不固定的，我们假设操作数第一个是个寄存器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第二个操作数为变量时&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;因为是进行数据操作的指令，不管变量加不加 [] 都是相同的效果，都是解引用，获取变量的数据到寄存器。栗子 2 的第一条代码就明白了，[] 是不用管的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;第二个操作数为寄存器或者地址表达式&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;第二个操作数是寄存器的时候，就是我们常见的情况了，加 [] 是把寄存器里的地址数据取出来解引用得到地址里的数据，把地址里的数据装入寄存器。不加 [] 是直接装寄存器的数据，不管数据是一个地址还是其他什么东西。&lt;/p&gt;
+&lt;p&gt;第二个操作数是地址表达式一定要加 [] ，这个可以理解 (你找不到不加 [] 的地址表达式), 这时是解引用，把数据装入寄存器。你可能要问了，如果我想把地址表达的值装入寄存器呢？我们有两种方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;方法一：使用 lea 指令 (也就是 lea 的第二种情况)。&lt;/li&gt;
+&lt;li&gt;方法二：先用 add 之类的指令把地址表达式的值算出来，然后值给到第二次操作数的寄存器 ebx, 再执行 mov eax, ebx&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#总结&#34;&gt;#&lt;/a&gt; 总结&lt;/h3&gt;
+&lt;p&gt;对于汇编指令来说 [] 只是一个标记，并没有特定的含义，具体含义应该看其所在的对应指令。除了上面的两个指令使用 [] 外，在编写汇编代码时，甚至可以用 &lt;code&gt;变量[]&lt;/code&gt;  来使用数组元素 (有点像 c 语言了), 当然在 ida 几乎看不到这样的东西，这只是一个语法糖。把 mov 和 lea 理解透了才能清楚汇编执行时倒是操作的是地址还是数据。&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/re3/</guid>
+            <title>汇编学习-汇编语法</title>
+            <link>https://pangbai.work/IT/re3/</link>
+            <category>汇编语言</category>
+            <pubDate>Sun, 24 Sep 2023 12:19:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;汇编语法&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;基础语法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基础语法&#34;&gt;#&lt;/a&gt; 基础语法&lt;/h1&gt;
+&lt;h2 id=&#34;标号&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#标号&#34;&gt;#&lt;/a&gt; 标号&lt;/h2&gt;
+&lt;p&gt;为一个段命名，标号指代了一个地址，如 codesg&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;codesg segment&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;这个段由以下命令定义结束&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;codesg ends&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;声明段的类型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#声明段的类型&#34;&gt;#&lt;/a&gt; 声明段的类型&lt;/h2&gt;
+&lt;p&gt;段的类型可能是代码也可能是数据，需要加以声明 &lt;code&gt;assume&lt;/code&gt;&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;assume &lt;span class=&#34;token register variable&#34;&gt;cs&lt;/span&gt;:codesg&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;几种结束&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#几种结束&#34;&gt;#&lt;/a&gt; 几种结束&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;段结束&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;段名 ends&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ul&gt;
+&lt;li&gt;程序结束&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;end&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;ul&gt;
+&lt;li&gt;程序返回&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;4c00H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt; int &lt;span class=&#34;token number&#34;&gt;21H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;示例程序&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#示例程序&#34;&gt;#&lt;/a&gt; 示例程序&lt;/h2&gt;
+&lt;p&gt;编写 1.asm&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;assume &lt;span class=&#34;token register variable&#34;&gt;cs&lt;/span&gt;:codesg&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   codesg segment&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     add &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     add &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;4c00H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;     int &lt;span class=&#34;token number&#34;&gt;21H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   codesg ends&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   end&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;执行编译和链接&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;masm &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;.asm&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;link&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;1&lt;/span&gt;.obj&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h2 id=&#34;设置程序入口&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#设置程序入口&#34;&gt;#&lt;/a&gt; 设置程序入口&lt;/h2&gt;
+&lt;p&gt;用一个标号标识，用 &lt;code&gt;end 标号&lt;/code&gt; 结束程序入口&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;assume &lt;span class=&#34;token register variable&#34;&gt;cs&lt;/span&gt;:codesg&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   codesg segment&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   &lt;span class=&#34;token label function&#34;&gt;start:&lt;/span&gt;    mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            add &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            add &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;, &lt;span class=&#34;token number&#34;&gt;4c00H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;            int &lt;span class=&#34;token number&#34;&gt;21H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;9&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   codesg ends&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;10&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;11&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;   end start&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;小知识&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;程序被加载到内存后，还会在其前方设置一段内存设置代码 (psp) 用于与程序通信，运行时并不会从程序直接开始，而是从 psp 开始&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;数据的存储&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据的存储&#34;&gt;#&lt;/a&gt; 数据的存储&lt;/h2&gt;
+&lt;p&gt;对于 x86CPU, 数据在内存中是小端存储&lt;br /&gt;
+我们规定关于一个地址编号&lt;br /&gt;
+ 0x0001-&amp;gt;0xFFFF&lt;br /&gt;
+ 前为低地址，后为高地址，是按内存编号的方向区分&lt;br /&gt;
+对于数据 0x1234 (十六进制数据，需要 16 个比特位存储)&lt;br /&gt;
+ 需要拆分为两个字节存储&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;r 注意&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;在计算机中一个字节的存储可以完整存储，是没有大小端之分的&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;这个数据需要在两个相邻地址中存储，这就涉及到了谁先谁后的问题。&lt;br /&gt;
+大端存储：高位数据 0x1200 需要存储在低地址，低位数据 0x34 需要存储在高地址。&lt;br /&gt;
+小端存储：低位数据存储在低地址，高位数据存储在高地址。&lt;/p&gt;
+&lt;p&gt;x86CPU 小端存储的数据读入 CPU 寄存器的时候都会自动反转字节&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/re2/</guid>
+            <title>汇编学习-CPU寄存器</title>
+            <link>https://pangbai.work/IT/re2/</link>
+            <category>汇编语言</category>
+            <pubDate>Sat, 23 Sep 2023 12:19:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;计算机 CPU 与寄存器知识&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;寄存器与物理地址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#寄存器与物理地址&#34;&gt;#&lt;/a&gt; 寄存器与物理地址&lt;/h2&gt;
+&lt;p&gt;寄存器一般为 16 位，而地址总线可能大于 16&lt;br /&gt;
+8086 处理器，寄存器为 16，地址总线为 20&lt;br /&gt;
+ 如果我们想要寻址，该怎么办呢？&lt;br /&gt;
+CPU 中存在好几个段寄存器 CS,DS,SS,ES 用于提供段地址。&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;段寄存器&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;CS 是代码段寄存器&lt;br /&gt;
+ DS 是数据地址&lt;br /&gt;
+ SS 是堆栈地址&lt;br /&gt;
+ ES 提供额外的地址 (什么都可以有)&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;p&gt;我们需要理由 &lt;code&gt;段地址&lt;/code&gt; 和 &lt;code&gt;偏移量&lt;/code&gt; 进行操作，这两个数据存储在两个寄存器中，段地址就是物理地址的头部，而偏移量是物理地址的尾部，通过将段地址左移再和偏移量相加，就可以得到完整地址。&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;举个栗子&lt;/span&gt; 段地址 16 进制若为 21F0H，偏移地址 0060H，此时段地址左移 1 位&lt;span class=&#34;spoiler&#34; title=&#34;你知道得太多了&#34;&gt;即 x16, 也是加 4 位的意思，此时共 20 位&lt;/span&gt;为 21F00H，这个时候加上偏移地址 0060H 可以得到 21F60H 这个 20 位地址&lt;br /&gt;
+同一地址可以用不同组段地址 + 偏移量表示:&lt;br /&gt;
+2000H + 1F60H -&amp;gt;21F60H&lt;br /&gt;
+2100H + 0F60H -&amp;gt;21F60H&lt;br /&gt;
+1F00H + 2F60H -&amp;gt;21F60H&lt;br /&gt;
+ 以上都可表示为  &lt;code&gt;段地址:偏移地址&lt;/code&gt; &lt;br /&gt;
+ IP 寄存器是指令指针寄存器，用于提供偏移地址。&lt;br /&gt;
+CS 和 IP 最为关键，他们指示 CPU 要读取指令的地址，当 CS:IP 指向哪里，代码就执行到哪里&lt;/p&gt;
+&lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;小测试&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;2AE3:3=?&lt;br /&gt;
+3:0B16=?&lt;br /&gt;
+ 答案是 2AE33 和 00B46&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;cpu执行指令过程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cpu执行指令过程&#34;&gt;#&lt;/a&gt; CPU 执行指令过程&lt;/h2&gt;
+&lt;p&gt;首次执行&lt;br /&gt;
+ CS:IP -&amp;gt; 地址加法器 -&amp;gt; CPU 输入输出线路 -&amp;gt; 存储器地址 -&amp;gt; 获取数据 (可能是多个字节) -&amp;gt; CPU 输入输出线路 -&amp;gt; CPU 执行控制器&lt;br /&gt;
+第二次执行&lt;br /&gt;
+ CS:IP+(上次获取到的字节数) -&amp;gt; 地址加法器 -&amp;gt; CPU 输入 ......&lt;br /&gt;
+ 即  &lt;code&gt;新的指令执行IP=旧IP+指令读取长度&lt;/code&gt; 。&lt;/p&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;小知识&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;处理器通电后 CS 会被初始化为 FFFFH,IP 被初始化为 000H&lt;br /&gt;
+ 即计算机开机会执行内存中 FFFF0H 的指令 (这是计算机执行第一条指令)&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;h2 id=&#34;debug修改寄存器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#debug修改寄存器&#34;&gt;#&lt;/a&gt; debug 修改寄存器&lt;/h2&gt;
+&lt;p&gt;Windows 打开 cmd 进入 debug&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;R 查看修改寄存器内容&lt;/li&gt;
+&lt;li&gt;D 查看内存内容&lt;/li&gt;
+&lt;li&gt;E 改写内存内容&lt;/li&gt;
+&lt;li&gt;U 将内存中机械指令翻译成汇编指令&lt;/li&gt;
+&lt;li&gt;T 执行一行机械指令 (从 CS:IP 开始)&lt;/li&gt;
+&lt;li&gt;A 以汇编语言在内存写入机械指令&lt;br /&gt;
+以上指令不区分大小写&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;ds寄存器和address&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#ds寄存器和address&#34;&gt;#&lt;/a&gt; DS 寄存器和 [address]&lt;/h2&gt;
+&lt;p&gt;获取指定地址的数据&lt;br /&gt;
+将段地址存入 ds, 再通过偏移 [address] 获取数据&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt; , &lt;span class=&#34;token number&#34;&gt;1000H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ds&lt;/span&gt; , &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;al&lt;/span&gt; , &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;因为计算机 CPU 设计问题，不能直接使用 &lt;code&gt;mov ds , 1000H&lt;/code&gt; &lt;br /&gt;
+ 改写数据&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt; , &lt;span class=&#34;token number&#34;&gt;1000H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ds&lt;/span&gt; , &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token operator&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;token operator&#34;&gt;]&lt;/span&gt;, &lt;span class=&#34;token register variable&#34;&gt;al&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;需要注意的是：如果你使用 16 位寄存器 (ax) 进行操作如 &lt;code&gt;mov ax , [0]&lt;/code&gt;  那 ax 中将会存在 16 位数据，这些数据来自 [1] 和 [0], 如果你使用 8 位寄存器 (al) 进行操作如 &lt;code&gt;mov al,[0]&lt;/code&gt;  那 al 中将会存在八位数据 (仅仅来自 [0])&lt;/p&gt;
+&lt;h2 id=&#34;栈与寄存器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#栈与寄存器&#34;&gt;#&lt;/a&gt; 栈与寄存器&lt;/h2&gt;
+&lt;p&gt;栈是一段特殊内存，具有先进先出的规则，栈顶是栈的最高的存有数据的内存地址&lt;br /&gt;
+段寄存器 SS 存放栈顶段地址&lt;br /&gt;
+寄存器 SP 存放栈顶的偏移地址&lt;br /&gt;
+任意时刻 SS:SP 指向栈顶地址&lt;br /&gt;
+栈在代码编译的时候自动分配和销毁，每个函数都会有一个单独的栈，在函数执行时创建，执行完毕后销毁，栈的存在确保函数的相对封闭与数据的独立，当一个一个函数调用另一个函数时，调用者数据会进入栈中保存，被调用者执行完毕后，再从栈中读取数据继续执行，数据入栈和出栈顶顺序相反&lt;br /&gt;
+用 push 命令入栈数据，pop 命令出栈数据&lt;br /&gt;
+ push 命令会根据当前的栈顶执行进行操作，数据入栈前会将偏移地址减去数据长度 (此处为 2, 因为寄存器为内存单元两倍), 然后再存入数据，而 pop 顺序则相反&lt;/p&gt;
+&lt;figure class=&#34;highlight nasm&#34;&gt;&lt;figcaption data-lang=&#34;NASM&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;如果要在&lt;span class=&#34;token number&#34;&gt;10000H&lt;/span&gt;存入数据&lt;span class=&#34;token number&#34;&gt;2266H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;,&lt;span class=&#34;token number&#34;&gt;1000H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;ss&lt;/span&gt;,&lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov &lt;span class=&#34;token register variable&#34;&gt;sp&lt;/span&gt;,&lt;span class=&#34;token number&#34;&gt;2&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;mov, &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;,&lt;span class=&#34;token number&#34;&gt;2266H&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;push &lt;span class=&#34;token register variable&#34;&gt;ax&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;栈地址排列为上低下高，初始栈顶执行最高地址 + 1,CPU 只知道栈在哪，不会知道栈有多大，需要开发者注意越界&lt;/p&gt;
+ ]]></description>
+        </item>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/re1/</guid>
+            <title>汇编学习第一天</title>
+            <link>https://pangbai.work/IT/re1/</link>
+            <category>汇编语言</category>
+            <pubDate>Sat, 23 Sep 2023 10:39:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;计算机 CPU 相关基础知识&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;基本知识&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#基本知识&#34;&gt;#&lt;/a&gt; 基本知识&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;所有编译语言都是将可读性描述转化为二进制机械语言进行执行&lt;br /&gt;
+通用计算机语言 -&amp;gt; 汇编语言 -&amp;gt; 二进制语言&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算机几乎所有组件都有存储器&lt;br /&gt;
+ CPU 最直接的存储器是寄存器&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;CPU 可以对所有存储器读写&lt;br /&gt;
+ CPU 接有直接到达各个计算机部件的电路&lt;br /&gt;
+ CPU 可以对存储器进行三类交互&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details class=&#34;danger&#34;&gt;&lt;summary&gt;三种交互类型&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;&lt;span class=&#34;label info&#34;&gt;1&lt;/span&gt; 地址信息 (通过地址总线)&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;2&lt;/span&gt; 控制信息 (通过控制总线)&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;3&lt;/span&gt; 数据信息 (通过数据总线)&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;ul&gt;
+&lt;li&gt;程序执行流程&lt;br /&gt;
+硬盘文件 -&amp;gt; 虚拟内存 -&amp;gt;CPU&lt;/li&gt;
+&lt;li&gt;存储器芯片&lt;br /&gt;
+分为 RAM 和 ROM&lt;/li&gt;
+&lt;/ul&gt;
+&lt;details class=&#34;info&#34;&gt;&lt;summary&gt;存储器芯片分类&lt;/summary&gt;&lt;div&gt;
+&lt;p&gt;内存 -&amp;gt;RAM&lt;br /&gt;
+ 接口 -&amp;gt;RAM&lt;br /&gt;
+bios-&amp;gt;ROM&lt;/p&gt;
+&lt;/div&gt;&lt;/details&gt;
+&lt;ul&gt;
+&lt;li&gt;内存地址空间 (物理地址)&lt;br /&gt;
+ 逻辑上所有计算机接入设备都是相连的一大块&lt;br /&gt;
+ CPU 可见的是一大块的存储器 (包含内存，显卡，网卡...)&lt;br /&gt;
+ 系统为存储器分配地址空间&lt;br /&gt;
+&lt;span class=&#34;label danger&#34;&gt;举个栗子&lt;/span&gt; 主随机存储器地址为 0&lt;sub&gt;7FFFH, 显存地址为 8000H&lt;/sub&gt;9FFFH, 各 ROM 地址为 A000H~FFFFH&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;地址总线与cpu寻址&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#地址总线与cpu寻址&#34;&gt;#&lt;/a&gt; 地址总线与 CPU 寻址&lt;/h2&gt;
+&lt;p&gt;CPU 到内存的总线有很多条 (逻辑上), 具体数目与 CPU 有关，一条总线可以传输一位数据 (0/1), 将所有总线的数据联合起来就组成了地址信息，主流处理器分 32 位和 64 位 (也叫地址宽度), 在地址总线上就对应了 CPU 能访问到的地址数目 2&lt;sup&gt;32 和 2&lt;/sup&gt;64。&lt;br /&gt;
+&lt;span class=&#34;label info&#34;&gt;举个栗子&lt;/span&gt;当 CPU 从地址总线发送数据 (11010000...) 到内存，内存会定位到这个地址，这个地址的所在的内存单元数据 (通常为 1byte) 也就被寻找到了。&lt;/p&gt;
+&lt;h2 id=&#34;数据总线与数据传输&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据总线与数据传输&#34;&gt;#&lt;/a&gt; 数据总线与数据传输&lt;/h2&gt;
+&lt;p&gt;数据总线的宽度决定速度传输速度&lt;br /&gt;
+ 8088CPU 是 8 位的，一次可以传输 8 位数据&lt;br /&gt;
+ 8086CPU 是 16 位的，一次可以传输 16 位数据&lt;/p&gt;
+&lt;h2 id=&#34;控制总线&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#控制总线&#34;&gt;#&lt;/a&gt; 控制总线&lt;/h2&gt;
+&lt;p&gt;控制总线发送控制信息 (通常是读和写)&lt;br /&gt;
+ 控制接入电脑的硬件。&lt;/p&gt;
+&lt;h2 id=&#34;cpu概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#cpu概述&#34;&gt;#&lt;/a&gt; CPU 概述&lt;/h2&gt;
+&lt;p&gt;一个典型 CPU 由 &lt;code&gt;运算器&lt;/code&gt; ， &lt;code&gt;控制器&lt;/code&gt; ， &lt;code&gt;寄存器&lt;/code&gt; 组成，这些部件靠 CPU 内部总线相连。&lt;/p&gt;
+&lt;h2 id=&#34;寄存器概述&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#寄存器概述&#34;&gt;#&lt;/a&gt; 寄存器概述&lt;/h2&gt;
+&lt;p&gt;x86 寄存器一般是 16 位的，可以存放两个字节 (等于一个字)，AX,BX,CX,DX 存储一般性数据，可以分为两个独立的 8 位使用，称为通用寄存器&lt;br /&gt;
+通用寄存器一般为 8 个，其他寄存器可以有若干&lt;br /&gt;
+ AX 等带 X 后缀的都为 16 位，而 EAX 之类为 32 位&lt;br /&gt;
+通用寄存器可以分为高位和地位如 AH 和 AL,BH 和 BL (用于兼容旧系统)&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

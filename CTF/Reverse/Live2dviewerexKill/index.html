@@ -1,0 +1,608 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="汇编,Re,frida" />
+
+
+<link rel="canonical" href="https://pangbai.work/CTF/Reverse/Live2dviewerexKill/">
+
+
+
+  <title>
+Frida逆向实战-Live2dViewerEx破解 - 逆向工程 - CTF |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Frida逆向实战-Live2dViewerEx破解
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2024-11-24 14:00:25">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-11-24T14:00:25+08:00">2024-11-24</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>10k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>9 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?489660"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?74960"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?588961"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?95504"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?779766"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?681067"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/" itemprop="item" rel="index" title="分类于 CTF"><span itemprop="name">CTF</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/CTF/Reverse/" itemprop="item" rel="index" title="分类于 逆向工程"><span itemprop="name">逆向工程</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/CTF/Reverse/Live2dviewerexKill/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>Live2dViewerEx，是一个安卓 Live2D 动态壁纸软件，这篇文章记录了对它的破解过程</p>
+<span id="more"></span>
+<p>Live2dViewerEx 是一个老牌软件了，相当于 PC 端的 WallpaperEngine，还移植了 Steam 的创意工坊，安卓 5.1 时代我就用他当手机壁纸软件（谁能拒绝在桌面养一直萌娘呢）。我在中学生时代曾尝试过破解这个软件（无限点数，创意工坊的 kawaii 模型不就可以随便下了吗），但最后以失败告终（当时只会看 Java 层，改了几个类只能修改表层点数，真正的点数并没有办法修改）。如今逆向技术有成重新回过头来分析乐趣无穷。</p>
+<p><img data-src="http://shp.qpic.cn/collector/1642981619/323249b8-fa7e-4f39-85d6-b6f358ddee65/0" alt="桌面" /></p>
+<h2 id="软件框架"><a class="anchor" href="#软件框架">#</a> 软件框架</h2>
+<p>Live2dViewerEx 并不是原生应用，他核心由 Unity 编写，再与 Java 层通信渲染 UI 界面，软件逆向的核心是安卓 Unity 逆向。</p>
+<h2 id="逆向工具"><a class="anchor" href="#逆向工具">#</a> 逆向工具</h2>
+<p>Frida，Ida64，Il2CppDumper，Jadx-gui</p>
+<h2 id="java层分析"><a class="anchor" href="#java层分析">#</a> Java 层分析</h2>
+<p>通过 Java 层字符串索引，和 OnClick 函数调用堆栈，锁定到 UnityMessenger 类。这个类是处理 Unity 和 Java 层的消息传递的，<br />
+ <code>onReceive</code>  类接收了字符串通过 base64 解密转化为 JSON 对象</p>
+<figure class="highlight java"><figcaption data-lang="java"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token class-name">Java</span><span class="token punctuation">.</span><span class="token function">perform</span><span class="token punctuation">(</span>function <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    let <span class="token class-name">UnityMessenger</span> <span class="token operator">=</span> <span class="token class-name">Java</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"com.pavostudio.exlib.unity.UnityMessenger"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token class-name">UnityMessenger</span><span class="token punctuation">[</span><span class="token string">"onReceive"</span><span class="token punctuation">]</span><span class="token punctuation">.</span>implementation <span class="token operator">=</span> function <span class="token punctuation">(</span>str<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">var</span> <span class="token class-name">Base64</span> <span class="token operator">=</span> <span class="token class-name">Java</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"android.util.Base64"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre>        <span class="token comment">// 你要解码的 Base64 编码字符串</span></pre></td></tr><tr><td data-num="8"></td><td><pre>        <span class="token keyword">var</span> base64Str <span class="token operator">=</span> str<span class="token punctuation">;</span> <span class="token comment">// 这是 "Hello world!" 的 Base64 编码</span></pre></td></tr><tr><td data-num="9"></td><td><pre></pre></td></tr><tr><td data-num="10"></td><td><pre>        <span class="token comment">// 使用 Base64 解码</span></pre></td></tr><tr><td data-num="11"></td><td><pre>        <span class="token keyword">var</span> decodedBytes <span class="token operator">=</span> <span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span>base64Str<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token comment">// 将字节数组转换为字符串</span></pre></td></tr><tr><td data-num="14"></td><td><pre>        <span class="token keyword">var</span> decodedStr <span class="token operator">=</span> <span class="token class-name">Java</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"java.lang.String"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>$<span class="token keyword">new</span><span class="token punctuation">(</span>decodedBytes<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre></pre></td></tr><tr><td data-num="16"></td><td><pre></pre></td></tr><tr><td data-num="17"></td><td><pre></pre></td></tr><tr><td data-num="18"></td><td><pre>        <span class="token keyword">var</span> jsonObj <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>decodedStr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="19"></td><td><pre></pre></td></tr><tr><td data-num="20"></td><td><pre>        <span class="token comment">//// 修改 JSON 对象</span></pre></td></tr><tr><td data-num="21"></td><td><pre>        <span class="token comment">// if (jsonObj.msg == 1006 || jsonObj.msg == 1093 || jsonObj.msg == 1094) &#123;</span></pre></td></tr><tr><td data-num="22"></td><td><pre>        <span class="token comment">//     jsonObj.i = 100;  // 例如，修改 someKey 的值</span></pre></td></tr><tr><td data-num="23"></td><td><pre>        <span class="token comment">// &#125;</span></pre></td></tr><tr><td data-num="24"></td><td><pre></pre></td></tr><tr><td data-num="25"></td><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>jsonObj<span class="token punctuation">.</span>msg <span class="token operator">==</span> <span class="token number">1006</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="26"></td><td><pre>            let innerJsonStr <span class="token operator">=</span> jsonObj<span class="token punctuation">.</span>s<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="27"></td><td><pre>            let innerJsonObj <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>innerJsonStr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="28"></td><td><pre></pre></td></tr><tr><td data-num="29"></td><td><pre>            <span class="token comment">// 修改 DownloadCostPoint 字段</span></pre></td></tr><tr><td data-num="30"></td><td><pre>            <span class="token class-name"><span class="token namespace">innerJsonObj<span class="token punctuation">.</span></span>DownloadCostPoint</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 修改为你想要的新值</span></pre></td></tr><tr><td data-num="31"></td><td><pre>            innerJsonObj<span class="token punctuation">.</span>downloadCostPoint<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="32"></td><td><pre>            innerJsonObj<span class="token punctuation">.</span>minWatchReward <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="33"></td><td><pre>            innerJsonObj<span class="token punctuation">.</span>maxWatchReward <span class="token operator">=</span> <span class="token number">1000001</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="34"></td><td><pre>            <span class="token comment">// 将修改后的内嵌 JSON 对象转换回字符串</span></pre></td></tr><tr><td data-num="35"></td><td><pre>            jsonObj<span class="token punctuation">.</span>s <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>innerJsonObj<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="36"></td><td><pre></pre></td></tr><tr><td data-num="37"></td><td><pre></pre></td></tr><tr><td data-num="38"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="39"></td><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>jsonObj<span class="token punctuation">.</span>msg <span class="token operator">==</span> <span class="token number">1008</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="40"></td><td><pre>            let innerJsonStr <span class="token operator">=</span> jsonObj<span class="token punctuation">.</span>s<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="41"></td><td><pre>            let innerJsonObj <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>innerJsonStr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="42"></td><td><pre>           </pre></td></tr><tr><td data-num="43"></td><td><pre>            let innerJsonObj1 <span class="token operator">=</span>innerJsonObj<span class="token punctuation">.</span>setting<span class="token punctuation">;</span></pre></td></tr><tr><td data-num="44"></td><td><pre>            <span class="token comment">// 修改 DownloadCostPoint 字段</span></pre></td></tr><tr><td data-num="45"></td><td><pre>            <span class="token class-name"><span class="token namespace">innerJsonObj1<span class="token punctuation">.</span></span>DownloadCostPoint</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>  <span class="token comment">// 修改为你想要的新值</span></pre></td></tr><tr><td data-num="46"></td><td><pre>            innerJsonObj1<span class="token punctuation">.</span>downloadCostPoint<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="47"></td><td><pre>            innerJsonObj1<span class="token punctuation">.</span>minWatchReward <span class="token operator">=</span> <span class="token number">1000000</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="48"></td><td><pre>            innerJsonObj1<span class="token punctuation">.</span>maxWatchReward <span class="token operator">=</span> <span class="token number">1000001</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="49"></td><td><pre>            <span class="token comment">// 将修改后的内嵌 JSON 对象转换回字符串</span></pre></td></tr><tr><td data-num="50"></td><td><pre>            innerJsonObj<span class="token punctuation">.</span>setting <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>innerJsonObj1<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="51"></td><td><pre></pre></td></tr><tr><td data-num="52"></td><td><pre></pre></td></tr><tr><td data-num="53"></td><td><pre>            jsonObj<span class="token punctuation">.</span>s <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>innerJsonObj<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="54"></td><td><pre></pre></td></tr><tr><td data-num="55"></td><td><pre></pre></td></tr><tr><td data-num="56"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="57"></td><td><pre>        <span class="token comment">// 将修改后的对象转回 JSON 字符串</span></pre></td></tr><tr><td data-num="58"></td><td><pre>        <span class="token keyword">var</span> modifiedJsonStr <span class="token operator">=</span> <span class="token constant">JSON</span><span class="token punctuation">.</span><span class="token function">stringify</span><span class="token punctuation">(</span>jsonObj<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="59"></td><td><pre></pre></td></tr><tr><td data-num="60"></td><td><pre></pre></td></tr><tr><td data-num="61"></td><td><pre>        <span class="token comment">// 输出解码后的字符串</span></pre></td></tr><tr><td data-num="62"></td><td><pre>        <span class="token keyword">var</span> bytes <span class="token operator">=</span> <span class="token class-name">Java</span><span class="token punctuation">.</span><span class="token function">use</span><span class="token punctuation">(</span><span class="token string">"java.lang.String"</span><span class="token punctuation">)</span><span class="token punctuation">.</span>$<span class="token keyword">new</span><span class="token punctuation">(</span>modifiedJsonStr<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getBytes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="63"></td><td><pre></pre></td></tr><tr><td data-num="64"></td><td><pre>        <span class="token comment">// 使用 Base64 编码字节数组</span></pre></td></tr><tr><td data-num="65"></td><td><pre>        <span class="token keyword">var</span> base64Encoded <span class="token operator">=</span> <span class="token class-name">Base64</span><span class="token punctuation">.</span><span class="token function">encodeToString</span><span class="token punctuation">(</span>bytes<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="66"></td><td><pre></pre></td></tr><tr><td data-num="67"></td><td><pre>        <span class="token keyword">if</span> <span class="token punctuation">(</span>jsonObj<span class="token punctuation">.</span>msg <span class="token operator">==</span> <span class="token number">1093</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="68"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>'修改后的 <span class="token constant">JSON</span> 字符串<span class="token operator">:</span> ' <span class="token operator">+</span> modifiedJsonStr<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="69"></td><td><pre>           console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>`<span class="token class-name">UnityMessenger</span><span class="token punctuation">.</span>onReceive is called<span class="token operator">:</span> str<span class="token operator">=</span>$<span class="token punctuation">&#123;</span>base64Encoded<span class="token punctuation">&#125;</span>`<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="70"></td><td><pre>       <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="71"></td><td><pre>        <span class="token keyword">this</span><span class="token punctuation">[</span><span class="token string">"onReceive"</span><span class="token punctuation">]</span><span class="token punctuation">(</span>base64Encoded<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="72"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="73"></td><td><pre><span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr></table></figure><p>尝试 hook 并修改消息内容，和以前效果一样，只是安卓端 UI 界面改变，下载模型点数任然按受限。<br />
+Java 层的 Jadx 逆向数据虽然只是前端显示，但我们可以借此分析消息协议。<br />
+如：消息号 1006 为同步点数的消息，消息号 1093 为看广告增加的点数消息</p>
+<h2 id="so层符号恢复"><a class="anchor" href="#so层符号恢复">#</a> So 层符号恢复</h2>
+<p><code>libil2cpp.so</code>  里是 Unity 代码的主逻辑，ida 直接分析缺失符号信息，assets 里的 <code>global-metadata.dat</code>  含有字符串和符号信息。<br />
+用 Il2CppDumper 可以生成符号导入脚本和 C# 的类信息。<br />
+IDA 使用运行符号导入脚本，等待重新分析完成即可，时间有点长，这个时候可以看看 Il2CppDumper 生成的 DLL 文件。用 dnspy 打开 Assembly-CSharp.dll 看看，这里只有类结构和空的函数头，函数主体并不在内，但是我们可以借此看到函数偏移和类的结构信息。搜索 UnityMessenger，发现一个  <code>onReceive </code> 函数，还有一个 <code>SendUnityMessage</code>  函数，感觉很可疑。Java 层的 <code>onReceive</code>  收到来自 Unity 的消息来渲染前端，那么发送这个信息的一定是一个 Send。</p>
+<h2 id="frida分析unity消息系统"><a class="anchor" href="#frida分析unity消息系统">#</a> Frida 分析 Unity 消息系统</h2>
+<p>等等 ida 分析完成进行 hook`UnityMessenger_SendUnityMessage'。</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">var</span> mInterval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token keyword">var</span> sgame <span class="token operator">=</span> Process<span class="token punctuation">.</span><span class="token function">findModuleByName</span><span class="token punctuation">(</span><span class="token string">"libil2cpp.so"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span>sgame <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"无"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">return</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token function">clearInterval</span><span class="token punctuation">(</span>mInterval<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>   </pre></td></tr><tr><td data-num="9"></td><td><pre>  <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x1C2D3F4</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>             console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Send2 arg1: \n"</span><span class="token operator">+</span><span class="token function">hexdump</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token literal-property property">ansi</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Send2 arg2: \n"</span><span class="token operator">+</span><span class="token function">hexdump</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token literal-property property">ansi</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="17"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></pre></td></tr></table></figure><p>hook 到的消息正是 Java 层分析时 <code>onReceive</code>  接收到的消息，可以判断 Unity 消息由此函数发送。<br />
+交叉索引这个函数可以得到很多调用，那到底是那个调用发送点数消息呢，借助 Java 层分析可知消息号 1006 是同步增加的点数消息，我们在 hook 里打印 <code>SendUnityMessage</code>  函数调用堆栈，再找到消息号 1006 下的调用堆栈就可以知道 1006 同步点数消息从哪个地方被发送。</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">var</span> mInterval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token keyword">var</span> sgame <span class="token operator">=</span> Process<span class="token punctuation">.</span><span class="token function">findModuleByName</span><span class="token punctuation">(</span><span class="token string">"libil2cpp.so"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span>sgame <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"无"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">return</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token function">clearInterval</span><span class="token punctuation">(</span>mInterval<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>   </pre></td></tr><tr><td data-num="9"></td><td><pre>  <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x1C2D3F4</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>            <span class="token comment">// console.log("Send2 arg1: \n"+hexdump(ptr(args[0]), &#123; length: 100, ansi: true &#125;));</span></pre></td></tr><tr><td data-num="15"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Send2 arg2: \n"</span><span class="token operator">+</span><span class="token function">hexdump</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token literal-property property">ansi</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Backtrace:\n"</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">backtrace</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">,</span> Backtracer<span class="token punctuation">.</span><span class="token constant">ACCURATE</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>DebugSymbol<span class="token punctuation">.</span>fromAddress<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>       <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></pre></td></tr></table></figure><p>frida 打印如下消息</p>
+<figure class="highlight bash"><figcaption data-lang="bash"></figcaption><table><tr><td data-num="1"></td><td><pre>Send2 arg2:</pre></td></tr><tr><td data-num="2"></td><td><pre>           <span class="token number">0</span>  <span class="token number">1</span>  <span class="token number">2</span>  <span class="token number">3</span>  <span class="token number">4</span>  <span class="token number">5</span>  <span class="token number">6</span>  <span class="token number">7</span>  <span class="token number">8</span>  <span class="token number">9</span>  A  B  C  D  E  F  0123456789ABCDEF</pre></td></tr><tr><td data-num="3"></td><td><pre>aae4f990  <span class="token number">80</span> ae <span class="token number">56</span> f5 00 00 00 00 4c 01 00 00 7b 00 <span class="token number">22</span> 00  <span class="token punctuation">..</span>V<span class="token punctuation">..</span><span class="token punctuation">..</span>.L<span class="token punctuation">..</span>.<span class="token punctuation">&#123;</span>.<span class="token string">".</pre></td></tr><tr><td data-num="4"></td><td><pre>aae4f9a0  6d 00 73 00 67 00 22 00 3a 00 31 00 30 00 30 00  m.s.g."</span>.:.1.0.0.</pre></td></tr><tr><td data-num="5"></td><td><pre>aae4f9b0  <span class="token number">36</span> 00 2c 00 <span class="token number">22</span> 00 <span class="token number">69</span> 00 <span class="token number">22</span> 00 3a 00 <span class="token number">31</span> 00 <span class="token number">30</span> 00  <span class="token number">6</span>.,.<span class="token string">".i."</span>.:.1.4.</pre></td></tr><tr><td data-num="6"></td><td><pre>aae4f9c0  <span class="token number">32</span> 00 <span class="token number">34</span> 00 2c 00 <span class="token number">22</span> 00 <span class="token number">69</span> 00 <span class="token number">32</span> 00 <span class="token number">22</span> 00 3a 00  <span class="token number">0.0</span>.,.<span class="token string">".i.2."</span>.:.</pre></td></tr><tr><td data-num="7"></td><td><pre>aae4f9d0  <span class="token number">30</span> 00 2c 00 <span class="token number">22</span> 00 <span class="token number">69</span> 00 <span class="token number">33</span> 00 <span class="token number">22</span> 00 3a 00 <span class="token number">30</span> 00  <span class="token number">0</span>.,.<span class="token string">".i.3."</span>.:.0.</pre></td></tr><tr><td data-num="8"></td><td><pre>aae4f9e0  2c 00 <span class="token number">22</span> 00 <span class="token number">69</span> 00 <span class="token number">61</span> 00 <span class="token number">22</span> 00 3a 00 5b 00 5d 00  ,.<span class="token string">".i.a."</span>.:.<span class="token punctuation">[</span>.<span class="token punctuation">]</span>.</pre></td></tr><tr><td data-num="9"></td><td><pre>aae4f9f0  2c 00 <span class="token number">22</span> 00                                      ,.".</pre></td></tr><tr><td data-num="10"></td><td><pre>Backtrace:</pre></td></tr><tr><td data-num="11"></td><td><pre>0xb5a01950 libil2cpp.so<span class="token operator">!</span>0x1e01950</pre></td></tr><tr><td data-num="12"></td><td><pre>0xb5a012c4 libil2cpp.so<span class="token operator">!</span>0x1e012c4</pre></td></tr><tr><td data-num="13"></td><td><pre>0xb583c0ac libil2cpp.so<span class="token operator">!</span>0x1c3c0ac</pre></td></tr><tr><td data-num="14"></td><td><pre>0xb5bed380 libil2cpp.so<span class="token operator">!</span>0x1fed380</pre></td></tr><tr><td data-num="15"></td><td><pre>0xb5bedc9c libil2cpp.so<span class="token operator">!</span>0x1fedc9c</pre></td></tr><tr><td data-num="16"></td><td><pre>0xb408a128 libil2cpp.so<span class="token operator">!</span>0x48a128</pre></td></tr><tr><td data-num="17"></td><td><pre>0xb3fb69c0 libil2cpp.so<span class="token operator">!</span>0x3b69c0</pre></td></tr><tr><td data-num="18"></td><td><pre>0xb9da76c7 libunity.so<span class="token operator">!</span>0x1e66c7</pre></td></tr><tr><td data-num="19"></td><td><pre>0xb9da9eaf libunity.so<span class="token operator">!</span>0x1e8eaf</pre></td></tr><tr><td data-num="20"></td><td><pre>0xb9db823b libunity.so<span class="token operator">!</span>0x1f723b</pre></td></tr><tr><td data-num="21"></td><td><pre>0xb9cd3c3d libunity.so<span class="token operator">!</span>0x112c3d</pre></td></tr><tr><td data-num="22"></td><td><pre>0xb9d41cd3 libunity.so<span class="token operator">!</span>0x180cd3</pre></td></tr><tr><td data-num="23"></td><td><pre>0xb9d41cf1 libunity.so<span class="token operator">!</span>0x180cf1</pre></td></tr><tr><td data-num="24"></td><td><pre>0xb9d41e8d libunity.so<span class="token operator">!</span>0x180e8d</pre></td></tr><tr><td data-num="25"></td><td><pre>0xb9dfc93b libunity.so<span class="token operator">!</span>0x23b93b</pre></td></tr><tr><td data-num="26"></td><td><pre>0xb9e0a8a9 libunity.so<span class="token operator">!</span>0x2498a9</pre></td></tr></table></figure><p>消息是 json 字符串，其中 <code>msg</code>  是消息号 1006， <code>i</code>  正是我当前点数 14。<br />
+可以锁定点数同步调用地址 <code>0x1e01950</code> ,IDA 查看伪代码，核心如下。</p>
+<figure class="highlight c"><figcaption data-lang="c"></figcaption><table><tr><td data-num="1"></td><td><pre>v45 <span class="token operator">=</span> <span class="token function">UnityMessage__FPMMBDMKELA</span><span class="token punctuation">(</span><span class="token number">1006</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>  v46 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span><span class="token keyword">unsigned</span> __int8 <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>GMAOFAGNCIO_TypeInfo <span class="token operator">+</span> <span class="token number">187</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>v46 <span class="token operator">&amp;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="4"></td><td><pre>  <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>    v46 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>GMAOFAGNCIO_TypeInfo <span class="token operator">+</span> <span class="token number">116</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v46 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="7"></td><td><pre>      <span class="token function">j_il2cpp_runtime_class_init_0</span><span class="token punctuation">(</span>GMAOFAGNCIO_TypeInfo<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> v44<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>  <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="9"></td><td><pre>  v47 <span class="token operator">=</span> <span class="token function">GMAOFAGNCIO__LJGKLPOHDKL</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> v46<span class="token punctuation">,</span> v44<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="10"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v45 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    <span class="token function">null</span><span class="token punctuation">(</span>v47<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>  v48 <span class="token operator">=</span> <span class="token function">UnityMessage__JDPPCOGEFJE</span><span class="token punctuation">(</span>v45<span class="token punctuation">,</span> v47<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>  v49 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>GMAOFAGNCIO_TypeInfo <span class="token operator">+</span> <span class="token number">92</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>  v50 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v49 <span class="token operator">+</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="15"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v50 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="16"></td><td><pre>    <span class="token function">null</span><span class="token punctuation">(</span>v49<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="17"></td><td><pre>  v51 <span class="token operator">=</span> <span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>v50 <span class="token operator">+</span> <span class="token number">76</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v51 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token function">null</span><span class="token punctuation">(</span>v49<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="20"></td><td><pre>  v53 <span class="token operator">=</span> <span class="token function">AdData_AdSetting__FDIJNPDBFNH</span><span class="token punctuation">(</span>v51<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="21"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">(</span>_BYTE <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>EOEAIKOEFDF_TypeInfo <span class="token operator">+</span> <span class="token number">187</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">0</span> <span class="token operator">&amp;&amp;</span> <span class="token operator">!</span><span class="token operator">*</span><span class="token punctuation">(</span>_DWORD <span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">(</span>EOEAIKOEFDF_TypeInfo <span class="token operator">+</span> <span class="token number">116</span><span class="token punctuation">)</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="22"></td><td><pre>    <span class="token function">j_il2cpp_runtime_class_init_0</span><span class="token punctuation">(</span>EOEAIKOEFDF_TypeInfo<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> v52<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="23"></td><td><pre>  v54 <span class="token operator">=</span> <span class="token function">toJSon</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>v53<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="24"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v48 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="25"></td><td><pre>    <span class="token function">null</span><span class="token punctuation">(</span>v54<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="26"></td><td><pre>  v55 <span class="token operator">=</span> <span class="token function">UnityMessage__CIJAGENPKCD</span><span class="token punctuation">(</span>v48<span class="token punctuation">,</span> v54<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="27"></td><td><pre>  <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v55 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="28"></td><td><pre>    <span class="token function">null</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="29"></td><td><pre>  <span class="token keyword">return</span> <span class="token function">UnityMessage__OPBMOAEIAIF</span><span class="token punctuation">(</span>v55<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr></table></figure><p><code>UnityMessage__FPMMBDMKELA(1006)</code>  应该是消息号声明，后面一段直到发送消息为止都是构建消息内容的调用，我们只要分析这几行代码就行了。<br />
+对 <code>GMAOFAGNCIO__LJGKLPOHDKL(0, v46, v44)</code>  进行函数的基本礼仪（交叉引用）。查看其中一个引用 <code>UnityMessageHandler__LAJNIAIBCOK</code>  时代码如下</p>
+<figure class="highlight c"><figcaption data-lang="c"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token function">GMAOFAGNCIO__LJGKLPOHDKL</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> v7<span class="token punctuation">,</span> a3<span class="token punctuation">)</span> <span class="token operator">&lt;</span> a2 <span class="token operator">*</span> a1 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>      v8 <span class="token operator">=</span> <span class="token function">UnityMessage__FPMMBDMKELA</span><span class="token punctuation">(</span><span class="token number">1091</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>      <span class="token keyword">if</span> <span class="token punctuation">(</span> <span class="token operator">!</span>v8 <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token function">null</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>      v6 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>      <span class="token function">UnityMessenger__SendUnityMessage</span><span class="token punctuation">(</span>v8<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr></table></figure><p>在消息接收处理函数里居然有对这行返回值大小的判断，可以大胆猜测这是 Java 传递的消耗点数的消息。<br />
+为了验证这一点，我们 hook 这里就好了</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">var</span> mInterval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token keyword">var</span> sgame <span class="token operator">=</span> Process<span class="token punctuation">.</span><span class="token function">findModuleByName</span><span class="token punctuation">(</span><span class="token string">"libil2cpp.so"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span>sgame <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"无"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">return</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token function">clearInterval</span><span class="token punctuation">(</span>mInterval<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>   </pre></td></tr><tr><td data-num="9"></td><td><pre>  <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x1C2D3F4</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>            <span class="token comment">// console.log("Send2 arg1: \n"+hexdump(ptr(args[0]), &#123; length: 100, ansi: true &#125;));</span></pre></td></tr><tr><td data-num="15"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Send2 arg2: \n"</span><span class="token operator">+</span><span class="token function">hexdump</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token literal-property property">ansi</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Backtrace:\n"</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">backtrace</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">,</span> Backtracer<span class="token punctuation">.</span><span class="token constant">ACCURATE</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>DebugSymbol<span class="token punctuation">.</span>fromAddress<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>       <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre></pre></td></tr><tr><td data-num="21"></td><td><pre>        <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x022F84F4</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="22"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="24"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="25"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="26"></td><td><pre>        <span class="token comment">//   console.log("gess arg1: "+hexdump(ptr(this.context.r5), &#123; length: 100, ansi: true &#125;))</span></pre></td></tr><tr><td data-num="27"></td><td><pre>        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="28"></td><td><pre>        <span class="token function-variable function">onLeave</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">retval</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="29"></td><td><pre>           console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"FunRet: "</span><span class="token operator">+</span>retval<span class="token punctuation">)</span></pre></td></tr><tr><td data-num="30"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="31"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="32"></td><td><pre><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></pre></td></tr></table></figure><p>hook 在 frida 控制台返回 0xe，这正是我当前的点数，写个代码修改返回值。</p>
+<figure class="highlight js"><figcaption data-lang="JavaScript"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">var</span> mInterval <span class="token operator">=</span> <span class="token function">setInterval</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="2"></td><td><pre>    <span class="token keyword">var</span> sgame <span class="token operator">=</span> Process<span class="token punctuation">.</span><span class="token function">findModuleByName</span><span class="token punctuation">(</span><span class="token string">"libil2cpp.so"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token keyword">if</span> <span class="token punctuation">(</span>sgame <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="4"></td><td><pre>        console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"无"</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="5"></td><td><pre>        <span class="token keyword">return</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="6"></td><td><pre>    <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="7"></td><td><pre>    <span class="token function">clearInterval</span><span class="token punctuation">(</span>mInterval<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="8"></td><td><pre>   </pre></td></tr><tr><td data-num="9"></td><td><pre>  <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x1C2D3F4</span> <span class="token punctuation">)</span></pre></td></tr><tr><td data-num="10"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="11"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="12"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="13"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="14"></td><td><pre>            <span class="token comment">// console.log("Send2 arg1: \n"+hexdump(ptr(args[0]), &#123; length: 100, ansi: true &#125;));</span></pre></td></tr><tr><td data-num="15"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Send2 arg2: \n"</span><span class="token operator">+</span><span class="token function">hexdump</span><span class="token punctuation">(</span><span class="token function">ptr</span><span class="token punctuation">(</span>args<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">&#123;</span> <span class="token literal-property property">length</span><span class="token operator">:</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token literal-property property">ansi</span><span class="token operator">:</span> <span class="token boolean">true</span> <span class="token punctuation">&#125;</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="16"></td><td><pre>            console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"Backtrace:\n"</span> <span class="token operator">+</span> Thread<span class="token punctuation">.</span><span class="token function">backtrace</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">.</span>context<span class="token punctuation">,</span> Backtracer<span class="token punctuation">.</span><span class="token constant">ACCURATE</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="17"></td><td><pre>            <span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span>DebugSymbol<span class="token punctuation">.</span>fromAddress<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token string">"\n"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="18"></td><td><pre>       <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="19"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="20"></td><td><pre></pre></td></tr><tr><td data-num="21"></td><td><pre>        <span class="token keyword">var</span>  addr7<span class="token operator">=</span> sgame<span class="token punctuation">.</span>base<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">0x022F84F4</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="22"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">""</span> <span class="token operator">+</span>addr7<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="23"></td><td><pre>    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>Instruction<span class="token punctuation">.</span><span class="token function">parse</span><span class="token punctuation">(</span>addr7<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="24"></td><td><pre>    Interceptor<span class="token punctuation">.</span><span class="token function">attach</span><span class="token punctuation">(</span>addr7<span class="token punctuation">,</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="25"></td><td><pre>        <span class="token function-variable function">onEnter</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">args</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="26"></td><td><pre>        <span class="token comment">//   console.log("gess arg1: "+hexdump(ptr(this.context.r5), &#123; length: 100, ansi: true &#125;))</span></pre></td></tr><tr><td data-num="27"></td><td><pre>        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span></pre></td></tr><tr><td data-num="28"></td><td><pre>        <span class="token function-variable function">onLeave</span><span class="token operator">:</span> <span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token parameter">retval</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span></pre></td></tr><tr><td data-num="29"></td><td><pre>           console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">"FunRet: "</span><span class="token operator">+</span>retval<span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="30"></td><td><pre>           retval<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token number">10000</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="31"></td><td><pre>        <span class="token punctuation">&#125;</span></pre></td></tr><tr><td data-num="32"></td><td><pre>    <span class="token punctuation">&#125;</span><span class="token punctuation">)</span></pre></td></tr><tr><td data-num="33"></td><td><pre><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span></pre></td></tr></table></figure><p>打开软件查看点数真变成 10000 了，而且在创新工坊，15 点数的模型下载也没有问题。大喜过望，修改成功了！！！<br />
+ <code>GMAOFAGNCIO__LJGKLPOHDKL</code>  就是软件返回点数数据的函数。</p>
+<h2 id="修改程序"><a class="anchor" href="#修改程序">#</a> 修改程序</h2>
+<p>因为一开始的目的就是奔着破解软件去的，hook 后还没结束，应该修改代码。<br />
+查看 <code>GMAOFAGNCIO__LJGKLPOHDKL</code>  的 arm 汇编。<br />
+ARM 架构返回值通常会存储在 R0 寄存器。<br />
+ <code>GMAOFAGNCIO__LJGKLPOHDKL</code>  最后跳转到 <code>UnityEngine.Mathf$$Max_10639724</code>  函数，交叉引用后感觉并不是很重要的函数。直接修改函数汇编代码，让返回值改变。</p>
+<pre><code class="language-asm">il2cpp:00A2596C                 MOV             R1, #0x400
+il2cpp:00A25970                 MOV             R0, #0x400
+il2cpp:00A25974                 BX              LR
+</code></pre>
+<p>如此修改即可返回 1024 个点数。Apply Patch 后覆盖原本的 lib。</p>
+<h2 id="破解签名验证"><a class="anchor" href="#破解签名验证">#</a> 破解签名验证</h2>
+<p>修改了 lib 安装完成发现软件打开就闪退。经过 Hook 发现闪退位置还是在 Java 层的 <code>SendUnityMessage</code> , 仔细查看有下面的可疑代码。</p>
+<figure class="highlight java"><figcaption data-lang="java"></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">case</span> <span class="token number">1007</span><span class="token operator">:</span></pre></td></tr><tr><td data-num="2"></td><td><pre>                    <span class="token class-name">UnityMessage</span><span class="token punctuation">.</span><span class="token function">create</span><span class="token punctuation">(</span><span class="token number">1007</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setString</span><span class="token punctuation">(</span><span class="token class-name">AppUtil</span><span class="token punctuation">.</span><span class="token function">getSignature</span><span class="token punctuation">(</span><span class="token class-name">ExApplication</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="3"></td><td><pre>                    <span class="token keyword">return</span><span class="token punctuation">;</span></pre></td></tr></table></figure><p>分析函数是 APk 签名验证的，哈哈，那我就安装原来没修改的软件，然后 Hook 签名数据，再修改 Smali，伪装一个正确的签名。<br />
+定位 Smali 代码，并修改数据如下。</p>
+<figure class="highlight smali"><figcaption data-lang="smali"></figcaption><table><tr><td data-num="1"></td><td><pre>invoke-static <span class="token punctuation">&#123;</span><span class="token register variable">v0</span><span class="token punctuation">&#125;</span><span class="token punctuation">,</span> <span class="token class-name"><span class="token builtin">L</span><span class="token namespace">com<span class="token punctuation">/</span>pavostudio<span class="token punctuation">/</span>exlib<span class="token punctuation">/</span>util<span class="token punctuation">/</span></span><span class="token class-name">AppUtil</span></span><span class="token punctuation">;</span><span class="token operator">-></span><span class="token function">getSignature</span><span class="token punctuation">(</span><span class="token class-name"><span class="token builtin">L</span><span class="token namespace">android<span class="token punctuation">/</span>content<span class="token punctuation">/</span></span><span class="token class-name">Context</span></span><span class="token punctuation">;</span><span class="token punctuation">)</span><span class="token class-name"><span class="token builtin">L</span><span class="token namespace">java<span class="token punctuation">/</span>lang<span class="token punctuation">/</span></span><span class="token class-name">String</span></span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre>    move-result-object <span class="token register variable">v0</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre>    const-string <span class="token register variable">v0</span><span class="token punctuation">,</span> <span class="token string">"3082019f30820108a00302010202045365a59b300d06092a864886f70d010105050030133111300f060355040313086f756b6169746f753020170d3134303530343032323733395a180f32313134303431303032323733395a30133111300f060355040313086f756b6169746f7530819f300d06092a864886f70d010101050003818d0030818902818100b2e1d67613a0fbe26fd3ea512fd7787c93d9b7053ef295b8099414cd3049916567fc1b4601ded6e18263b2a2d2b309067a912048eee368216a5dcee5ad987550de4373f7fababac7a0e3826c07b3463c10ea4a08b6986adce751b5a86f8bd062bcf866ec732fe3773d72a60144879881979d147d1c04eacdb7d7c5e89c492e2f0203010001300d06092a864886f70d0101050500038181004d5d127b7320f37271b594b59f2bb44a2fa96ca9324074268829f0ace9efc157d5844ddc5c5d0a9c71a8758a05d8544f99287ba458081abe02c91d51a6531243a31a23e1aa3cfff4b5abe6cfbdba20f34eb3c0de873b913ebdcafd0daa8c8a4a8ea17d28a76fa34f1418d201faf27305989bd2458d91b7277859fda40ee687b4"</span></pre></td></tr></table></figure><p>到此重新签名软件，安装，软件正常打开，没有闪退。<br />
+打开软件测试，不管怎么下载模型，点数都被锁定为 1024，软件破解成功，美滋滋。</p>
+<h2 id="总结"><a class="anchor" href="#总结">#</a> 总结</h2>
+<p>熟练掌握 Frida 后分析软件真是事半功倍，逆向乐趣无穷。<br />
+想要 Live2dViewerEx 破解版的朋友可以在评论区留下邮箱，哈哈哈哈。</p>
+
+      <div class="tags">
+          <a href="/tags/%E6%B1%87%E7%BC%96/" rel="tag"><i class="ic i-tag"></i> 汇编</a>
+          <a href="/tags/Re/" rel="tag"><i class="ic i-tag"></i> Re</a>
+          <a href="/tags/frida/" rel="tag"><i class="ic i-tag"></i> frida</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="CTF/Reverse/Live2dviewerexKill/" class="item leancloud_visitors" data-flag-title="Frida逆向实战-Live2dViewerEx破解" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/CTF/Reverse/Live2dviewerexKill/" title="Frida逆向实战-Live2dViewerEx破解">https://pangbai.work/CTF/Reverse/Live2dviewerexKill/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/CTF/Reverse/ZJCTF2024/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?639511" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 逆向工程</span>
+  <h3>2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/life/2024Year-endSummary/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?667428" title="2024年终总结੭ ᐕ)੭">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 记录生活</span>
+  <h3>2024年终总结੭ ᐕ)੭</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AF%E4%BB%B6%E6%A1%86%E6%9E%B6"><span class="toc-number">1.</span> <span class="toc-text"> 软件框架</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%86%E5%90%91%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text"> 逆向工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#java%E5%B1%82%E5%88%86%E6%9E%90"><span class="toc-number">3.</span> <span class="toc-text"> Java 层分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#so%E5%B1%82%E7%AC%A6%E5%8F%B7%E6%81%A2%E5%A4%8D"><span class="toc-number">4.</span> <span class="toc-text"> So 层符号恢复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#frida%E5%88%86%E6%9E%90unity%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F"><span class="toc-number">5.</span> <span class="toc-text"> Frida 分析 Unity 消息系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E7%A8%8B%E5%BA%8F"><span class="toc-number">6.</span> <span class="toc-text"> 修改程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%B4%E8%A7%A3%E7%AD%BE%E5%90%8D%E9%AA%8C%E8%AF%81"><span class="toc-number">7.</span> <span class="toc-text"> 破解签名验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">8.</span> <span class="toc-text"> 总结</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li><a href="/CTF/Reverse/Ctf_vm/" rel="bookmark" title="CTF虚拟机">CTF虚拟机</a></li><li><a href="/CTF/Reverse/antidebug/" rel="bookmark" title="反调试简述">反调试简述</a></li><li><a href="/CTF/Reverse/ctf_encode/" rel="bookmark" title="常见加密算法特征识别">常见加密算法特征识别</a></li><li><a href="/CTF/Reverse/encode_decode/" rel="bookmark" title="加密解密算法">加密解密算法</a></li><li><a href="/CTF/Reverse/ciscn2024re/" rel="bookmark" title="CISCN2024复现及总结">CISCN2024复现及总结</a></li><li><a href="/CTF/Reverse/stm32/" rel="bookmark" title="STM32固件逆向概述">STM32固件逆向概述</a></li><li><a href="/CTF/Reverse/ZJCTF2024/" rel="bookmark" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</a></li><li class="active"><a href="/CTF/Reverse/Live2dviewerexKill/" rel="bookmark" title="Frida逆向实战-Live2dViewerEx破解">Frida逆向实战-Live2dViewerEx破解</a></li><li><a href="/CTF/Reverse/frida-check/" rel="bookmark" title="Frida特征分析(基于去特征的FridaServer)">Frida特征分析(基于去特征的FridaServer)</a></li><li><a href="/CTF/Reverse/Want2BecomeMagicalGirl/" rel="bookmark" title="Want2BecomeMagicalGirl出题笔记-WMCTF2025">Want2BecomeMagicalGirl出题笔记-WMCTF2025</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/CTF/Reverse/ZJCTF2024/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/life/2024Year-endSummary/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E4%B8%8E%E4%BD%A0%E8%BF%9C%E6%96%B9%E7%9A%84%E6%9C%8B%E5%8F%8B%E4%B8%80%E8%B5%B7%E7%8E%A9%E6%B8%B8%E6%88%8F/" title="分类于 与你远方的朋友一起玩游戏">与你远方的朋友一起玩游戏</a>
+</div>
+
+    <span><a href="/share/mclink/" title="MCinaBox远程联机教学">MCinaBox远程联机教学</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/encode_decode/" title="加密解密算法">加密解密算法</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ZJCTF2024/" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/IT/" title="分类于 IT">IT</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/IT/Nowork/" title="分类于 Nowork开发笔记">Nowork开发笔记</a>
+</div>
+
+    <span><a href="/IT/Nowork/dialog/" title="Android底部简约风格对话框">Android底部简约风格对话框</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%9A%8F%E6%97%B6%E9%9A%8F%E5%9C%B0%E8%BF%9B%E8%A1%8C%E8%BD%AF%E4%BB%B6%E6%9E%84%E5%BB%BA/" title="分类于 随时随地进行软件构建">随时随地进行软件构建</a>
+</div>
+
+    <span><a href="/IT/githubci/" title="Github CI自动构建使用教程">Github CI自动构建使用教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/IT/dowork/" title="Dowork食用教程">Dowork食用教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/life/" title="分类于 记录生活">记录生活</a>
+</div>
+
+    <span><a href="/life/2024Year-endSummary/" title="2024年终总结੭ ᐕ)੭">2024年终总结੭ ᐕ)੭</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Minecraft%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BA/" title="分类于 Minecraft服务器搭建">Minecraft服务器搭建</a>
+</div>
+
+    <span><a href="/share/CatServer/" title="1.12.2 | CatServer 可自行添加mod|自配权限小型整合服务端">1.12.2 | CatServer 可自行添加mod|自配权限小型整合服务端</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/re2/" title="汇编学习-CPU寄存器">汇编学习-CPU寄存器</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/re3/" title="汇编学习-汇编语法">汇编学习-汇编语法</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'CTF/Reverse/Live2dviewerexKill/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

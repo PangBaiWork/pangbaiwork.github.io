@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;shell&#34; tag</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Wed, 13 Sep 2023 16:48:30 +0800</pubDate>
+        <lastBuildDate>Wed, 13 Sep 2023 16:48:30 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>汇编</category>
+        <category>MC</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>反调试</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/randomacg/</guid>
+            <title>Linux桌面使用随机二刺螈壁纸</title>
+            <link>https://pangbai.work/randomacg/</link>
+            <category>Linux</category>
+            <category>shell</category>
+            <pubDate>Wed, 13 Sep 2023 16:48:30 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;在 Linux 桌面使用随机二刺螈壁纸&lt;br /&gt;
+一个很简单的 shell&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;p&gt;总所周知，涩图是第一生产力&lt;br /&gt;
+如果桌面壁纸单调那么，那一定会影响工作和学习效率 (bushi&lt;br /&gt;
+ 壁纸千千万，均以自然风景和抽象图片居多，在 linux 下更是如此，&lt;br /&gt;
+如果我们想要看不完的二次元壁纸，那指定会要点功夫&lt;br /&gt;
+以下我利用简单的 shell 脚本实现随机桌面壁纸。&lt;/p&gt;
+&lt;h2 id=&#34;材料&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#材料&#34;&gt;#&lt;/a&gt; 材料&lt;/h2&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt;  一个随机壁纸 api:&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9hcGkuc3V5YW53LmNuL2FwaS9jb21pYyglRTUlOEYlQUYlRTUlODglQjAlRTclOTklQkUlRTUlQkElQTYlRTUlQUYlQkIlRTYlODklQkUp&#34;&gt;https://api.suyanw.cn/api/comic (可到百度寻找)&lt;/span&gt;&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; 一个 Linux 壁纸软件:variety (桌面环境自带的也许也行，但是效果不确定)&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; checked=&#34;true&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; 一双手，一个脑子，一只像 PangBai 一样热心网友 (doge)&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;原理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#原理&#34;&gt;#&lt;/a&gt; 原理&lt;/h2&gt;
+&lt;p&gt;没啥原理，就是通过启动终端的配置文件执行指定脚本，脚本会下载图片，下载完成后替换图片，壁纸自动刷新显示&lt;br /&gt;
+因为不希望耗费太多资源，壁纸更换就是当你每次启动终端的时候&lt;br /&gt;
+如果你想要定时更换功能，可以自己设计&lt;/p&gt;
+&lt;h2 id=&#34;步骤&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#步骤&#34;&gt;#&lt;/a&gt; 步骤&lt;/h2&gt;
+&lt;p&gt;编辑一个脚本文件，这里我们叫它 start_run, 位置随意&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;wget&lt;/span&gt;  --no-proxy &lt;span class=&#34;token parameter variable&#34;&gt;-q&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-O&lt;/span&gt;  临时壁纸存放位置 https://api.suyanw.cn/api/comic &lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;[&lt;/span&gt; &lt;span class=&#34;token variable&#34;&gt;$?&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-eq&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;token punctuation&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;then&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;# 下载成功，替换旧图片&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token function&#34;&gt;mv&lt;/span&gt; 零食壁纸存放位置 当前壁纸所在位置&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;else&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token comment&#34;&gt;# 下载失败，不替换图片&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;    &lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;下载失败&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;fi&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;解释一下脚本执行&lt;br /&gt;
+绕过代理，静默下载壁纸文件&lt;br /&gt;
+这里存在两个路径，一个是临时壁纸存放位置如 /tmp/download.jpg，用于下载缓冲一个当前壁纸所在位置 (如 /home/pangbai/ 图片 /random.jpg), 这个就是我们在 variety 要选择的壁纸，&lt;br /&gt;
+有人可能会问，为什么要两个文件呢，那是因为下载壁纸覆盖的过程会导致壁纸空缺，很难看。&lt;/p&gt;
+&lt;p&gt;修改 shell 启动配置&lt;br /&gt;
+这里涉及到你使用的 shell 的类型&lt;br /&gt;
+执行&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token function&#34;&gt;chmod&lt;/span&gt; +x start_run&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token builtin class-name&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;token environment constant&#34;&gt;SHELL&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;查看你当前 shell, 一般是 bash 或者 zsh&lt;br /&gt;
+bash 就编辑 \～/.bashrc,zsh 就编辑 \～/.zshrc&lt;br /&gt;
+ 在文件最后一行添加脚本执行命令如&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;/home/pangbai/start_run &lt;span class=&#34;token operator&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h1 id=&#34;&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#&#34;&gt;#&lt;/a&gt; &lt;/h1&gt;
+&lt;p&gt;修改壁纸设置&lt;br /&gt;
+把 variety 默认壁纸来源全部取消了&lt;br /&gt;
+添加壁纸图片 /home/pangbai/ 图片 /random.jpg&lt;/p&gt;
+&lt;h2 id=&#34;完结&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#完结&#34;&gt;#&lt;/a&gt; 完结&lt;/h2&gt;
+&lt;p&gt;每次你启动命令行执行命令都会为你更新一次壁纸，很方便呢&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

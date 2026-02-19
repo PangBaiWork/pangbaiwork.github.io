@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pangbai.work</id>
+    <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;dowork&#34; tag</title>
+    <link href="https://pangbai.work" />
+    <updated>2023-09-18T09:00:21.000Z</updated>
+    <category term="Linux" />
+    <category term="shell" />
+    <category term="IT" />
+    <category term="编程" />
+    <category term="汇编语言" />
+    <category term="ADB" />
+    <category term="re" />
+    <category term="Dowork" />
+    <category term="Github" />
+    <category term="linux" />
+    <category term="kail" />
+    <category term="渗透" />
+    <category term="Android" />
+    <category term="安卓" />
+    <category term="博客日常" />
+    <category term="记录生活" />
+    <category term="氵帖" />
+    <category term="Minecraft" />
+    <category term="服务器" />
+    <category term="xposed" />
+    <category term="xp模块" />
+    <category term="太极" />
+    <category term="icebox" />
+    <category term="手机软件分享" />
+    <category term="线程下载器" />
+    <category term="汇编" />
+    <category term="MC" />
+    <category term="Re" />
+    <category term="frida" />
+    <category term="反调试" />
+    <category term="STM32" />
+    <category term="html前端" />
+    <entry>
+        <id>https://pangbai.work/IT/dowork/</id>
+        <title>Dowork食用教程</title>
+        <link rel="alternate" href="https://pangbai.work/IT/dowork/"/>
+        <content type="html">&lt;p&gt;Dowork 是一个在安卓运行 Linux 容器并且集成了终端，图形化显示，音频输出，容器管理等功能的多合一管理器&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h2 id=&#34;前言&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#前言&#34;&gt;#&lt;/a&gt; 前言&lt;/h2&gt;
+&lt;p&gt;如果有人用过 &lt;code&gt;Linuxdeploy&lt;/code&gt; ，那必定吐槽过这玩意的难用，使用其安装 Linux，需要时刻关注天朝内部网络天气，并且准备好魔法上网，生成 &lt;code&gt;bootstrap&lt;/code&gt;  的过程让人等待到厌烦，如果遇到一个包下载超时，那便只有两个选择：从头开始安装和等待 30 分钟 wget 会自动重新下载。&lt;br /&gt;
+如果你也遇到过以下情况：用它启动 ssh 是否成功全靠运气，无法安装根文件系统，安装完成后的 Linux 残缺。那是时候考虑换个软件了。没错说的就是你 &lt;code&gt;Dowork&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;简单介绍&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#简单介绍&#34;&gt;#&lt;/a&gt; 简单介绍&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;Dowork&lt;/code&gt;  融合了 Linuxdeploy 的后端，同时支持无 root 权限使用，在享受到 Linuxdeploy 自动脚本的方便的同时，也加入了 &lt;code&gt;Rootfs&lt;/code&gt;  在线获取和下载功能，你可以通过 &lt;code&gt;rootfstool&lt;/code&gt;  命令行工具获取到最新构建的发行版 Rootfs (终于不用看网络脸色了)。&lt;br /&gt;
+ &lt;code&gt;Dowork&lt;/code&gt;  使用了来自 Termux 的终端，提供可控性操作，按键布局继承自 &amp;quot;Tmoe&amp;quot; 脚本，方便实用。&lt;br /&gt;
+ &lt;code&gt;Dowork&lt;/code&gt;  使用 Xvfb 作为显示后端，提供两种显示模式 (内部 / 外部 Xvfb)，数据传输使用 unix 套接字 (比 XSDL 和 VNC 传输性能好得多), 同时支持触控会手势滚动，文本输入支持中文&lt;br /&gt;
+ &lt;code&gt;Dowork&lt;/code&gt;  内置 pulseaduio, 提供音频输出。&lt;br /&gt;
+ &lt;code&gt;Dowork&lt;/code&gt;  提供悬浮命令行任务输出，摸鱼和学 Linux 两不误&lt;br /&gt;
+&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXRodWIuY29tL1BhbmdCYWlXb3JrL0Rvd29yay9yZWxlYXNlcw==&#34;&gt;下载 Dowork (GITHUB)&lt;/span&gt;&lt;/p&gt;
+&lt;h2 id=&#34;使用教程&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#使用教程&#34;&gt;#&lt;/a&gt; 使用教程&lt;/h2&gt;
+&lt;h3 id=&#34;创建容器&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#创建容器&#34;&gt;#&lt;/a&gt; 创建容器&lt;/h3&gt;
+&lt;p&gt;在容器页面点击加号即可创建&lt;br /&gt;
+创建后请修改以下数据&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;容器类型&lt;br /&gt;
+根据是否具有 root 权限选择，若无 root 权限，只可选择 &lt;code&gt;proot&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;发行版 GNU/Linux&lt;br /&gt;
+ 请确定自己偏好的 Linux 发行版&lt;/li&gt;
+&lt;li&gt;安装类型&lt;br /&gt;
+请选择 &lt;code&gt;目录&lt;/code&gt; 安装 (其他类型暂时未适配)&lt;/li&gt;
+&lt;li&gt;安装目录&lt;br /&gt;
+此安装目录可自定义，一个容器对应一个目录&lt;br /&gt;
+若容器为 proot, 请默认安装在 /data/data/com.pangbai.dowork/files/ 下目录&lt;br /&gt;
+若容器为 chroot, 任何具有执行权限的目录都可安装 (最好是 /data 下目录)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;安装rootfs&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安装rootfs&#34;&gt;#&lt;/a&gt; 安装 rootfs&lt;/h3&gt;
+&lt;p&gt;rootfs (根文件系统) 包含容器运行所需所有文件&lt;br /&gt;
+ Dowork 提供两种方式安装 rootfs (Proot 和 Chroot 都可以使用)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在线构建 rootfs&lt;br /&gt;
+ 在线构建 bootstrap 与 Linuxdeploy 使用方法相同，考虑到网络状况，可能需要修改软件源&lt;br /&gt;
+此方法较为反人类，此处略过。&lt;/li&gt;
+&lt;li&gt;导入 rootfs&lt;br /&gt;
+ 返回到软件主页，点击终端符号可进入安卓 shell 环境 (此环境在容器未安装时可用)&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/f30928dc-b327-48ac-8303-fc235be84be8/0&#34; alt=&#34;进入终端&#34; /&gt;&lt;br /&gt;
+进入终端后输入命令行，可查看 rootfstool 用法和提示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rootfstool &lt;span class=&#34;token builtin class-name&#34;&gt;help&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;若我们想安装最新版本的 centos9, 可输入以下命令获得 rootfs 的 url，其他发行版同理&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;rootfstool url &lt;span class=&#34;token parameter variable&#34;&gt;-a&lt;/span&gt; arm64 &lt;span class=&#34;token parameter variable&#34;&gt;-d&lt;/span&gt; centos &lt;span class=&#34;token parameter variable&#34;&gt;-v&lt;/span&gt; &lt;span class=&#34;token number&#34;&gt;9&lt;/span&gt; &lt;span class=&#34;token parameter variable&#34;&gt;-m&lt;/span&gt; bfsu&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;获取到 url 后我们就可以拿去导入了，在容器配置页面，点击右上角中间的按钮，把 url 填入，进行导入，等待导入完成，提示 Succeed 即导入成功。&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/334ec5fb-a476-4898-92c9-e109a25f263f/0&#34; alt=&#34;导入容器&#34; /&gt;&lt;br /&gt;
+此时我们返回软件主页可以看到容器的版本信息已经识别出来了&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/c0bbb380-7846-4bf9-8cb2-e40bd4aca7b1/0&#34; alt=&#34;版本信息&#34; /&gt;&lt;br /&gt;
+是否显示版本信息是 &lt;code&gt;Dowork&lt;/code&gt;  判断容器是否可用的标志&lt;br /&gt;
+此时我们再点击终端符号，就会直接进入容器&lt;br /&gt;
+至此容器安装完成&lt;/p&gt;
+&lt;h3 id=&#34;图形化显示以及音频输出&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#图形化显示以及音频输出&#34;&gt;#&lt;/a&gt; 图形化显示以及音频输出&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;图形化显示&lt;br /&gt;
+若无特殊需求请选择内置 X 服务器，在显示页面可对显示屏幕进行设置，由于显示屏幕是横向放置，第一个参数 width 不应该大于屏幕高度，第二个参数 height 不应该大于屏幕宽度，否则会出现显示画面闪烁和崩溃，第三个参数为显示色深，如果没有特殊需求，不建议更改。更改后重启 &lt;code&gt;Dowork&lt;/code&gt; ，若 Xserver 状态为 running 即正常。&lt;br /&gt;
+ &lt;code&gt;Dowork&lt;/code&gt;  会自动嗅探图形化软件的打开和关闭，并且提供浮窗显示，同时可以进行点击，滚动页面等操作，如果你是一个想在安卓上进行跨平台图形化开发的开发者，你会爱上这个功能 (相比于 termux-x11 等应用，满足了开发者快速图形化调试的需求)。&lt;br /&gt;
+Dowork 已在容器内预设 DISPLAY 环境变量，只需直接启动图形化软件即可显示&lt;/li&gt;
+&lt;li&gt;音频输出到 pulseaudio&lt;br /&gt;
+ 音频输出需要在容器内配置音频服务&lt;br /&gt;
+若是 chroot 容器，可以直接在容器配置页面勾选 &lt;code&gt;启用允许音频输出&lt;/code&gt; &lt;br /&gt;
+若为 proot 容器需要手动安装软件包 (Linuxdeploy 的配置页面是为 chroot 准备的，适配需要些时间)&lt;/li&gt;
+&lt;li&gt;debian 系安装 libasound2-plugins&lt;/li&gt;
+&lt;li&gt;arch 系安装 pulseaudio-alsa&lt;/li&gt;
+&lt;li&gt;centos 系安装 alsa-plugins-pulseaudio&lt;br /&gt;
+ 最后创建 /etc/asound.conf 文件，加入以下内容&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;pcm.&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;default &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;type&lt;/span&gt; pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ctl.&lt;span class=&#34;token operator&#34;&gt;!&lt;/span&gt;default &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;type&lt;/span&gt; pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;pcm.pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;type&lt;/span&gt; pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;ctl.pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#123;&lt;/span&gt; &lt;span class=&#34;token builtin class-name&#34;&gt;type&lt;/span&gt; pulse &lt;span class=&#34;token punctuation&#34;&gt;&amp;#125;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;至此音频配置完成&lt;br /&gt;
+可以使用 aplay 命令测试是否成功&lt;/p&gt;
+&lt;figure class=&#34;highlight shell&#34;&gt;&lt;figcaption data-lang=&#34;Bash&#34;&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;aplay *mp3&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;h3 id=&#34;容器配置和更新仅限chroot&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#容器配置和更新仅限chroot&#34;&gt;#&lt;/a&gt; 容器配置和更新 (仅限 chroot)&lt;/h3&gt;
+&lt;p&gt;在容器配置页面更改配置并退出&lt;br /&gt;
+在容器管理页面点击更新按钮&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/9e4cd613-1b99-418e-9242-8464406f64cd/0&#34; alt=&#34;更新容器配置&#34; /&gt;&lt;/p&gt;
+&lt;h3 id=&#34;进程管理&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#进程管理&#34;&gt;#&lt;/a&gt; 进程管理&lt;/h3&gt;
+&lt;p&gt;在主页会对已运行的 chroot 进程进行探测，可以进行手动管理&lt;br /&gt;
+若点击 umount container 将会终止所有 chroot 进程并卸载容器&lt;br /&gt;
+&lt;img data-src=&#34;http://shp.qpic.cn/collector/1642981619/67a5c5ea-e46e-4934-a31e-193eee244510/0&#34; alt=&#34;进程管理&#34; /&gt;&lt;/p&gt;
+</content>
+        <category term="Dowork" />
+        <updated>2023-09-18T09:00:21.000Z</updated>
+    </entry>
+</feed>

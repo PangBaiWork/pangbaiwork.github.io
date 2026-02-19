@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://pangbai.work</id>
+    <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;stm32&#34; tag</title>
+    <link href="https://pangbai.work" />
+    <updated>2024-10-10T06:00:25.000Z</updated>
+    <category term="Linux" />
+    <category term="shell" />
+    <category term="IT" />
+    <category term="编程" />
+    <category term="汇编语言" />
+    <category term="ADB" />
+    <category term="re" />
+    <category term="Dowork" />
+    <category term="Github" />
+    <category term="linux" />
+    <category term="kail" />
+    <category term="渗透" />
+    <category term="Android" />
+    <category term="安卓" />
+    <category term="博客日常" />
+    <category term="记录生活" />
+    <category term="氵帖" />
+    <category term="Minecraft" />
+    <category term="服务器" />
+    <category term="xposed" />
+    <category term="xp模块" />
+    <category term="太极" />
+    <category term="icebox" />
+    <category term="手机软件分享" />
+    <category term="线程下载器" />
+    <category term="汇编" />
+    <category term="MC" />
+    <category term="Re" />
+    <category term="frida" />
+    <category term="反调试" />
+    <category term="STM32" />
+    <category term="html前端" />
+    <entry>
+        <id>https://pangbai.work/CTF/Reverse/stm32/</id>
+        <title>STM32固件逆向概述</title>
+        <link rel="alternate" href="https://pangbai.work/CTF/Reverse/stm32/"/>
+        <content type="html">&lt;p&gt;stm32 固件逆向&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;h1 id=&#34;系统架构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#系统架构&#34;&gt;#&lt;/a&gt; 系统架构&lt;/h1&gt;
+&lt;p&gt;stm32 基于 ARM 公司设计的 Cortex-M 系列芯片&lt;/p&gt;
+&lt;h1 id=&#34;stm32的存储器映射&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#stm32的存储器映射&#34;&gt;#&lt;/a&gt; stm32 的存储器映射&lt;/h1&gt;
+&lt;p&gt;作为一块 32 位芯片，stm32 把其拥有的 4GB 地址空间里分配为几大，&lt;br /&gt;
+详细分配大概是这样&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0x00000000 ~ 0x1FFFFFFF (代码块) 512MB&lt;/li&gt;
+&lt;li&gt;0x20000000 ~ 0x3FFFFFFF (SRAM 内存) 512MB&lt;/li&gt;
+&lt;li&gt;0x40000000 ~ 0x5FFFFFFF (片上外设) 512MB&lt;/li&gt;
+&lt;li&gt;0x60000000 ~ 0xFFFFFFFF (拓展 RAM 和一些其他的东西)&lt;br /&gt;
+ 对于 M3 系列芯片代码块里作为可编程部分 (给 flash 的) 一般只有 0x08000000~0x0807FFFF (512KB)&lt;br /&gt;
+ 对于 M4 系列的则为 0x08000000~0x081FFFFF（2MB）&lt;br /&gt;
+其他 M 系列也大同小异&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <category term="汇编" />
+        <category term="Re" />
+        <category term="STM32" />
+        <updated>2024-10-10T06:00:25.000Z</updated>
+    </entry>
+</feed>

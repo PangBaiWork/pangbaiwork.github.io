@@ -1,0 +1,607 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="汇编语言" />
+
+
+<link rel="canonical" href="https://pangbai.work/IT/re1/">
+
+
+
+  <title>
+汇编学习第一天 - 逆向 |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">汇编学习第一天
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2023-09-23 10:39:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-09-23T10:39:19+08:00">2023-09-23</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>910</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>1 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?342368"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?726016"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?133160"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?781118"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?821874"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?486703"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E9%80%86%E5%90%91/" itemprop="item" rel="index" title="分类于 逆向"><span itemprop="name">逆向</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/IT/re1/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>计算机 CPU 相关基础知识</p>
+<span id="more"></span>
+<h2 id="基本知识"><a class="anchor" href="#基本知识">#</a> 基本知识</h2>
+<ul>
+<li>
+<p>所有编译语言都是将可读性描述转化为二进制机械语言进行执行<br />
+通用计算机语言 -&gt; 汇编语言 -&gt; 二进制语言</p>
+</li>
+<li>
+<p>计算机几乎所有组件都有存储器<br />
+ CPU 最直接的存储器是寄存器</p>
+</li>
+<li>
+<p>CPU 可以对所有存储器读写<br />
+ CPU 接有直接到达各个计算机部件的电路<br />
+ CPU 可以对存储器进行三类交互</p>
+</li>
+</ul>
+<details class="danger"><summary>三种交互类型</summary><div>
+<p><span class="label info">1</span> 地址信息 (通过地址总线)<br />
+<span class="label info">2</span> 控制信息 (通过控制总线)<br />
+<span class="label info">3</span> 数据信息 (通过数据总线)</p>
+</div></details>
+<ul>
+<li>程序执行流程<br />
+硬盘文件 -&gt; 虚拟内存 -&gt;CPU</li>
+<li>存储器芯片<br />
+分为 RAM 和 ROM</li>
+</ul>
+<details class="info"><summary>存储器芯片分类</summary><div>
+<p>内存 -&gt;RAM<br />
+ 接口 -&gt;RAM<br />
+bios-&gt;ROM</p>
+</div></details>
+<ul>
+<li>内存地址空间 (物理地址)<br />
+ 逻辑上所有计算机接入设备都是相连的一大块<br />
+ CPU 可见的是一大块的存储器 (包含内存，显卡，网卡...)<br />
+ 系统为存储器分配地址空间<br />
+<span class="label danger">举个栗子</span> 主随机存储器地址为 0<sub>7FFFH, 显存地址为 8000H</sub>9FFFH, 各 ROM 地址为 A000H~FFFFH</li>
+</ul>
+<h2 id="地址总线与cpu寻址"><a class="anchor" href="#地址总线与cpu寻址">#</a> 地址总线与 CPU 寻址</h2>
+<p>CPU 到内存的总线有很多条 (逻辑上), 具体数目与 CPU 有关，一条总线可以传输一位数据 (0/1), 将所有总线的数据联合起来就组成了地址信息，主流处理器分 32 位和 64 位 (也叫地址宽度), 在地址总线上就对应了 CPU 能访问到的地址数目 2<sup>32 和 2</sup>64。<br />
+<span class="label info">举个栗子</span>当 CPU 从地址总线发送数据 (11010000...) 到内存，内存会定位到这个地址，这个地址的所在的内存单元数据 (通常为 1byte) 也就被寻找到了。</p>
+<h2 id="数据总线与数据传输"><a class="anchor" href="#数据总线与数据传输">#</a> 数据总线与数据传输</h2>
+<p>数据总线的宽度决定速度传输速度<br />
+ 8088CPU 是 8 位的，一次可以传输 8 位数据<br />
+ 8086CPU 是 16 位的，一次可以传输 16 位数据</p>
+<h2 id="控制总线"><a class="anchor" href="#控制总线">#</a> 控制总线</h2>
+<p>控制总线发送控制信息 (通常是读和写)<br />
+ 控制接入电脑的硬件。</p>
+<h2 id="cpu概述"><a class="anchor" href="#cpu概述">#</a> CPU 概述</h2>
+<p>一个典型 CPU 由 <code>运算器</code> ， <code>控制器</code> ， <code>寄存器</code> 组成，这些部件靠 CPU 内部总线相连。</p>
+<h2 id="寄存器概述"><a class="anchor" href="#寄存器概述">#</a> 寄存器概述</h2>
+<p>x86 寄存器一般是 16 位的，可以存放两个字节 (等于一个字)，AX,BX,CX,DX 存储一般性数据，可以分为两个独立的 8 位使用，称为通用寄存器<br />
+通用寄存器一般为 8 个，其他寄存器可以有若干<br />
+ AX 等带 X 后缀的都为 16 位，而 EAX 之类为 32 位<br />
+通用寄存器可以分为高位和地位如 AH 和 AL,BH 和 BL (用于兼容旧系统)</p>
+
+      <div class="tags">
+          <a href="/tags/%E6%B1%87%E7%BC%96%E8%AF%AD%E8%A8%80/" rel="tag"><i class="ic i-tag"></i> 汇编语言</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="IT/re1/" class="item leancloud_visitors" data-flag-title="汇编学习第一天" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/IT/re1/" title="汇编学习第一天">https://pangbai.work/IT/re1/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/IT/bit/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?728429" title="通用二进制位运算及其注意事项">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>通用二进制位运算及其注意事项</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/IT/re2/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?661733" title="汇编学习-CPU寄存器">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 逆向</span>
+  <h3>汇编学习-CPU寄存器</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text"> 基本知识</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9C%B0%E5%9D%80%E6%80%BB%E7%BA%BF%E4%B8%8Ecpu%E5%AF%BB%E5%9D%80"><span class="toc-number">2.</span> <span class="toc-text"> 地址总线与 CPU 寻址</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%80%BB%E7%BA%BF%E4%B8%8E%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93"><span class="toc-number">3.</span> <span class="toc-text"> 数据总线与数据传输</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%80%BB%E7%BA%BF"><span class="toc-number">4.</span> <span class="toc-text"> 控制总线</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#cpu%E6%A6%82%E8%BF%B0"><span class="toc-number">5.</span> <span class="toc-text"> CPU 概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-number">6.</span> <span class="toc-text"> 寄存器概述</span></a></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/IT/re1/" rel="bookmark" title="汇编学习第一天">汇编学习第一天</a></li><li><a href="/IT/re2/" rel="bookmark" title="汇编学习-CPU寄存器">汇编学习-CPU寄存器</a></li><li><a href="/IT/re3/" rel="bookmark" title="汇编学习-汇编语法">汇编学习-汇编语法</a></li><li><a href="/IT/Re4/" rel="bookmark" title="汇编学习-汇编指令">汇编学习-汇编指令</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/IT/bit/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/IT/re2/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%B0%88/" title="分类于 杂谈">杂谈</a>
+</div>
+
+    <span><a href="/IT/fzzx/" title="你用了8年的软件居然是盗版">你用了8年的软件居然是盗版</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" title="分类于 安卓逆向">安卓逆向</a>
+</div>
+
+    <span><a href="/IT/smali/" title="Smali踩坑纪录">Smali踩坑纪录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E4%BD%BF%E7%94%A8Termux%E6%90%AD%E5%BB%BAlinux/" title="分类于 使用Termux搭建linux">使用Termux搭建linux</a>
+</div>
+
+    <span><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc2VjLmNvbS8yMDIwLzA0L3Rlcm11eGxpbnV4Lmh0bWw=" title="在手机上快速搭建Linux">在手机上快速搭建Linux<i class="ic i-link-alt"></i></span></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/re1/" title="汇编学习第一天">汇编学习第一天</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/IT/PythonStudy/" title="Python学习">Python学习</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/stm32/" title="STM32固件逆向概述">STM32固件逆向概述</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/life/" title="分类于 记录生活">记录生活</a>
+</div>
+
+    <span><a href="/life/2025Year-endSummary/" title="2025年终总结(´◊ω◊｀) ">2025年终总结(´◊ω◊｀) </a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/antidebug/" title="反调试简述">反调试简述</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/randomacg/" title="Linux桌面使用随机二刺螈壁纸">Linux桌面使用随机二刺螈壁纸</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+</div>
+
+    <span><a href="/CTF/pwn/pwn_skill/" title="PWN相关的奇淫技巧">PWN相关的奇淫技巧</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'IT/re1/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

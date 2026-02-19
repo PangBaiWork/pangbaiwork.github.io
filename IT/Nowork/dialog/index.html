@@ -1,0 +1,580 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="Android" />
+
+
+<link rel="canonical" href="https://pangbai.work/IT/Nowork/dialog/">
+
+
+
+  <title>
+Android底部简约风格对话框 - Nowork开发笔记 - IT |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Android底部简约风格对话框
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2021-06-19 13:39:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-06-19T13:39:19+08:00">2021-06-19</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>5k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>5 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?399772"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?165606"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?643599"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?255337"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?470935"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?804575"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/IT/" itemprop="item" rel="index" title="分类于 IT"><span itemprop="name">IT</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/IT/Nowork/" itemprop="item" rel="index" title="分类于 Nowork开发笔记"><span itemprop="name">Nowork开发笔记</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/IT/Nowork/dialog/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>在开发的过程中，纠结于对话框的制作，各种博客上 Android 对话框的制作教程很多，在此记录下自己制作对话框详细的过程。</p>
+<span id="more"></span>
+<p>在安卓开发中，软件整体 UI 是否赏心悦目决定了用户对这个软件的评价，而对话框是用弹出的控件提醒用户操作的工具，说是 APP 的面子也不过分<br />
+我曾经在很多简约风格软件中看见过圆角的底部对话框，便感觉到了这种风格的美丽。便一直想实现它，便在网上翻找教程，但大多都是多了些复杂，而且描述并不清晰，对于我这种小白，更多带来的是头疼，经过查找资料，终于清晰了实现这种对话框的方法。<br />
+对话框可以选择 <code>Dialog</code>  或者 v7 包里的  <code>Alertdialog</code> ，使用方法和效果都差不太多<br />
+建议使用 Dialog，比起 v7 包的那一大堆东西，我更喜欢  <code>Dialog</code> <br />
+ 这里将要用到的文件有</p>
+<ul>
+<li>a.java : 一个 Activity</li>
+<li>bottomdialog.xml : 对话框的布局文件</li>
+<li>translate_dialog_in.xml : 对话框进入动画</li>
+<li>translate_dialog_out.xml : 对话框关闭动画</li>
+</ul>
+<p>首先要设置对话框样式，找到项目中 value 文件夹里的  <code>style.xml</code>  并在其中添加如下代码</p>
+<figure class="highlight xml"><figcaption data-lang="XML"><span>style.xml</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>BottomDialog<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@android:style/Theme.Dialog<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="2"></td><td><pre> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowContentOverlay<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>@null<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="3"></td><td><pre> <span class="token comment">&lt;!-- 浮于 Activity 之上 --></span></pre></td></tr><tr><td data-num="4"></td><td><pre> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowIsFloating<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="5"></td><td><pre> <span class="token comment">&lt;!-- 边框 --></span></pre></td></tr><tr><td data-num="6"></td><td><pre> <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowFrame<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>@null<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>  <span class="token comment">&lt;!-- Dialog 以外的区域模糊效果 --></span></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:backgroundDimEnabled<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="9"></td><td><pre> <span class="token comment">&lt;!-- 无标题 --></span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowNoTitle<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="11"></td><td><pre><span class="token comment">&lt;!-- 半透明 --></span></pre></td></tr><tr><td data-num="12"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowIsTranslucent<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>true<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="13"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowBackground<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>@android:color/transparent<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="14"></td><td><pre></pre></td></tr><tr><td data-num="15"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="16"></td><td><pre><span class="token comment">&lt;!-- 对话框动画 --></span></pre></td></tr><tr><td data-num="17"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>BottomDialog.Animation<span class="token punctuation">"</span></span> <span class="token attr-name">parent</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@android:style/Animation.Dialog<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="18"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowEnterAnimation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>@anim/translate_dialog_in<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="19"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>item</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>android:windowExitAnimation<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>@anim/translate_dialog_out<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>item</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="20"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">></span></span></pre></td></tr></table></figure><p>在 res 中添加 anim 文件夹，用来存放动画<br />
+在文件夹中添加 translate_dialog_in.xml 和 translate_dialog_out.xml</p>
+<figure class="highlight xml"><figcaption data-lang="XML"><span>translate_dialog_in.xml</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>translate</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="4"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>duration</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="5"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>fromXDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="6"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>fromYDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>toXDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="8"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>toYDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100%<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="9"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>translate</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span></pre></td></tr></table></figure><figure class="highlight xml"><figcaption data-lang="XML"><span>translate_dialog_out.xml</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>resources</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="3"></td><td><pre>    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>translate</span> <span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="4"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>duration</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>300<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="5"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>fromXDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="6"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>fromYDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>toXDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="8"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>toYDelta</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>100%<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="9"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>translate</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="10"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>resources</span><span class="token punctuation">></span></span></pre></td></tr></table></figure><p>接下来按照你自己的需要制作底部对话框布局<br />
+我的是这样的</p>
+<figure class="highlight xml"><figcaption data-lang="XML"><span>bottomdialog.xml</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token prolog">&lt;?xml version="1.0" encoding="utf-8"?></span></pre></td></tr><tr><td data-num="2"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="3"></td><td><pre>	<span class="token attr-name"><span class="token namespace">xmlns:</span>android</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>http://schemas.android.com/apk/res/android<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="4"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>vertical<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="5"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="6"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="7"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="8"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>layout_margin</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="9"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>padding</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>0dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="10"></td><td><pre>	<span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@drawable/dialog_bg<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="11"></td><td><pre></pre></td></tr><tr><td data-num="12"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="13"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>horizontal<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="14"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="15"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="16"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="17"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="18"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginRight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="19"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginTop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="20"></td><td><pre></pre></td></tr><tr><td data-num="21"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span></pre></td></tr><tr><td data-num="22"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="23"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="24"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>nowork<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="25"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>18sp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="26"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>textStyle</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>bold<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="27"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#ff000000<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="28"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="29"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_marginLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="30"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@+id/dtv1<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></pre></td></tr><tr><td data-num="31"></td><td><pre></pre></td></tr><tr><td data-num="32"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="33"></td><td><pre></pre></td></tr><tr><td data-num="34"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="35"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>horizontal<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="36"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="37"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="38"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>left<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="39"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="40"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginRight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="41"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="42"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginTop</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>20dp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="43"></td><td><pre></pre></td></tr><tr><td data-num="44"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span></pre></td></tr><tr><td data-num="45"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="46"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="47"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>无<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="48"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>17sp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="49"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@+id/dtv2<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="50"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#FF312E2E<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></pre></td></tr><tr><td data-num="51"></td><td><pre></pre></td></tr><tr><td data-num="52"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="53"></td><td><pre></pre></td></tr><tr><td data-num="54"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="55"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>horizontal<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="56"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>match_parent<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="57"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="58"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>25dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="59"></td><td><pre>		<span class="token attr-name"><span class="token namespace">android:</span>layout_marginRight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>25dp<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="60"></td><td><pre></pre></td></tr><tr><td data-num="61"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="62"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>horizontal<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="63"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="64"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>45dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="65"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="66"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_marginRight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>15dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="67"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@drawable/bdyj<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="68"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_marginBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="69"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@+id/dlv3<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="70"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="71"></td><td><pre></pre></td></tr><tr><td data-num="72"></td><td><pre>			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span></pre></td></tr><tr><td data-num="73"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="74"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="75"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>取消<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="76"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>19sp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="77"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#FF312E2E<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></pre></td></tr><tr><td data-num="78"></td><td><pre></pre></td></tr><tr><td data-num="79"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="80"></td><td><pre></pre></td></tr><tr><td data-num="81"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>LinearLayout</span></pre></td></tr><tr><td data-num="82"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>orientation</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>horizontal<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="83"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="84"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>45dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="85"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_weight</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>5<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="86"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_marginLeft</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>15dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="87"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>background</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@drawable/bdyj<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="88"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>layout_marginBottom</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>10dp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="89"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>@+id/dlv4<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="90"></td><td><pre>			<span class="token attr-name"><span class="token namespace">android:</span>gravity</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="91"></td><td><pre></pre></td></tr><tr><td data-num="92"></td><td><pre>			<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>TextView</span></pre></td></tr><tr><td data-num="93"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>layout_width</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="94"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>layout_height</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>wrap_content<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="95"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>确定<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="96"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>textSize</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>19sp<span class="token punctuation">"</span></span></pre></td></tr><tr><td data-num="97"></td><td><pre>				<span class="token attr-name"><span class="token namespace">android:</span>textColor</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>#FF312E2E<span class="token punctuation">"</span></span><span class="token punctuation">/></span></span></pre></td></tr><tr><td data-num="98"></td><td><pre></pre></td></tr><tr><td data-num="99"></td><td><pre>		<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="100"></td><td><pre></pre></td></tr><tr><td data-num="101"></td><td><pre>	<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="102"></td><td><pre></pre></td></tr><tr><td data-num="103"></td><td><pre><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>LinearLayout</span><span class="token punctuation">></span></span></pre></td></tr><tr><td data-num="104"></td><td><pre></pre></td></tr><tr><td data-num="105"></td><td><pre>最后只有在Activity代码里调用对话框</pre></td></tr><tr><td data-num="106"></td><td><pre>```java a.java</pre></td></tr><tr><td data-num="107"></td><td><pre></pre></td></tr><tr><td data-num="108"></td><td><pre>      Dialog bottomDialog = new Dialog(a.this, R.style.BottomDialog);</pre></td></tr><tr><td data-num="109"></td><td><pre>      //指定布局</pre></td></tr><tr><td data-num="110"></td><td><pre>View contentView = LayoutInflater.from(a.this).inflate(R.layout.bottomdialog, null);</pre></td></tr><tr><td data-num="111"></td><td><pre>bottomDialog.setContentView(contentView);</pre></td></tr><tr><td data-num="112"></td><td><pre>ViewGroup.LayoutParams layoutParams = contentView.getLayoutParams();</pre></td></tr><tr><td data-num="113"></td><td><pre>layoutParams.width = getResources().getDisplayMetrics().widthPixels;</pre></td></tr><tr><td data-num="114"></td><td><pre>contentView.setLayoutParams(layoutParams);</pre></td></tr><tr><td data-num="115"></td><td><pre>//控制对话框位置</pre></td></tr><tr><td data-num="116"></td><td><pre>bottomDialog.getWindow().setGravity(Gravity.BOTTOM);</pre></td></tr><tr><td data-num="117"></td><td><pre>bottomDialog.getWindow().setWindowAnimations(R.style.BottomDialog_Animation);</pre></td></tr><tr><td data-num="118"></td><td><pre>//显示对话框</pre></td></tr><tr><td data-num="119"></td><td><pre>bottomDialog.show();</pre></td></tr></table></figure><p>以下是成品<br />
+<img data-src="http://shp.qpic.cn/collector/1642981619/d9076b1b-c52c-4d30-a834-5012ee76d3a1/0" alt="image" title="滑稽" /></p>
+
+      <div class="tags">
+          <a href="/tags/Android/" rel="tag"><i class="ic i-tag"></i> Android</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="IT/Nowork/dialog/" class="item leancloud_visitors" data-flag-title="Android底部简约风格对话框" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/IT/Nowork/dialog/" title="Android底部简约风格对话框">https://pangbai.work/IT/Nowork/dialog/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/link/termux-install-linux/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?835471" title="在手机上快速搭建Linux">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 使用Termux搭建linux</span>
+  <h3>在手机上快速搭建Linux</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/IT/kali/" itemprop="url" rel="next" data-background-image="http:&#x2F;&#x2F;shp.qpic.cn&#x2F;collector&#x2F;1642981619&#x2F;5d10a393-4056-405f-8cf6-1b0520c3f0b8&#x2F;0" title="干货！安卓手机上kali">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 在安卓上安装你的kail</span>
+  <h3>干货！安卓手机上kali</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/IT/Nowork/dialog/" rel="bookmark" title="Android底部简约风格对话框">Android底部简约风格对话框</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/link/termux-install-linux/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/IT/kali/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E4%BD%BF%E7%94%A8Termux%E6%90%AD%E5%BB%BAlinux/" title="分类于 使用Termux搭建linux">使用Termux搭建linux</a>
+</div>
+
+    <span><span class="exturl" data-url="aHR0cHM6Ly93d3cuc3Fsc2VjLmNvbS8yMDIwLzA0L3Rlcm11eGxpbnV4Lmh0bWw=" title="在手机上快速搭建Linux">在手机上快速搭建Linux<i class="ic i-link-alt"></i></span></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/re2/" title="汇编学习-CPU寄存器">汇编学习-CPU寄存器</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ciscn2024re/" title="CISCN2024复现及总结">CISCN2024复现及总结</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" title="分类于 安卓逆向">安卓逆向</a>
+</div>
+
+    <span><a href="/IT/smali/" title="Smali踩坑纪录">Smali踩坑纪录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/randomacg/" title="Linux桌面使用随机二刺螈壁纸">Linux桌面使用随机二刺螈壁纸</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/Frida/" title="分类于 Frida">Frida</a>
+</div>
+
+    <span><a href="/CTF/Reverse/frida-check/" title="Frida特征分析(基于去特征的FridaServer)">Frida特征分析(基于去特征的FridaServer)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/html/" title="分类于 html">html</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/html/js/" title="分类于 js">js</a>
+</div>
+
+    <span><a href="/html/js/jstxt/" title="利用JavaScript实现循环打字效果">利用JavaScript实现循环打字效果</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/stm32/" title="STM32固件逆向概述">STM32固件逆向概述</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%B0%88/" title="分类于 杂谈">杂谈</a>
+</div>
+
+    <span><a href="/IT/fzzx/" title="你用了8年的软件居然是盗版">你用了8年的软件居然是盗版</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ZJCTF2024/" title="2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP">2024浙江省大学生网络与信息安全竞赛决赛Reverse-WP</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'IT/Nowork/dialog/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

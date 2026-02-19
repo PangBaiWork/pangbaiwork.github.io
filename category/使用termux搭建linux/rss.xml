@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;使用termux搭建linux&#34; category</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 21 May 2021 23:30:04 +0800</pubDate>
+        <lastBuildDate>Fri, 21 May 2021 23:30:04 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>汇编</category>
+        <category>MC</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>反调试</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/link/termux-install-linux/</guid>
+            <title>在手机上快速搭建Linux</title>
+            <link>https://pangbai.work/link/termux-install-linux/</link>
+            <pubDate>Fri, 21 May 2021 23:30:04 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;这篇文章是国光大佬写的，制作了一键安装脚本&lt;br /&gt;
+并且将镜像放在了码云，在国内安装速度飞快&lt;br /&gt;
+在这里分享该文章，永远支持国光！！！&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>

@@ -1,0 +1,614 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+
+
+<link rel="alternate" type="application/rss+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/atom.xml" />
+<link rel="alternate" type="application/json" title="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊" href="https://pangbai.work/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+  <meta name="keywords" content="安卓" />
+
+
+<link rel="canonical" href="https://pangbai.work/IT/smali/">
+
+
+
+  <title>
+Smali踩坑纪录 - 安卓逆向 |
+PangBai's Blog = 𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 = 旁白博客</title>
+<meta name="generator" content="Hexo 6.3.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">Smali踩坑纪录
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="创建时间：2021-01-16 13:39:19">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">发表于</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-01-16T13:39:19+08:00">2021-01-16</time>
+  </span>
+  <span class="item" title="本文字数">
+    <span class="icon">
+      <i class="ic i-pen"></i>
+    </span>
+    <span class="text">本文字数</span>
+    <span>1.5k</span>
+    <span class="text">字</span>
+  </span>
+  <span class="item" title="阅读时长">
+    <span class="icon">
+      <i class="ic i-clock"></i>
+    </span>
+    <span class="text">阅读时长</span>
+    <span>1 分钟</span>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="切换导航栏">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">PangBai's Blog</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?432962"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?436135"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?327120"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?142796"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?990751"></li>
+          <li class="item" data-background-image="https://api.miaomc.cn/image/get?271187"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">首页</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E5%AE%89%E5%8D%93%E9%80%86%E5%90%91/" itemprop="item" rel="index" title="分类于 安卓逆向"><span itemprop="name">安卓逆向</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="zh-CN">
+  <link itemprop="mainEntityOfPage" href="https://pangbai.work/IT/smali/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="PangBai">
+    <meta itemprop="description" content="旁白博客, 记录生活 | 为众人抱薪者,不可使其扼于风雪">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="𝕺𝖚𝖗 𝕷𝖎𝖋𝖊">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>有关于安卓逆向的一篇日记，如何二改＆破解软件？来看看这篇很勉强的技术博客吧。</p>
+<span id="more"></span>
+<p>关于安卓逆向，大部分的作用都是用于破解软件 (一些付费的软件)，另外的就是二改软件 (软件汉化，反人类的操作修改)，当然这里面或多或少是涉及到软件提供商的利益问题的，一切利弊由修改者衡量。<br />
+这篇文章本人的入坑笔记，因为是小白，一些见解可能不太正确，如果你也有一点见解，可以在本页评论交流。</p>
+<p>注：可能需要一些安卓开发基础知识，可以自行百度<br />
+ <code>本文由@PangBai原创，转载请注明原地址</code></p>
+<h2 id="安卓安卓包"><a class="anchor" href="#安卓安卓包">#</a> 安卓安卓包</h2>
+<h3 id="目录结构"><a class="anchor" href="#目录结构">#</a> 目录结构</h3>
+<p>关于安卓安装包，大部分是以 <code>.apk</code>  为后缀，当然，也有.apks 和.abb, 解压后查看目录大致也相差不大。</p>
+<p>apk 文件中有许多已编译的文件 (字节码形式)，这些我们自然看不懂<br />
+如 AndroidManifest.xml，classes.dex，resources.arsc<br />
+ 既然看不懂，我们就得找翻译吧，使用工具<strong> Apktool</strong> 进行反编译，手机上请用<strong> Apktool_M</strong> （你一定要用 MT 我也没办法）</p>
+<p>以下为反编译后目录内容 (也许会出现其他文件夹，但大多与逆向不会有太大关系)</p>
+<ul>
+<li>assets</li>
+<li>lib</li>
+<li>smali</li>
+<li>res</li>
+<li>layout</li>
+<li>color</li>
+<li>anim</li>
+<li>drawable</li>
+<li>raw</li>
+<li>xml</li>
+</ul>
+<p><code>assets</code>  是一个储存大型资源的目录，可能占 apk 绝大多的字节大小， <code>储存其中的资源不会被编译，可以直接修改</code> ，软件运行时会以压缩文件形式解压出来使用。(根据我的经验，html 形式文件可以通过 ur 定位直接访问而其他形式的文件必须需要解压)</p>
+<p><code>lib</code>  存放已编译的库文件，十分重要，进行逆向时直接忽视它。</p>
+<p><code>smali</code>  存放反编译出的 smali 文件 (来自 classes.dex 文件)，是我们进行逆向的主角</p>
+<p><code>res</code>  存放资源文件，如布局，配色，样式，图片，大多为 xml 和 png 形式。<br />
+其中 <code>raw</code>  文件夹十分特别，该文件夹下不会被编译 (同 assets 相似，但它还会额外为文件分配一个 id)，可以存放任何形式文件。</p>
+<h2 id="smali"><a class="anchor" href="#smali">#</a> Smali</h2>
+<p>smali 是一种类似于汇编语言的语法，可以打包为 dex 文件运行在 Dalvik 里（Android 虚拟机） 。</p>
+<h3 id="smali文件"><a class="anchor" href="#smali文件">#</a> Smali 文件</h3>
+<p>我们在 smali 文件夹里能看到许多 smali 文件，它们的是按一定规则进行命名的。</p>
+<p>每一个 smali 文件都对应对应一个 java 类，如果有一个<strong> activity.java</strong>，那么编译后就有<strong> activity.smali</strong>。我们也许还可以看到另外的<strong> activity$InnerClass.smali</strong> 这样的文件，这说明<strong> activity.java</strong> 里面还有一个叫<strong> InnerClass</strong> 的内部类。如果出现<strong> activity$a.smali</strong> 或<strong> activity$b.smali</strong> 这种无意义的内部类名称，那就可能是个匿名内部类。</p>
+<h3 id="smali语法"><a class="anchor" href="#smali语法">#</a> Smali 语法</h3>
+<h3 id="数据类型"><a class="anchor" href="#数据类型">#</a> 数据类型</h3>
+<ul class="task-list">
+<li class="task-list-item"><input type="checkbox" id="cbx_0" disabled="true" /><label for="cbx_0"> B---byte</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_1" disabled="true" /><label for="cbx_1"> C---char</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_2" disabled="true" /><label for="cbx_2"> D---double</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_3" disabled="true" /><label for="cbx_3"> F---float</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_4" disabled="true" /><label for="cbx_4"> I---int</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_5" disabled="true" /><label for="cbx_5"> J---long</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_6" disabled="true" /><label for="cbx_6"> S---short</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_7" disabled="true" /><label for="cbx_7"> V---void</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_8" disabled="true" /><label for="cbx_8"> Z---boolean</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_9" disabled="true" /><label for="cbx_9"> [xxx---array</label></li>
+<li class="task-list-item"><input type="checkbox" id="cbx_10" disabled="true" /><label for="cbx_10"> Lxxx/yyy---object</label></li>
+</ul>
+<p>每种基本数据类型对应一个字母<br />
+<strong> [+ 数据类型</strong>表示一个数组，如 [D 表示一个 double 类型数组。<br />
+<strong>L + 类路径</strong>表示一个对象，如 String 类型数据使用的是<strong> Ljava/lang/String</strong></p>
+<h3 id="类"><a class="anchor" href="#类">#</a> 类</h3>
+<figure class="highlight smali"><figcaption data-lang="smali"><span>i</span></figcaption><table><tr><td data-num="1"></td><td><pre><span class="token keyword">.class</span> <span class="token keyword">public</span> <span class="token keyword">abstract</span> <span class="token class-name"><span class="token builtin">L</span><span class="token class-name">Car</span></span><span class="token punctuation">;</span> //<span class="token keyword">abstract</span> 表明为抽象类</pre></td></tr><tr><td data-num="2"></td><td><pre></pre></td></tr><tr><td data-num="3"></td><td><pre><span class="token keyword">.super</span> <span class="token class-name"><span class="token builtin">L</span><span class="token namespace">java<span class="token punctuation">/</span>lang<span class="token punctuation">/</span></span><span class="token class-name">Object</span></span><span class="token punctuation">;</span></pre></td></tr><tr><td data-num="4"></td><td><pre></pre></td></tr><tr><td data-num="5"></td><td><pre><span class="token keyword">.source</span> <span class="token string">"Car.java"</span></pre></td></tr><tr><td data-num="6"></td><td><pre></pre></td></tr><tr><td data-num="7"></td><td><pre></pre></td></tr><tr><td data-num="8"></td><td><pre><span class="token keyword">.implements</span> <span class="token class-name"><span class="token builtin">L</span><span class="token class-name">IFly</span></span><span class="token punctuation">;</span></pre></td></tr></table></figure><p><strong>.class</strong> 声明一个类并添加修饰<br />
+<strong>.super</strong> 声明继承的父类<br />
+<strong>.source</strong> 声明类来源的文件<br />
+<strong>.implements</strong> 声明类实现的接口</p>
+
+      <div class="tags">
+          <a href="/tags/%E5%AE%89%E5%8D%93/" rel="tag"><i class="ic i-tag"></i> 安卓</a>
+      </div>
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">更新于</span>
+    <time title="修改时间：2026-02-19 11:34:04" itemprop="dateModified" datetime="2026-02-19T11:34:04+08:00">2026-02-19</time>
+  </span>
+  <span id="IT/smali/" class="item leancloud_visitors" data-flag-title="Smali踩坑纪录" title="阅读次数">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">阅读次数</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">次</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> 赞赏</button>
+  <p>请我喝[茶]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="PangBai 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="PangBai 支付宝">
+        <p>支付宝</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="PangBai 贝宝">
+        <p>贝宝</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>本文作者： </strong>PangBai <i class="ic i-at"><em>@</em></i>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊
+  </li>
+  <li class="link">
+    <strong>本文链接：</strong>
+    <a href="https://pangbai.work/IT/smali/" title="Smali踩坑纪录">https://pangbai.work/IT/smali/</a>
+  </li>
+  <li class="license">
+    <strong>版权声明： </strong>本站所有文章除特别声明外，均采用 <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/share/idm/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?721259" title="LDM+线程下载器">
+  <span class="type">上一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 一个很牛的手机端线程下载器</span>
+  <h3>LDM+线程下载器</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/IT/adb/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;api.miaomc.cn&#x2F;image&#x2F;get?230367" title="ADB带来的春天">
+  <span class="type">下一篇</span>
+  <span class="category"><i class="ic i-flag"></i> 强大的安卓调试工具</span>
+  <h3>ADB带来的春天</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="文章目录">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%8D%93%E5%AE%89%E5%8D%93%E5%8C%85"><span class="toc-number">1.</span> <span class="toc-text"> 安卓安卓包</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text"> 目录结构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#smali"><span class="toc-number">2.</span> <span class="toc-text"> Smali</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#smali%E6%96%87%E4%BB%B6"><span class="toc-number">2.1.</span> <span class="toc-text"> Smali 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#smali%E8%AF%AD%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text"> Smali 语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text"> 数据类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B1%BB"><span class="toc-number">2.4.</span> <span class="toc-text"> 类</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="系列文章">
+        <ul>
+          <li class="active"><a href="/IT/smali/" rel="bookmark" title="Smali踩坑纪录">Smali踩坑纪录</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="站点概览">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="PangBai"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">PangBai</p>
+  <div class="description" itemprop="description">记录生活 | 为众人抱薪者,不可使其扼于风雪</div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">38</span>
+        <span class="name">文章</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">22</span>
+        <span class="name">分类</span>
+      </a>
+    </div>
+    <div class="item tags">
+      <a href="/tags/">
+        <span class="count">32</span>
+        <span class="name">标签</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3BhbmdiYWl3b3Jr" title="https:&#x2F;&#x2F;github.com&#x2F;pangbaiwork"><i class="ic i-github"></i></span>
+      <span class="exturl item qq" data-url="aHR0cHM6Ly9xbS5xcS5jb20vY2dpLWJpbi9xbS9xcj9rPTBGMVlPVGVMRXlQZ0FYajdoeHBlak5jQXNWMm5OcldGJm5vdmVyaWZ5PTA=" title="https:&#x2F;&#x2F;qm.qq.com&#x2F;cgi-bin&#x2F;qm&#x2F;qr?k&#x3D;0F1YOTeLEyPgAXj7hxpejNcAsV2nNrWF&amp;noverify&#x3D;0"><i class="ic i-qq"></i></span>
+      <a href="/about/" title="&#x2F;about&#x2F;" class="item about"><i class="ic i-address-card"></i></a>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>首页</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-heart"></i>关于</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>友情链接</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-user"></i>朋友</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/music/" rel="section"><i class="ic i-music"></i>听听旁白喜欢的歌</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/thinks/" rel="section"><i class="ic i-th"></i>启思录</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/share/idm/" rel="prev" title="上一篇"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/IT/adb/" rel="next" title="下一篇"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>随机文章</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/IT/dowork/" title="Dowork食用教程">Dowork食用教程</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%8F%AF%E8%83%BD%E6%98%AF%E6%9C%AC%E7%AB%99%E5%94%AF%E4%B8%80%E4%B8%80%E7%AF%87%E6%9C%89%E7%94%A8%E7%9A%84%E6%96%87%E7%AB%A0/" title="分类于 可能是本站唯一一篇有用的文章">可能是本站唯一一篇有用的文章</a>
+</div>
+
+    <span><a href="/html/hhh/" title="如何在一分钟内黑掉任何网站">如何在一分钟内黑掉任何网站</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/antidebug/" title="反调试简述">反调试简述</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/Frida/" title="分类于 Frida">Frida</a>
+</div>
+
+    <span><a href="/CTF/Reverse/frida-check/" title="Frida特征分析(基于去特征的FridaServer)">Frida特征分析(基于去特征的FridaServer)</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/Want2BecomeMagicalGirl/" title="Want2BecomeMagicalGirl出题笔记-WMCTF2025">Want2BecomeMagicalGirl出题笔记-WMCTF2025</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/life/" title="分类于 记录生活">记录生活</a>
+</div>
+
+    <span><a href="/life/2024Year-endSummary/" title="2024年终总结੭ ᐕ)੭">2024年终总结੭ ᐕ)੭</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/CTF/" title="分类于 CTF">CTF</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/CTF/Reverse/" title="分类于 逆向工程">逆向工程</a>
+</div>
+
+    <span><a href="/CTF/Reverse/ciscn2024re/" title="CISCN2024复现及总结">CISCN2024复现及总结</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%9D%82%E8%B0%88/" title="分类于 杂谈">杂谈</a>
+</div>
+
+    <span><a href="/IT/fzzx/" title="你用了8年的软件居然是盗版">你用了8年的软件居然是盗版</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/life/" title="分类于 记录生活">记录生活</a>
+</div>
+
+    <span><a href="/life/2023Year-endSummary/" title="2023年终总结( ﾟдﾟ)つBye">2023年终总结( ﾟдﾟ)つBye</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E9%80%86%E5%90%91/" title="分类于 逆向">逆向</a>
+</div>
+
+    <span><a href="/IT/Re4/" title="汇编学习-汇编指令">汇编学习-汇编指令</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>最新评论</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2021 – 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">PangBai @ PangBai's Blog</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: 'IT/smali/',
+    favicon: {
+      show: "（●´3｀●）やれやれだぜ",
+      hide: "(´Д｀)大変だ！"
+    },
+    search : {
+      placeholder: "文章搜索",
+      empty: "关于 「 ${query} 」，什么也没搜到",
+      stats: "${time} ms 内找到 ${hits} 条结果"
+    },
+    valine: true,fancybox: true,
+    copyright: '复制成功，转载请遵守 <i class="ic i-creative-commons"></i>BY-NC-SA 协议。',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//fastly.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

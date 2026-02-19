@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>𝕺𝖚𝖗 𝕷𝖎𝖋𝖊 • Posts by &#34;安卓逆向&#34; category</title>
+        <link>https://pangbai.work</link>
+        <description>记录生活 | 为众人抱薪者,不可使其扼于风雪</description>
+        <language>zh-CN</language>
+        <pubDate>Sat, 16 Jan 2021 13:39:19 +0800</pubDate>
+        <lastBuildDate>Sat, 16 Jan 2021 13:39:19 +0800</lastBuildDate>
+        <category>Linux</category>
+        <category>shell</category>
+        <category>IT</category>
+        <category>编程</category>
+        <category>汇编语言</category>
+        <category>ADB</category>
+        <category>re</category>
+        <category>Dowork</category>
+        <category>Github</category>
+        <category>linux</category>
+        <category>kail</category>
+        <category>渗透</category>
+        <category>Android</category>
+        <category>安卓</category>
+        <category>博客日常</category>
+        <category>记录生活</category>
+        <category>氵帖</category>
+        <category>Minecraft</category>
+        <category>服务器</category>
+        <category>xposed</category>
+        <category>xp模块</category>
+        <category>太极</category>
+        <category>icebox</category>
+        <category>手机软件分享</category>
+        <category>线程下载器</category>
+        <category>汇编</category>
+        <category>MC</category>
+        <category>Re</category>
+        <category>frida</category>
+        <category>反调试</category>
+        <category>STM32</category>
+        <category>html前端</category>
+        <item>
+            <guid isPermalink="true">https://pangbai.work/IT/smali/</guid>
+            <title>Smali踩坑纪录</title>
+            <link>https://pangbai.work/IT/smali/</link>
+            <category>安卓</category>
+            <pubDate>Sat, 16 Jan 2021 13:39:19 +0800</pubDate>
+            <description><![CDATA[ &lt;p&gt;有关于安卓逆向的一篇日记，如何二改＆破解软件？来看看这篇很勉强的技术博客吧。&lt;/p&gt;
+&lt;span id=&#34;more&#34;&gt;&lt;/span&gt;
+&lt;p&gt;关于安卓逆向，大部分的作用都是用于破解软件 (一些付费的软件)，另外的就是二改软件 (软件汉化，反人类的操作修改)，当然这里面或多或少是涉及到软件提供商的利益问题的，一切利弊由修改者衡量。&lt;br /&gt;
+这篇文章本人的入坑笔记，因为是小白，一些见解可能不太正确，如果你也有一点见解，可以在本页评论交流。&lt;/p&gt;
+&lt;p&gt;注：可能需要一些安卓开发基础知识，可以自行百度&lt;br /&gt;
+ &lt;code&gt;本文由@PangBai原创，转载请注明原地址&lt;/code&gt;&lt;/p&gt;
+&lt;h2 id=&#34;安卓安卓包&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#安卓安卓包&#34;&gt;#&lt;/a&gt; 安卓安卓包&lt;/h2&gt;
+&lt;h3 id=&#34;目录结构&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#目录结构&#34;&gt;#&lt;/a&gt; 目录结构&lt;/h3&gt;
+&lt;p&gt;关于安卓安装包，大部分是以 &lt;code&gt;.apk&lt;/code&gt;  为后缀，当然，也有.apks 和.abb, 解压后查看目录大致也相差不大。&lt;/p&gt;
+&lt;p&gt;apk 文件中有许多已编译的文件 (字节码形式)，这些我们自然看不懂&lt;br /&gt;
+如 AndroidManifest.xml，classes.dex，resources.arsc&lt;br /&gt;
+ 既然看不懂，我们就得找翻译吧，使用工具&lt;strong&gt; Apktool&lt;/strong&gt; 进行反编译，手机上请用&lt;strong&gt; Apktool_M&lt;/strong&gt; （你一定要用 MT 我也没办法）&lt;/p&gt;
+&lt;p&gt;以下为反编译后目录内容 (也许会出现其他文件夹，但大多与逆向不会有太大关系)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;assets&lt;/li&gt;
+&lt;li&gt;lib&lt;/li&gt;
+&lt;li&gt;smali&lt;/li&gt;
+&lt;li&gt;res&lt;/li&gt;
+&lt;li&gt;layout&lt;/li&gt;
+&lt;li&gt;color&lt;/li&gt;
+&lt;li&gt;anim&lt;/li&gt;
+&lt;li&gt;drawable&lt;/li&gt;
+&lt;li&gt;raw&lt;/li&gt;
+&lt;li&gt;xml&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;code&gt;assets&lt;/code&gt;  是一个储存大型资源的目录，可能占 apk 绝大多的字节大小， &lt;code&gt;储存其中的资源不会被编译，可以直接修改&lt;/code&gt; ，软件运行时会以压缩文件形式解压出来使用。(根据我的经验，html 形式文件可以通过 ur 定位直接访问而其他形式的文件必须需要解压)&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lib&lt;/code&gt;  存放已编译的库文件，十分重要，进行逆向时直接忽视它。&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;smali&lt;/code&gt;  存放反编译出的 smali 文件 (来自 classes.dex 文件)，是我们进行逆向的主角&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;res&lt;/code&gt;  存放资源文件，如布局，配色，样式，图片，大多为 xml 和 png 形式。&lt;br /&gt;
+其中 &lt;code&gt;raw&lt;/code&gt;  文件夹十分特别，该文件夹下不会被编译 (同 assets 相似，但它还会额外为文件分配一个 id)，可以存放任何形式文件。&lt;/p&gt;
+&lt;h2 id=&#34;smali&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#smali&#34;&gt;#&lt;/a&gt; Smali&lt;/h2&gt;
+&lt;p&gt;smali 是一种类似于汇编语言的语法，可以打包为 dex 文件运行在 Dalvik 里（Android 虚拟机） 。&lt;/p&gt;
+&lt;h3 id=&#34;smali文件&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#smali文件&#34;&gt;#&lt;/a&gt; Smali 文件&lt;/h3&gt;
+&lt;p&gt;我们在 smali 文件夹里能看到许多 smali 文件，它们的是按一定规则进行命名的。&lt;/p&gt;
+&lt;p&gt;每一个 smali 文件都对应对应一个 java 类，如果有一个&lt;strong&gt; activity.java&lt;/strong&gt;，那么编译后就有&lt;strong&gt; activity.smali&lt;/strong&gt;。我们也许还可以看到另外的&lt;strong&gt; activity$InnerClass.smali&lt;/strong&gt; 这样的文件，这说明&lt;strong&gt; activity.java&lt;/strong&gt; 里面还有一个叫&lt;strong&gt; InnerClass&lt;/strong&gt; 的内部类。如果出现&lt;strong&gt; activity$a.smali&lt;/strong&gt; 或&lt;strong&gt; activity$b.smali&lt;/strong&gt; 这种无意义的内部类名称，那就可能是个匿名内部类。&lt;/p&gt;
+&lt;h3 id=&#34;smali语法&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#smali语法&#34;&gt;#&lt;/a&gt; Smali 语法&lt;/h3&gt;
+&lt;h3 id=&#34;数据类型&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#数据类型&#34;&gt;#&lt;/a&gt; 数据类型&lt;/h3&gt;
+&lt;ul class=&#34;task-list&#34;&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_0&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_0&#34;&gt; B---byte&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_1&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_1&#34;&gt; C---char&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_2&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_2&#34;&gt; D---double&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_3&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_3&#34;&gt; F---float&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_4&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_4&#34;&gt; I---int&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_5&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_5&#34;&gt; J---long&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_6&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_6&#34;&gt; S---short&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_7&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_7&#34;&gt; V---void&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_8&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_8&#34;&gt; Z---boolean&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_9&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_9&#34;&gt; [xxx---array&lt;/label&gt;&lt;/li&gt;
+&lt;li class=&#34;task-list-item&#34;&gt;&lt;input type=&#34;checkbox&#34; id=&#34;cbx_10&#34; disabled=&#34;true&#34; /&gt;&lt;label for=&#34;cbx_10&#34;&gt; Lxxx/yyy---object&lt;/label&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;每种基本数据类型对应一个字母&lt;br /&gt;
+&lt;strong&gt; [+ 数据类型&lt;/strong&gt;表示一个数组，如 [D 表示一个 double 类型数组。&lt;br /&gt;
+&lt;strong&gt;L + 类路径&lt;/strong&gt;表示一个对象，如 String 类型数据使用的是&lt;strong&gt; Ljava/lang/String&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;类&#34;&gt;&lt;a class=&#34;anchor&#34; href=&#34;#类&#34;&gt;#&lt;/a&gt; 类&lt;/h3&gt;
+&lt;figure class=&#34;highlight smali&#34;&gt;&lt;figcaption data-lang=&#34;smali&#34;&gt;&lt;span&gt;i&lt;/span&gt;&lt;/figcaption&gt;&lt;table&gt;&lt;tr&gt;&lt;td data-num=&#34;1&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;.class&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;token keyword&#34;&gt;abstract&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token builtin&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Car&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt; //&lt;span class=&#34;token keyword&#34;&gt;abstract&lt;/span&gt; 表明为抽象类&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;2&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;3&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;.super&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token builtin&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;token namespace&#34;&gt;java&lt;span class=&#34;token punctuation&#34;&gt;/&lt;/span&gt;lang&lt;span class=&#34;token punctuation&#34;&gt;/&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;Object&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;4&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;5&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;.source&lt;/span&gt; &lt;span class=&#34;token string&#34;&gt;&#34;Car.java&#34;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;6&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;7&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td data-num=&#34;8&#34;&gt;&lt;/td&gt;&lt;td&gt;&lt;pre&gt;&lt;span class=&#34;token keyword&#34;&gt;.implements&lt;/span&gt; &lt;span class=&#34;token class-name&#34;&gt;&lt;span class=&#34;token builtin&#34;&gt;L&lt;/span&gt;&lt;span class=&#34;token class-name&#34;&gt;IFly&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;token punctuation&#34;&gt;;&lt;/span&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;p&gt;&lt;strong&gt;.class&lt;/strong&gt; 声明一个类并添加修饰&lt;br /&gt;
+&lt;strong&gt;.super&lt;/strong&gt; 声明继承的父类&lt;br /&gt;
+&lt;strong&gt;.source&lt;/strong&gt; 声明类来源的文件&lt;br /&gt;
+&lt;strong&gt;.implements&lt;/strong&gt; 声明类实现的接口&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
